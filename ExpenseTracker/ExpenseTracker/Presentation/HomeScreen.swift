@@ -13,10 +13,13 @@ struct HomeScreen: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text(viewModel.addressString)
+            Button {
+
+            } label: {
+                Text("Show map view")
+            }
+            .buttonStyle(.borderedProminent)
         }
         .padding()
         .onAppear {

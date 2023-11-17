@@ -7,7 +7,18 @@
 
 import Foundation
 
-final class UserDefaultsManager {
+protocol UserDefaultsManagerProtocol {
+
+    func save<T>(data: T, for key: String)
+    func getInt(for key: String) -> Int
+    func getString(for key: String) -> String?
+    func getBool(for key: String) -> Bool
+    func deleteData(for key: String)
+    func isKeyExist(for key: String) -> Bool
+    func isFirstInstall() -> Bool
+}
+
+final class UserDefaultsManager: UserDefaultsManagerProtocol {
 
     private let storage: UserDefaults
 
@@ -37,5 +48,18 @@ final class UserDefaultsManager {
 
     public func isKeyExist(for key: String) -> Bool {
         storage.object(forKey: key) != nil
+    }
+
+    public func isFirstInstall() -> Bool {
+        let isFirstInstall = !isKeyExist(
+            for: UserDefaults.Keys.isFristRun
+        )
+        if isFirstInstall {
+            save(
+                data: true,
+                for: UserDefaults.Keys.isFristRun
+            )
+        }
+        return isFirstInstall
     }
 }
