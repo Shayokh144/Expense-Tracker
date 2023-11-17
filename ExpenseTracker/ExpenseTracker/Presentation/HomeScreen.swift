@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeScreen: View {
+
+    @ObservedObject private var viewModel: HomeViewModel
+
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -16,5 +19,12 @@ struct HomeScreen: View {
             Text("Hello, world!")
         }
         .padding()
+        .onAppear {
+            viewModel.viewDidAppear()
+        }
+    }
+
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
     }
 }
