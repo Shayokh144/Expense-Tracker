@@ -8,10 +8,11 @@
 import Combine
 import CoreLocation
 import Foundation
+import MapKit
 
 final class HomeViewModel: NSObject, ObservableObject {
 
-    var authorizationStatus: CLAuthorizationStatus
+    private var authorizationStatus: CLAuthorizationStatus
     private let locationManager: CLLocationManager
     @Published var lastSeenLocation: CLLocation?
     @Published var currentPlaceMark: CLPlacemark?
@@ -38,6 +39,17 @@ final class HomeViewModel: NSObject, ObservableObject {
         if userDefaultManager.isFirstInstall() {
             locationManager.requestWhenInUseAuthorization()
         }
+    }
+
+    func getCurrentLocation() -> CLLocationCoordinate2D {
+        guard let lastLocation = lastSeenLocation else {
+            return CLLocationCoordinate2D(
+                latitude: 13.73,
+                longitude: 100.52
+            )
+        }
+        print("CLLC: \(lastLocation.coordinate)")
+        return lastLocation.coordinate
     }
 
     deinit {
