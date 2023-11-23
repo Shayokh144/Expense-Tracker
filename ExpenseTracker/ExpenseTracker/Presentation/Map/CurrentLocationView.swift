@@ -8,7 +8,8 @@
 import SwiftUI
 import MapKit
 
-struct MapView: View {
+/// This view shows the current position of user in Apple  map
+struct CurrentLocationView: View {
 
     @Binding private var mapRegion: MKCoordinateRegion
 
@@ -16,7 +17,6 @@ struct MapView: View {
         Map(
             coordinateRegion: $mapRegion,
             showsUserLocation: true
-            // userTrackingMode: .constant(.follow)
         )
     }
 

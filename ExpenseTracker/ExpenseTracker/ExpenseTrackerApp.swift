@@ -11,9 +11,10 @@ import SwiftUI
 struct ExpenseTrackerApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeScreen(
-                viewModel: HomeViewModel()
-            )
+//            HomeScreen(
+//                viewModel: HomeViewModel()
+//            )
+            LocationSearchView(viewModel: LocationSearchViewModel())
         }
     }
 }

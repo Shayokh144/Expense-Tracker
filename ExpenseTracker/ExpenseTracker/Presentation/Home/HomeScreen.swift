@@ -35,7 +35,7 @@ struct HomeScreen: View {
             viewModel.viewDidAppear()
         }
         .sheet(isPresented: $shouldShowMapView) {
-            MapView(mapRegion: $region)
+            CurrentLocationView(mapRegion: $region)
             .presentationDetents([.fraction(0.75)])
         }
 
