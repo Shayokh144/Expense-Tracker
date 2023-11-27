@@ -10,7 +10,7 @@ import CoreLocation
 import Foundation
 import MapKit
 
-final class HomeViewModel: NSObject, ObservableObject {
+final class CurrentLocationViewModel: NSObject, ObservableObject {
 
     private var authorizationStatus: CLAuthorizationStatus
     private let locationManager: CLLocationManager
@@ -58,7 +58,7 @@ final class HomeViewModel: NSObject, ObservableObject {
 }
 
 // CoreLocation
-extension HomeViewModel: CLLocationManagerDelegate {
+extension CurrentLocationViewModel: CLLocationManagerDelegate {
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
@@ -75,7 +75,7 @@ extension HomeViewModel: CLLocationManagerDelegate {
 }
 
 // Process location lat long
-extension HomeViewModel {
+extension CurrentLocationViewModel {
     func fetchCountryAndCity(for location: CLLocation?) {
         guard let location = location else { return }
         let geocoder = CLGeocoder()
