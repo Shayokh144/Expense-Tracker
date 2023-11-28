@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "flowstacks",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/johnpatrickmorgan/FlowStacks",
+      "state" : {
+        "revision" : "14a726e093568c3088ecbd4cd5b578059b029c28",
+        "version" : "0.3.6"
+      }
+    }
+  ],
+  "version" : 2
+}
