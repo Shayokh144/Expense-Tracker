@@ -5,10 +5,13 @@
 //  Created by Taher on 13/11/23.
 //
 
+import FlowStacks
 import MapKit
 import SwiftUI
 
 struct CurrentLocationScreen: View {
+
+    @EnvironmentObject var navigator: AppCoordinatorViewModel
 
     @ObservedObject private var viewModel: CurrentLocationViewModel
     @State var shouldShowMapView: Bool = false
@@ -19,7 +22,6 @@ struct CurrentLocationScreen: View {
             Text(viewModel.addressString)
             Button {
                 let currentLocation = viewModel.getCurrentLocation()
-                print("XYZ \(currentLocation)")
                 region = MKCoordinateRegion(
                     center: currentLocation,
                     span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
@@ -31,6 +33,17 @@ struct CurrentLocationScreen: View {
             .buttonStyle(.borderedProminent)
         }
         .padding()
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            // BACK BUTTON
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: {
+                    navigator.goBack()
+                }) {
+                    Label("Back", systemImage: "arrow.left.circle")
+                }
+            }
+        }
         .onAppear {
             viewModel.viewDidAppear()
         }

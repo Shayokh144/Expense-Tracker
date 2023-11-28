@@ -5,9 +5,13 @@
 //  Created by Taher on 28/11/23.
 //
 
+import FlowStacks
 import SwiftUI
 
 struct HomeScreen: View {
+
+    @EnvironmentObject var navigator: AppCoordinatorViewModel
+    @ObservedObject private var viewModel: HomeViewModel
 
     private var loginGmailButton: some View {
         Button {
@@ -26,7 +30,7 @@ struct HomeScreen: View {
 
     private var searchLocationButton: some View {
         Button {
-
+            navigator.goToSearchLocationView()
         } label: {
             Text("Search location in map")
                 .frame(maxWidth: .infinity)
@@ -41,7 +45,7 @@ struct HomeScreen: View {
 
     private var seeCurrentLocationButton: some View {
         Button {
-
+            navigator.goToCurrentLocationView()
         } label: {
             Text("See current location in map")
                 .frame(maxWidth: .infinity)
@@ -61,5 +65,9 @@ struct HomeScreen: View {
             seeCurrentLocationButton
         }
         .padding()
+    }
+
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
     }
 }

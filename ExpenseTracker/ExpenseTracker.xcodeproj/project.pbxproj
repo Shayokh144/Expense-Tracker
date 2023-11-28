@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0418DCE02B159F8000AF975A /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 0418DCDF2B159F8000AF975A /* FlowStacks */; };
+		0418DCE32B159FBA00AF975A /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418DCE22B159FBA00AF975A /* Screen.swift */; };
+		0418DCE52B15A23700AF975A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418DCE42B15A23700AF975A /* AppCoordinator.swift */; };
+		0418DCE72B15A25500AF975A /* AppCoordinatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418DCE62B15A25500AF975A /* AppCoordinatorViewModel.swift */; };
 		042350102B0362B2005C6D0C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423500F2B0362B2005C6D0C /* Constants.swift */; };
 		042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350122B036385005C6D0C /* UserDefaults+Extension.swift */; };
 		042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350142B0363F9005C6D0C /* UserDefaultsManager.swift */; };
@@ -17,7 +21,7 @@
 		04742F232B02557700850F24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04742F222B02557700850F24 /* Preview Assets.xcassets */; };
 		04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F2A2B025B5A00850F24 /* CurrentLocationViewModel.swift */; };
 		04CBF1432B15197B00DF5B06 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1422B15197B00DF5B06 /* HomeScreen.swift */; };
-		04CBF1452B15199200DF5B06 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1442B15199200DF5B06 /* HomeScreenViewModel.swift */; };
+		04CBF1452B15199200DF5B06 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1442B15199200DF5B06 /* HomeViewModel.swift */; };
 		04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1472B15216800DF5B06 /* TextButtonStyle.swift */; };
 		04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1492B15230700DF5B06 /* Color+Extension.swift */; };
 		04EEC1A82B0E30F300AC445E /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEC1A72B0E30F300AC445E /* LocationSearchView.swift */; };
@@ -25,6 +29,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0418DCE22B159FBA00AF975A /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		0418DCE42B15A23700AF975A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		0418DCE62B15A25500AF975A /* AppCoordinatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorViewModel.swift; sourceTree = "<group>"; };
 		0423500F2B0362B2005C6D0C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		042350122B036385005C6D0C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		042350142B0363F9005C6D0C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -36,7 +43,7 @@
 		04742F222B02557700850F24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		04742F2A2B025B5A00850F24 /* CurrentLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewModel.swift; sourceTree = "<group>"; };
 		04CBF1422B15197B00DF5B06 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		04CBF1442B15199200DF5B06 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		04CBF1442B15199200DF5B06 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		04CBF1472B15216800DF5B06 /* TextButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButtonStyle.swift; sourceTree = "<group>"; };
 		04CBF1492B15230700DF5B06 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		04EEC1A72B0E30F300AC445E /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
@@ -48,12 +55,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0418DCE02B159F8000AF975A /* FlowStacks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0418DCE12B159F9A00AF975A /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				0418DCE22B159FBA00AF975A /* Screen.swift */,
+				0418DCE42B15A23700AF975A /* AppCoordinator.swift */,
+				0418DCE62B15A25500AF975A /* AppCoordinatorViewModel.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		0423500E2B03628A005C6D0C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				04CBF1422B15197B00DF5B06 /* HomeScreen.swift */,
-				04CBF1442B15199200DF5B06 /* HomeScreenViewModel.swift */,
+				04CBF1442B15199200DF5B06 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -120,6 +138,7 @@
 		04742F1A2B02557500850F24 /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
+				0418DCE12B159F9A00AF975A /* Navigation */,
 				042350112B036353005C6D0C /* Extension */,
 				0423500E2B03628A005C6D0C /* Helper */,
 				04742F292B02599800850F24 /* Presentation */,
@@ -180,6 +199,9 @@
 			dependencies = (
 			);
 			name = ExpenseTracker;
+			packageProductDependencies = (
+				0418DCDF2B159F8000AF975A /* FlowStacks */,
+			);
 			productName = ExpenseTracker;
 			productReference = 04742F182B02557500850F24 /* ExpenseTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -208,6 +230,9 @@
 				Base,
 			);
 			mainGroup = 04742F0F2B02557500850F24;
+			packageReferences = (
+				0418DCDE2B159F8000AF975A /* XCRemoteSwiftPackageReference "FlowStacks" */,
+			);
 			productRefGroup = 04742F192B02557500850F24 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,17 +259,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04CBF1452B15199200DF5B06 /* HomeScreenViewModel.swift in Sources */,
+				04CBF1452B15199200DF5B06 /* HomeViewModel.swift in Sources */,
 				04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */,
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,
 				04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */,
 				04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */,
 				042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */,
 				042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */,
+				0418DCE32B159FBA00AF975A /* Screen.swift in Sources */,
 				04CBF1432B15197B00DF5B06 /* HomeScreen.swift in Sources */,
+				0418DCE72B15A25500AF975A /* AppCoordinatorViewModel.swift in Sources */,
 				04EEC1A82B0E30F300AC445E /* LocationSearchView.swift in Sources */,
 				04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */,
 				04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */,
+				0418DCE52B15A23700AF975A /* AppCoordinator.swift in Sources */,
 				042350102B0362B2005C6D0C /* Constants.swift in Sources */,
 				04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */,
 			);
@@ -451,6 +479,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0418DCDE2B159F8000AF975A /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0418DCDF2B159F8000AF975A /* FlowStacks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0418DCDE2B159F8000AF975A /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			productName = FlowStacks;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 04742F102B02557500850F24 /* Project object */;
 }
