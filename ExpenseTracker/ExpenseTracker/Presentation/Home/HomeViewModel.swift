@@ -71,7 +71,15 @@ final class HomeViewModel: ObservableObject {
     }
 
     func onTapSignOut() {
-        loginGmailUseCase.signOut()
-        authState = .signedOut
+        do {
+            try loginGmailUseCase.signOut()
+            authState = .signedOut
+        } catch let error {
+            authState = .error(message: error.localizedDescription)
+        }
+    }
+
+    func isSignedIn() -> Bool {
+        loginGmailUseCase.isSignedIn()
     }
 }
