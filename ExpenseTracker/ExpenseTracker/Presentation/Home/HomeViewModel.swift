@@ -38,7 +38,7 @@ final class HomeViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] user in
-                    self?.authState = .signedIn(name: user.profile?.name ?? "No Name found")
+                    self?.authState = .signedIn
                 }
             )
             .store(in: &cancellable)
@@ -64,7 +64,7 @@ final class HomeViewModel: ObservableObject {
                 },
                 receiveValue: { [weak self] user in
                     print("USER: \(user)")
-                    self?.authState = .signedIn(name: user.profile?.name ?? "No Name found")
+                    self?.authState = .signedIn
                 }
             )
             .store(in: &cancellable)
@@ -81,5 +81,19 @@ final class HomeViewModel: ObservableObject {
 
     func isSignedIn() -> Bool {
         loginGmailUseCase.isSignedIn()
+    }
+
+    func getUser() -> User? {
+        guard let gUser = loginGmailUseCase.getCurrentUser() else {
+            return nil
+        }
+        guard let id = gUser.userID, let profile = gUser.profile else {
+            return nil
+        }
+        return User(
+            id: id,
+            name: profile.name,
+            email: profile.email
+        )
     }
 }

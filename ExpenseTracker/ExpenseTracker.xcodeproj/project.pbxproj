@@ -48,6 +48,13 @@
 		042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350122B036385005C6D0C /* UserDefaults+Extension.swift */; };
 		042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350142B0363F9005C6D0C /* UserDefaultsManager.swift */; };
 		042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042470F82B08BA8100A4E2C2 /* CurrentLocationView.swift */; };
+		045294702B30A33D00BB2513 /* TabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452946F2B30A33D00BB2513 /* TabScreen.swift */; };
+		045294722B30A39600BB2513 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294712B30A39600BB2513 /* ProfileScreen.swift */; };
+		045294782B30A46400BB2513 /* AddExpenseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294772B30A46400BB2513 /* AddExpenseScreen.swift */; };
+		0452947A2B30A49900BB2513 /* ExpenseHistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294792B30A49900BB2513 /* ExpenseHistoryScreen.swift */; };
+		0452947D2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452947C2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift */; };
+		045294812B30ADF800BB2513 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294802B30ADF800BB2513 /* User.swift */; };
+		045294832B30BA3A00BB2513 /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */; };
 		04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F1B2B02557500850F24 /* ExpenseTrackerApp.swift */; };
 		04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F1D2B02557500850F24 /* CurrentLocationScreen.swift */; };
 		04742F202B02557700850F24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04742F1F2B02557700850F24 /* Assets.xcassets */; };
@@ -76,6 +83,13 @@
 		042350122B036385005C6D0C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		042350142B0363F9005C6D0C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		042470F82B08BA8100A4E2C2 /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
+		0452946F2B30A33D00BB2513 /* TabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabScreen.swift; sourceTree = "<group>"; };
+		045294712B30A39600BB2513 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		045294772B30A46400BB2513 /* AddExpenseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseScreen.swift; sourceTree = "<group>"; };
+		045294792B30A49900BB2513 /* ExpenseHistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryScreen.swift; sourceTree = "<group>"; };
+		0452947C2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAnalysisScreen.swift; sourceTree = "<group>"; };
+		045294802B30ADF800BB2513 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
 		04742F182B02557500850F24 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04742F1B2B02557500850F24 /* ExpenseTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTrackerApp.swift; sourceTree = "<group>"; };
 		04742F1D2B02557500850F24 /* CurrentLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationScreen.swift; sourceTree = "<group>"; };
@@ -209,6 +223,67 @@
 			path = CurrentLocation;
 			sourceTree = "<group>";
 		};
+		0452946D2B30A2B500BB2513 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				045294762B30A3FD00BB2513 /* ExpenseAnalysis */,
+				045294752B30A3E100BB2513 /* ExpenseHistory */,
+				045294742B30A3C300BB2513 /* AddExpense */,
+				045294732B30A3B100BB2513 /* Profile */,
+				0452946F2B30A33D00BB2513 /* TabScreen.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		045294732B30A3B100BB2513 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				045294712B30A39600BB2513 /* ProfileScreen.swift */,
+				045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		045294742B30A3C300BB2513 /* AddExpense */ = {
+			isa = PBXGroup;
+			children = (
+				045294772B30A46400BB2513 /* AddExpenseScreen.swift */,
+			);
+			path = AddExpense;
+			sourceTree = "<group>";
+		};
+		045294752B30A3E100BB2513 /* ExpenseHistory */ = {
+			isa = PBXGroup;
+			children = (
+				045294792B30A49900BB2513 /* ExpenseHistoryScreen.swift */,
+			);
+			path = ExpenseHistory;
+			sourceTree = "<group>";
+		};
+		045294762B30A3FD00BB2513 /* ExpenseAnalysis */ = {
+			isa = PBXGroup;
+			children = (
+				0452947C2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift */,
+			);
+			path = ExpenseAnalysis;
+			sourceTree = "<group>";
+		};
+		0452947E2B30ADE000BB2513 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0452947F2B30ADE600BB2513 /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0452947F2B30ADE600BB2513 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				045294802B30ADF800BB2513 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		04742F0F2B02557500850F24 = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +303,7 @@
 		04742F1A2B02557500850F24 /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
+				0452947E2B30ADE000BB2513 /* Data */,
 				041152912B179EA500D93FFC /* Domain */,
 				04073E542B170BD800BDE21B /* Info.plist */,
 				04073E522B170B1800BDE21B /* GoogleService-Info.plist */,
@@ -254,6 +330,7 @@
 		04742F292B02599800850F24 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				0452946D2B30A2B500BB2513 /* Tabs */,
 				042D1C5F2B0785AD009FCE92 /* Map */,
 				042D1C5E2B078598009FCE92 /* Home */,
 			);
@@ -386,14 +463,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CBF1452B15199200DF5B06 /* HomeViewModel.swift in Sources */,
+				045294702B30A33D00BB2513 /* TabScreen.swift in Sources */,
 				04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */,
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,
 				04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */,
+				045294812B30ADF800BB2513 /* User.swift in Sources */,
 				04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */,
 				042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */,
 				041152942B179F1100D93FFC /* LoginGmailUseCase.swift in Sources */,
 				042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */,
 				0418DCE32B159FBA00AF975A /* Screen.swift in Sources */,
+				0452947D2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift in Sources */,
+				045294782B30A46400BB2513 /* AddExpenseScreen.swift in Sources */,
 				04CBF1432B15197B00DF5B06 /* HomeScreen.swift in Sources */,
 				0418DCE72B15A25500AF975A /* AppCoordinatorViewModel.swift in Sources */,
 				04EEC1A82B0E30F300AC445E /* LocationSearchView.swift in Sources */,
@@ -401,9 +482,12 @@
 				04FA489E2B2C4803000B7949 /* CommonError.swift in Sources */,
 				04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */,
 				04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */,
+				0452947A2B30A49900BB2513 /* ExpenseHistoryScreen.swift in Sources */,
 				0418DCE52B15A23700AF975A /* AppCoordinator.swift in Sources */,
 				042350102B0362B2005C6D0C /* Constants.swift in Sources */,
 				04FA489A2B2C3BCB000B7949 /* AuthState.swift in Sources */,
+				045294832B30BA3A00BB2513 /* ProfileScreenViewModel.swift in Sources */,
+				045294722B30A39600BB2513 /* ProfileScreen.swift in Sources */,
 				04073E512B17092800BDE21B /* AppDelegate.swift in Sources */,
 				04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */,
 			);

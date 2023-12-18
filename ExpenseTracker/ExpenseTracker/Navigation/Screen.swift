@@ -12,4 +12,5 @@ enum Screen {
     case home(HomeViewModel)
     case searchLocation(LocationSearchViewModel)
     case showCurrentLocation(CurrentLocationViewModel)
+    case tabScreen(User)
 }
