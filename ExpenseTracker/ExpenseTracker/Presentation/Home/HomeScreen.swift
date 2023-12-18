@@ -13,16 +13,31 @@ struct HomeScreen: View {
     @EnvironmentObject var navigator: AppCoordinatorViewModel
     @ObservedObject private var viewModel: HomeViewModel
 
-    private var loginGmailButton: some View {
+    private var signInButton: some View {
         Button {
-
+            viewModel.onTapSignIn()
         } label: {
-            Text("Login with Gmail")
+            Text(Constants.AppText.signInGmail)
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(
             TextButtonStyle(
-                backgroundColor: Color(hexString: "#AD2533"),
+                backgroundColor: Color(hexString: Constants.AppColors.redButtonColor),
+                textColor: .white
+            )
+        )
+    }
+
+    private var signOutButton: some View {
+        Button {
+            viewModel.onTapSignOut()
+        } label: {
+            Text(Constants.AppText.signOut)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(
+            TextButtonStyle(
+                backgroundColor: Color(hexString: Constants.AppColors.redButtonColor),
                 textColor: .white
             )
         )
@@ -32,12 +47,12 @@ struct HomeScreen: View {
         Button {
             navigator.goToSearchLocationView()
         } label: {
-            Text("Search location in map")
+            Text(Constants.AppText.searchLocationMap)
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(
             TextButtonStyle(
-                backgroundColor: Color(hexString: "#2529AD"),
+                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
                 textColor: .white
             )
         )
@@ -47,12 +62,12 @@ struct HomeScreen: View {
         Button {
             navigator.goToCurrentLocationView()
         } label: {
-            Text("See current location in map")
+            Text(Constants.AppText.seeCurrentLocationMap)
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(
             TextButtonStyle(
-                backgroundColor: Color(hexString: "#2529AD"),
+                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
                 textColor: .white
             )
         )
@@ -60,11 +75,27 @@ struct HomeScreen: View {
 
     var body: some View {
         VStack {
-            loginGmailButton
-            searchLocationButton
-            seeCurrentLocationButton
+            switch viewModel.authState {
+            case .loading:
+                ProgressView()
+            case .signedOut:
+                signInButton
+            case let .signedIn(name):
+                Text("Hi: \(name)")
+                    .foregroundColor(.white)
+                searchLocationButton
+                seeCurrentLocationButton
+                signOutButton
+            case let .error(message):
+                Text(message)
+                    .foregroundColor(.red)
+                signInButton
+            }
         }
         .padding()
+        .onAppear {
+            viewModel.checkAuthSate()
+        }
     }
 
     init(viewModel: HomeViewModel) {
