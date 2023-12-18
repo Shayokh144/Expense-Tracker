@@ -89,7 +89,11 @@ struct HomeScreen: View {
             case let .error(message):
                 Text(message)
                     .foregroundColor(.red)
-                signInButton
+                if viewModel.isSignedIn() {
+                    signOutButton
+                } else {
+                    signInButton
+                }
             }
         }
         .padding()
