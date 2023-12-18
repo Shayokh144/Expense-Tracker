@@ -10,6 +10,9 @@ import SwiftUI
 @main
 struct ExpenseTrackerApp: App {
     
+    // register app delegate for Firebase setup
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     var body: some Scene {
         WindowGroup {
             AppCoordinator(coordinator: AppCoordinatorViewModel())
