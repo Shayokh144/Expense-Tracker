@@ -2,110 +2,98 @@
 //  HomeViewModel.swift
 //  ExpenseTracker
 //
-//  Created by Taher on 13/11/23.
+//  Created by Taher on 28/11/23.
 //
 
 import Combine
-import CoreLocation
 import Foundation
-import MapKit
 
-final class HomeViewModel: NSObject, ObservableObject {
+final class HomeViewModel: ObservableObject {
 
-    private var authorizationStatus: CLAuthorizationStatus
-    private let locationManager: CLLocationManager
-    @Published var lastSeenLocation: CLLocation?
-    @Published var currentPlaceMark: CLPlacemark?
-    @Published var addressString: String = ""
+    private let loginGmailUseCase: LoginGmailUseCaseProtocol
+    
+    @Published var authState: AuthState = .signedOut
+    private var cancellable = Set<AnyCancellable>()
 
-    private let userDefaultManager: UserDefaultsManagerProtocol
-
-    init(
-        userDefaultManager: UserDefaultsManagerProtocol = UserDefaultsManager(),
-        locationManager: CLLocationManager = CLLocationManager()
-    ) {
-        self.userDefaultManager = userDefaultManager
-        self.locationManager = locationManager
-        self.authorizationStatus = locationManager.authorizationStatus
-        print("init status: \(authorizationStatus.rawValue)")
-        super.init()
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.startUpdatingLocation()
+    init(loginGmailUseCase: LoginGmailUseCaseProtocol = LoginGmailUseCase()) {
+        self.loginGmailUseCase = loginGmailUseCase
     }
 
-
-    func viewDidAppear() {
-        if userDefaultManager.isFirstInstall() {
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-
-    func getCurrentLocation() -> CLLocationCoordinate2D {
-        guard let lastLocation = lastSeenLocation else {
-            return CLLocationCoordinate2D(
-                latitude: 13.73,
-                longitude: 100.52
+    func checkAuthSate() {
+        authState = .loading
+        loginGmailUseCase.checkAuthStatus()
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    switch completion {
+                    case let .failure(error):
+                        if let newErr = error as? CommonError {
+                            print(newErr.localizedDescription)
+                            self?.authState = .error(message: newErr.localizedDescription)
+                        } else {
+                            self?.authState = .error(message: CommonError.unknown.localizedDescription)
+                        }
+                    case .finished:
+                        NSLog("Finished sign in flow")
+                    }
+                },
+                receiveValue: { [weak self] user in
+                    self?.authState = .signedIn
+                }
             )
-        }
-        print("CLLC: \(lastLocation.coordinate)")
-        return lastLocation.coordinate
+            .store(in: &cancellable)
     }
 
-    deinit {
-        locationManager.stopUpdatingLocation()
+    func onTapSignIn() {
+        authState = .loading
+        loginGmailUseCase.signIn()
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    switch completion {
+                    case let .failure(error):
+                        if let newErr = error as? CommonError {
+                            print(newErr.localizedDescription)
+                            self?.authState = .error(message: newErr.localizedDescription)
+                        } else {
+                            self?.authState = .error(message: CommonError.unknown.localizedDescription)
+                        }
+                    case .finished:
+                        NSLog("Finished sign in flow")
+                    }
+                },
+                receiveValue: { [weak self] user in
+                    print("USER: \(user)")
+                    self?.authState = .signedIn
+                }
+            )
+            .store(in: &cancellable)
     }
-}
 
-// CoreLocation
-extension HomeViewModel: CLLocationManagerDelegate {
-
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        authorizationStatus = manager.authorizationStatus
-        print("initnext status: \(authorizationStatus.rawValue)")
-//        if userDefaultManager.isFirstInstall() && authorizationStatus != .authorizedWhenInUse && authorizationStatus != .authorizedWhenInUse {
-//            // TODO: SHOW POPUP
-//        }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        lastSeenLocation = locations.last
-        fetchCountryAndCity(for: locations.first)
-    }
-}
-
-// Process location lat long
-extension HomeViewModel {
-    func fetchCountryAndCity(for location: CLLocation?) {
-        guard let location = location else { return }
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
-            guard let owner = self else {
-                return
-            }
-            owner.currentPlaceMark = placemarks?.last
-            if let place = placemarks?.last {
-                owner.addressString = """
-                name: \(place.name ?? "")
-                thoroughfare: \(place.thoroughfare ?? "")
-                subthoroughfare: \(place.subThoroughfare ?? "")
-                city: \(place.locality ?? "")
-                sub city: \(place.subLocality ?? "")
-                administrativeArea: \(place.administrativeArea ?? "")
-                subadministrativeArea: \(place.subAdministrativeArea ?? "")
-                postal code: \(place.postalCode ?? "")
-                country code: \(place.isoCountryCode ?? "")
-                country: \(place.country ?? "")
-                interests: \(owner.interestAreas(areas: place.areasOfInterest ?? []))
-            """
-            }
+    func onTapSignOut() {
+        do {
+            try loginGmailUseCase.signOut()
+            authState = .signedOut
+        } catch let error {
+            authState = .error(message: error.localizedDescription)
         }
     }
 
-    private func interestAreas(areas: [String]) -> String {
-        if areas.isEmpty {
-            return "No place found"
+    func isSignedIn() -> Bool {
+        loginGmailUseCase.isSignedIn()
+    }
+
+    func getUser() -> User? {
+        guard let gUser = loginGmailUseCase.getCurrentUser() else {
+            return nil
         }
-        return areas.joined(separator: "\n")
+        guard let id = gUser.userID, let profile = gUser.profile else {
+            return nil
+        }
+        return User(
+            id: id,
+            name: profile.name,
+            email: profile.email
+        )
     }
 }

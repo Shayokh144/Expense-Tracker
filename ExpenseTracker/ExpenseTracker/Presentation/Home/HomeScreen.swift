@@ -2,46 +2,64 @@
 //  HomeScreen.swift
 //  ExpenseTracker
 //
-//  Created by Taher on 13/11/23.
+//  Created by Taher on 28/11/23.
 //
 
-import MapKit
+import FlowStacks
 import SwiftUI
 
 struct HomeScreen: View {
 
+    @EnvironmentObject var navigator: AppCoordinatorViewModel
     @ObservedObject private var viewModel: HomeViewModel
-    @State var shouldShowMapView: Bool = false
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    private let onSignInSuccess: (User) -> Void
+
+    private var signInButton: some View {
+        Button {
+            viewModel.onTapSignIn()
+        } label: {
+            Text(Constants.AppText.signInGmail)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(
+            TextButtonStyle(
+                backgroundColor: Color(hexString: Constants.AppColors.redButtonColor),
+                textColor: .white
+            )
+        )
+    }
 
     var body: some View {
         VStack {
-            Text(viewModel.addressString)
-            Button {
-                let currentLocation = viewModel.getCurrentLocation()
-                print("XYZ \(currentLocation)")
-                region = MKCoordinateRegion(
-                    center: currentLocation,
-                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-                )
-                shouldShowMapView.toggle()
-            } label: {
-                Text("Show map view")
+            switch viewModel.authState {
+            case .loading:
+                ProgressView()
+            case .signedOut:
+                signInButton
+            case .signedIn:
+                // TODO: Remove dummy
+                Text("Sign in success")
+            case let .error(message):
+                Text(message)
+                    .foregroundColor(.red)
+                signInButton
             }
-            .buttonStyle(.borderedProminent)
         }
         .padding()
         .onAppear {
-            viewModel.viewDidAppear()
+            viewModel.checkAuthSate()
         }
-        .sheet(isPresented: $shouldShowMapView) {
-            MapView(mapRegion: $region)
-            .presentationDetents([.fraction(0.75)])
+        .onChange(of: viewModel.authState) { state in
+            if state == .signedIn {
+                if let user = viewModel.getUser() {
+                    onSignInSuccess(user)
+                }
+            }
         }
-
     }
 
-    init(viewModel: HomeViewModel) {
+    init(viewModel: HomeViewModel, onSignInSuccess: @escaping (User) -> Void) {
         self.viewModel = viewModel
+        self.onSignInSuccess = onSignInSuccess
     }
 }
