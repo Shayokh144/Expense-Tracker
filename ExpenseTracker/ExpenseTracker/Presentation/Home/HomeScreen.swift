@@ -12,6 +12,7 @@ struct HomeScreen: View {
 
     @EnvironmentObject var navigator: AppCoordinatorViewModel
     @ObservedObject private var viewModel: HomeViewModel
+    private let onSignInSuccess: (User) -> Void
 
     private var signInButton: some View {
         Button {
@@ -28,51 +29,6 @@ struct HomeScreen: View {
         )
     }
 
-    private var signOutButton: some View {
-        Button {
-            viewModel.onTapSignOut()
-        } label: {
-            Text(Constants.AppText.signOut)
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(
-            TextButtonStyle(
-                backgroundColor: Color(hexString: Constants.AppColors.redButtonColor),
-                textColor: .white
-            )
-        )
-    }
-
-    private var searchLocationButton: some View {
-        Button {
-            navigator.goToSearchLocationView()
-        } label: {
-            Text(Constants.AppText.searchLocationMap)
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(
-            TextButtonStyle(
-                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
-                textColor: .white
-            )
-        )
-    }
-
-    private var seeCurrentLocationButton: some View {
-        Button {
-            navigator.goToCurrentLocationView()
-        } label: {
-            Text(Constants.AppText.seeCurrentLocationMap)
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(
-            TextButtonStyle(
-                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
-                textColor: .white
-            )
-        )
-    }
-
     var body: some View {
         VStack {
             switch viewModel.authState {
@@ -80,29 +36,30 @@ struct HomeScreen: View {
                 ProgressView()
             case .signedOut:
                 signInButton
-            case let .signedIn(name):
-                Text("Hi: \(name)")
-                    .foregroundColor(.white)
-                searchLocationButton
-                seeCurrentLocationButton
-                signOutButton
+            case .signedIn:
+                // TODO: Remove dummy
+                Text("Sign in success")
             case let .error(message):
                 Text(message)
                     .foregroundColor(.red)
-                if viewModel.isSignedIn() {
-                    signOutButton
-                } else {
-                    signInButton
-                }
+                signInButton
             }
         }
         .padding()
         .onAppear {
             viewModel.checkAuthSate()
         }
+        .onChange(of: viewModel.authState) { state in
+            if state == .signedIn {
+                if let user = viewModel.getUser() {
+                    onSignInSuccess(user)
+                }
+            }
+        }
     }
 
-    init(viewModel: HomeViewModel) {
+    init(viewModel: HomeViewModel, onSignInSuccess: @escaping (User) -> Void) {
         self.viewModel = viewModel
+        self.onSignInSuccess = onSignInSuccess
     }
 }

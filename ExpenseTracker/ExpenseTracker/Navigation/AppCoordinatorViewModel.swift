@@ -37,4 +37,12 @@ final class AppCoordinatorViewModel: ObservableObject {
             embedInNavigationView: true
         )
     }
+
+    func goToTabScreen(user: User) {
+        routes = [.root(.tabScreen(user))]
+    }
+
+    func goToHome() {
+        routes = [.root(.home(HomeViewModel()))]
+    }
 }

@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum AuthState {
+enum AuthState: Equatable {
 
     case loading
     case signedOut
-    case signedIn(name: String)
+    case signedIn
     case error(message: String)
 }
