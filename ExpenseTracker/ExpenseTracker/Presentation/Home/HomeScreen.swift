@@ -29,36 +29,6 @@ struct HomeScreen: View {
         )
     }
 
-    private var searchLocationButton: some View {
-        Button {
-            navigator.goToSearchLocationView()
-        } label: {
-            Text(Constants.AppText.searchLocationMap)
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(
-            TextButtonStyle(
-                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
-                textColor: .white
-            )
-        )
-    }
-
-    private var seeCurrentLocationButton: some View {
-        Button {
-            navigator.goToCurrentLocationView()
-        } label: {
-            Text(Constants.AppText.seeCurrentLocationMap)
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(
-            TextButtonStyle(
-                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
-                textColor: .white
-            )
-        )
-    }
-
     var body: some View {
         VStack {
             switch viewModel.authState {
@@ -67,8 +37,8 @@ struct HomeScreen: View {
             case .signedOut:
                 signInButton
             case .signedIn:
-                searchLocationButton
-                seeCurrentLocationButton
+                // TODO: Remove dummy
+                Text("Sign in success")
             case let .error(message):
                 Text(message)
                     .foregroundColor(.red)

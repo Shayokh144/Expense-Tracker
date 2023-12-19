@@ -29,11 +29,43 @@ struct ProfileScreen: View {
         )
     }
 
+    private var searchLocationButton: some View {
+        Button {
+            navigator.goToSearchLocationView()
+        } label: {
+            Text(Constants.AppText.searchLocationMap)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(
+            TextButtonStyle(
+                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
+                textColor: .white
+            )
+        )
+    }
+
+    private var seeCurrentLocationButton: some View {
+        Button {
+            navigator.goToCurrentLocationView()
+        } label: {
+            Text(Constants.AppText.seeCurrentLocationMap)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(
+            TextButtonStyle(
+                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
+                textColor: .white
+            )
+        )
+    }
+
     var body: some View {
         VStack {
             Text(viewModel.user.name)
                 .font(.title2)
             Text(viewModel.user.email)
+            searchLocationButton
+            seeCurrentLocationButton
             signOutButton
         }
         .padding()
