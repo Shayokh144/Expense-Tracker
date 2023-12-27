@@ -60,6 +60,11 @@
 		04742F202B02557700850F24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04742F1F2B02557700850F24 /* Assets.xcassets */; };
 		04742F232B02557700850F24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04742F222B02557700850F24 /* Preview Assets.xcassets */; };
 		04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F2A2B025B5A00850F24 /* CurrentLocationViewModel.swift */; };
+		04C410E42B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */; };
+		04C410E62B3C87B30084BF81 /* ExpenseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E52B3C87B30084BF81 /* ExpenseList.swift */; };
+		04C410E82B3C8A0D0084BF81 /* DateFormatter+Extenson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */; };
+		04C410EA2B3C8A690084BF81 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E92B3C8A690084BF81 /* Date+Extension.swift */; };
+		04C410EC2B3C8D000084BF81 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410EB2B3C8D000084BF81 /* AddExpenseViewModel.swift */; };
 		04CBF1432B15197B00DF5B06 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1422B15197B00DF5B06 /* HomeScreen.swift */; };
 		04CBF1452B15199200DF5B06 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1442B15199200DF5B06 /* HomeViewModel.swift */; };
 		04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1472B15216800DF5B06 /* TextButtonStyle.swift */; };
@@ -96,6 +101,11 @@
 		04742F1F2B02557700850F24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04742F222B02557700850F24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		04742F2A2B025B5A00850F24 /* CurrentLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewModel.swift; sourceTree = "<group>"; };
+		04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRealtimeDBUseCase.swift; sourceTree = "<group>"; };
+		04C410E52B3C87B30084BF81 /* ExpenseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseList.swift; sourceTree = "<group>"; };
+		04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extenson.swift"; sourceTree = "<group>"; };
+		04C410E92B3C8A690084BF81 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		04C410EB2B3C8D000084BF81 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
 		04CBF1422B15197B00DF5B06 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		04CBF1442B15199200DF5B06 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		04CBF1472B15216800DF5B06 /* TextButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButtonStyle.swift; sourceTree = "<group>"; };
@@ -159,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				041152932B179F1100D93FFC /* LoginGmailUseCase.swift */,
+				04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -190,6 +201,8 @@
 			children = (
 				042350122B036385005C6D0C /* UserDefaults+Extension.swift */,
 				04CBF1492B15230700DF5B06 /* Color+Extension.swift */,
+				04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */,
+				04C410E92B3C8A690084BF81 /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -248,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				045294772B30A46400BB2513 /* AddExpenseScreen.swift */,
+				04C410EB2B3C8D000084BF81 /* AddExpenseViewModel.swift */,
 			);
 			path = AddExpense;
 			sourceTree = "<group>";
@@ -280,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				045294802B30ADF800BB2513 /* User.swift */,
+				04C410E52B3C87B30084BF81 /* ExpenseList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -468,6 +483,7 @@
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,
 				04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */,
 				045294812B30ADF800BB2513 /* User.swift in Sources */,
+				04C410E82B3C8A0D0084BF81 /* DateFormatter+Extenson.swift in Sources */,
 				04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */,
 				042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */,
 				041152942B179F1100D93FFC /* LoginGmailUseCase.swift in Sources */,
@@ -478,10 +494,13 @@
 				04CBF1432B15197B00DF5B06 /* HomeScreen.swift in Sources */,
 				0418DCE72B15A25500AF975A /* AppCoordinatorViewModel.swift in Sources */,
 				04EEC1A82B0E30F300AC445E /* LocationSearchView.swift in Sources */,
+				04C410E62B3C87B30084BF81 /* ExpenseList.swift in Sources */,
 				041152962B17A16A00D93FFC /* Typealias.swift in Sources */,
 				04FA489E2B2C4803000B7949 /* CommonError.swift in Sources */,
 				04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */,
+				04C410EA2B3C8A690084BF81 /* Date+Extension.swift in Sources */,
 				04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */,
+				04C410EC2B3C8D000084BF81 /* AddExpenseViewModel.swift in Sources */,
 				0452947A2B30A49900BB2513 /* ExpenseHistoryScreen.swift in Sources */,
 				0418DCE52B15A23700AF975A /* AppCoordinator.swift in Sources */,
 				042350102B0362B2005C6D0C /* Constants.swift in Sources */,
@@ -490,6 +509,7 @@
 				045294722B30A39600BB2513 /* ProfileScreen.swift in Sources */,
 				04073E512B17092800BDE21B /* AppDelegate.swift in Sources */,
 				04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */,
+				04C410E42B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
