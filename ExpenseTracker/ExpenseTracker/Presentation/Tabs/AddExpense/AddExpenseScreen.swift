@@ -27,10 +27,27 @@ struct AddExpenseScreen: View {
         )
     }
 
+    private var getExpenseButton: some View {
+        Button {
+            viewModel.getExpenseList()
+        } label: {
+            Text("Get list")
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(
+            TextButtonStyle(
+                backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
+                textColor: .white
+            )
+        )
+    }
+
     var body: some View {
         VStack {
             Text("Add Expense Screen")
             saveExpenseButton
+            // TODO: Remove dummy
+            getExpenseButton
         }
     }
 

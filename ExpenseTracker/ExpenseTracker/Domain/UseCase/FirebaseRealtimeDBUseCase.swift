@@ -21,6 +21,7 @@ final class FirebaseRealtimeDBUseCase {
     }()
 
     private let encoder = JSONEncoder()
+    private let decoder = JSONDecoder()
 
     func postExpanse(
         expenseList: ExpenseList,
@@ -46,5 +47,33 @@ final class FirebaseRealtimeDBUseCase {
             NSLog("Post method error: \(error)")
             isSuccessCompletion(false)
         }
+    }
+
+    func getExpenses(completion: @escaping (ExpenseList?) -> Void) {
+        guard let databasePath = databasePath else {
+            NSLog("Database path not found")
+            completion(nil)
+            return
+        }
+        databasePath.observe(.childAdded) { [weak self] snapshot  in
+            let dataModel = self?.getExpenseModel(snapshot: snapshot)
+            completion(dataModel)
+        }
+    }
+
+    private func getExpenseModel(snapshot: DataSnapshot) ->  ExpenseList? {
+        guard var json = snapshot.value as? [String: Any]
+        else {
+            return nil
+        }
+        json["id"] = snapshot.key
+        do {
+            let expenseListData = try JSONSerialization.data(withJSONObject: json)
+            let expenseList = try self.decoder.decode(ExpenseList.self, from: expenseListData)
+            return expenseList
+        } catch let error {
+            NSLog("Data conversion error: \(error)")
+        }
+        return nil
     }
 }
