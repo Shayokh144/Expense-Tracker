@@ -32,10 +32,21 @@ extension Expense {
 
     static var dummy: Expense {
         .init(
-            name: "Orange",
-            price: 60.5,
+            name: "Oil",
+            price: 40.0,
             type: "Grocery",
-            place: "Big C",
+            place: "7-11",
+            city: "Bangkok",
+            country: "Thailand"
+        )
+    }
+
+    static var dummy2: Expense {
+        .init(
+            name: "Egg",
+            price: 70.0,
+            type: "Grocery",
+            place: "7-11",
             city: "Bangkok",
             country: "Thailand"
         )
@@ -47,9 +58,9 @@ extension ExpenseList {
     static var dummy: ExpenseList {
         .init(
             dateTime: Date.currentDateString,
-            totalCost: 60.5,
+            totalCost: 110.0,
             country: "Thailand",
-            expenses: [Expense.dummy]
+            expenses: [Expense.dummy, Expense.dummy2]
         )
     }
 }
