@@ -23,8 +23,13 @@ final class AddExpenseViewModel: ObservableObject {
     }
 
     func getExpenseList() {
-        firebaseRealtimeDBUseCase.getExpenses { expenseList in
-            print("XYZ GET RESULT: \(expenseList)")
+//        firebaseRealtimeDBUseCase.getExpenses { expenseList in
+//            print("XYZ GET RESULT: \(expenseList)")
+//        }
+        firebaseRealtimeDBUseCase.getLatesExpenses { expenseList in
+            if let expenseList = expenseList {
+                print("XYZ GET RESULT: \(expenseList)")
+            }
         }
     }
 }

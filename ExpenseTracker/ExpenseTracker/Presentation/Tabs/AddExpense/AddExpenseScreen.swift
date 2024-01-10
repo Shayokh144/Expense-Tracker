@@ -27,6 +27,7 @@ struct AddExpenseScreen: View {
         )
     }
 
+    // TODO: Remove dummy
     private var getExpenseButton: some View {
         Button {
             viewModel.getExpenseList()
