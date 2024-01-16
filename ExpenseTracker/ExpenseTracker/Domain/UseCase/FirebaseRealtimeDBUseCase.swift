@@ -69,36 +69,50 @@ final class FirebaseRealtimeDBUseCase {
 
     /**
      This method will fetch latest data based on queryLimit. Let, queryLimit = 10
-     After reading last 10, it will read second last 10 records again.
+     After reading last 10, it will read second last 10 records.
      For example, if total 100 records, first it will read 90 to 100, then it will read 80-89 and so on.
      */
-    func getLatesExpenses(
-        queryLimit: UInt = 1,
-        completion: @escaping (ExpenseList?) -> Void
+    func getLatestExpenseLists(
+        queryLimit: UInt,
+        completion: @escaping ([ExpenseList]?) -> Void
     ) {
         guard let databasePath = databasePath else {
             NSLog("Database path not found")
             completion(nil)
             return
         }
-        if lastFetchedDataKey != nil {
-            let mostRecent = databasePath
+
+        var query: DatabaseQuery
+
+        if let lastFetchedDataKey = lastFetchedDataKey {
+            query = databasePath
                 .queryEnding(beforeValue: nil, childKey: lastFetchedDataKey)
+                .queryOrdered(byChild: "datetime")
                 .queryLimited(toLast: queryLimit)
-            mostRecent.observe(.childAdded) { [weak self] snapshot  in
-                self?.lastFetchedDataKey = snapshot.key
-                let dataModel = self?.getExpenseModel(snapshot: snapshot)
-                completion(dataModel)
-            }
         } else {
-            let mostRecent = databasePath.queryLimited(toLast: queryLimit)
-            mostRecent.observe(.childAdded) { [weak self] snapshot  in
-                self?.lastFetchedDataKey = snapshot.key
-                let dataModel = self?.getExpenseModel(snapshot: snapshot)
-                completion(dataModel)
+            query = databasePath
+                .queryOrdered(byChild: "datetime")
+                .queryLimited(toLast: queryLimit)
+        }
+
+        query.observeSingleEvent(of: .value) { [weak self] snapshot in
+            guard let self = self else { return }
+            var dataModels: [ExpenseList] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot {
+                    if let dataModel = self.getExpenseModel(snapshot: snapshot) {
+                        dataModels.append(dataModel)
+                    }
+                }
             }
+            if let firstChild = snapshot.children.allObjects.first as? DataSnapshot {
+                self.lastFetchedDataKey = firstChild.key
+            }
+            // Reverse the array to get the last one on top
+            completion(dataModels.reversed())
         }
     }
+
 
     // MARK: - Model conversion
 

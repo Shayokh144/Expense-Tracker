@@ -15,4 +15,12 @@ extension DateFormatter {
         dateFormatter.locale = Locale.current
         return dateFormatter
     }()
+
+    /// Result: "12 Dec 2023, 3:30 PM"
+    static let displayDateTimeFormat: DateFormatter = {
+        let displayDateFormatter = DateFormatter()
+        displayDateFormatter.dateFormat = "d MMM yyyy, h:mm a"
+        displayDateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        return displayDateFormatter
+    }()
 }
