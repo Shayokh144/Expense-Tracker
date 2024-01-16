@@ -13,19 +13,20 @@ struct ExpenseList: Codable, Identifiable {
     let dateTime: String
     let totalCost: Double
     let country: String
+    let currency: String?
     let expenses: [Expense]
 }
 
 
-struct Expense: Codable, Identifiable {
+struct Expense: Codable, Identifiable, Hashable {
 
     var id: String?
-    let name: String
-    let price: Double
-    let type: String
-    let place: String
-    let city: String
-    let country: String
+    var name: String
+    var price: Double
+    var type: String
+    var place: String
+    var city: String
+    var country: String
 }
 
 extension Expense {
@@ -60,6 +61,7 @@ extension ExpenseList {
             dateTime: Date.currentDateString,
             totalCost: 110.0,
             country: "Thailand",
+            currency: "THB",
             expenses: [Expense.dummy, Expense.dummy2]
         )
     }

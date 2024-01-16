@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import FirebaseAuth
 
 final class HomeViewModel: ObservableObject {
 
@@ -21,6 +22,11 @@ final class HomeViewModel: ObservableObject {
 
     func checkAuthSate() {
         authState = .loading
+        if let user = Auth.auth().currentUser {
+            print("XYZ UID:  \(user.uid)")
+            self.authState = .signedIn
+            return
+        }
         loginGmailUseCase.checkAuthStatus()
             .receive(on: DispatchQueue.main)
             .sink(
@@ -84,6 +90,13 @@ final class HomeViewModel: ObservableObject {
     }
 
     func getUser() -> User? {
+        if let fUser = Auth.auth().currentUser {
+            return User(
+                id: fUser.uid,
+                name: fUser.displayName ?? "No name found",
+                email: fUser.email ?? "No email found"
+            )
+        }
         guard let gUser = loginGmailUseCase.getCurrentUser() else {
             return nil
         }

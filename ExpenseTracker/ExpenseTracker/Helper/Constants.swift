@@ -30,5 +30,7 @@ extension Constants {
         static let tabProfile = "Profile"
         static let tabHistory = "History"
         static let tabAnalysis = "Analysis"
+        static let addExpense = "Add expense"
+        static let selectDate = "Select date"
     }
 }

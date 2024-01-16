@@ -44,6 +44,7 @@
 		0418DCE32B159FBA00AF975A /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418DCE22B159FBA00AF975A /* Screen.swift */; };
 		0418DCE52B15A23700AF975A /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418DCE42B15A23700AF975A /* AppCoordinator.swift */; };
 		0418DCE72B15A25500AF975A /* AppCoordinatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0418DCE62B15A25500AF975A /* AppCoordinatorViewModel.swift */; };
+		041D19CE2B55072000FB8978 /* CurrencyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D19CD2B55072000FB8978 /* CurrencyPickerView.swift */; };
 		042350102B0362B2005C6D0C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0423500F2B0362B2005C6D0C /* Constants.swift */; };
 		042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350122B036385005C6D0C /* UserDefaults+Extension.swift */; };
 		042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350142B0363F9005C6D0C /* UserDefaultsManager.swift */; };
@@ -55,11 +56,17 @@
 		0452947D2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452947C2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift */; };
 		045294812B30ADF800BB2513 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294802B30ADF800BB2513 /* User.swift */; };
 		045294832B30BA3A00BB2513 /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */; };
+		0463BECE2B50FB4000302121 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463BECD2B50FB4000302121 /* View+Extension.swift */; };
 		04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F1B2B02557500850F24 /* ExpenseTrackerApp.swift */; };
 		04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F1D2B02557500850F24 /* CurrentLocationScreen.swift */; };
 		04742F202B02557700850F24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04742F1F2B02557700850F24 /* Assets.xcassets */; };
 		04742F232B02557700850F24 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04742F222B02557700850F24 /* Preview Assets.xcassets */; };
 		04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F2A2B025B5A00850F24 /* CurrentLocationViewModel.swift */; };
+		04B1BFEA2B4EA28A00ABA765 /* ExpenseInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BFE92B4EA28A00ABA765 /* ExpenseInputView.swift */; };
+		04B1BFEC2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BFEB2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift */; };
+		04B1BFEE2B4EB6DE00ABA765 /* PlaceAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BFED2B4EB6DE00ABA765 /* PlaceAddress.swift */; };
+		04B1BFF02B4F127700ABA765 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BFEF2B4F127700ABA765 /* Double+Extension.swift */; };
+		04B1BFF22B4F154800ABA765 /* ExpenseEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BFF12B4F154800ABA765 /* ExpenseEditView.swift */; };
 		04C410E42B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */; };
 		04C410E62B3C87B30084BF81 /* ExpenseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E52B3C87B30084BF81 /* ExpenseList.swift */; };
 		04C410E82B3C8A0D0084BF81 /* DateFormatter+Extenson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */; };
@@ -84,6 +91,7 @@
 		0418DCE22B159FBA00AF975A /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		0418DCE42B15A23700AF975A /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		0418DCE62B15A25500AF975A /* AppCoordinatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorViewModel.swift; sourceTree = "<group>"; };
+		041D19CD2B55072000FB8978 /* CurrencyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPickerView.swift; sourceTree = "<group>"; };
 		0423500F2B0362B2005C6D0C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		042350122B036385005C6D0C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		042350142B0363F9005C6D0C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -95,12 +103,18 @@
 		0452947C2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAnalysisScreen.swift; sourceTree = "<group>"; };
 		045294802B30ADF800BB2513 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
+		0463BECD2B50FB4000302121 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		04742F182B02557500850F24 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04742F1B2B02557500850F24 /* ExpenseTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTrackerApp.swift; sourceTree = "<group>"; };
 		04742F1D2B02557500850F24 /* CurrentLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationScreen.swift; sourceTree = "<group>"; };
 		04742F1F2B02557700850F24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04742F222B02557700850F24 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		04742F2A2B025B5A00850F24 /* CurrentLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewModel.swift; sourceTree = "<group>"; };
+		04B1BFE92B4EA28A00ABA765 /* ExpenseInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseInputView.swift; sourceTree = "<group>"; };
+		04B1BFEB2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseInputViewModel.swift; sourceTree = "<group>"; };
+		04B1BFED2B4EB6DE00ABA765 /* PlaceAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddress.swift; sourceTree = "<group>"; };
+		04B1BFEF2B4F127700ABA765 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		04B1BFF12B4F154800ABA765 /* ExpenseEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditView.swift; sourceTree = "<group>"; };
 		04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRealtimeDBUseCase.swift; sourceTree = "<group>"; };
 		04C410E52B3C87B30084BF81 /* ExpenseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseList.swift; sourceTree = "<group>"; };
 		04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extenson.swift"; sourceTree = "<group>"; };
@@ -184,6 +198,14 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		041D19CC2B5506E700FB8978 /* ExpenseEdit */ = {
+			isa = PBXGroup;
+			children = (
+				04B1BFF12B4F154800ABA765 /* ExpenseEditView.swift */,
+			);
+			path = ExpenseEdit;
+			sourceTree = "<group>";
+		};
 		0423500E2B03628A005C6D0C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +225,8 @@
 				04CBF1492B15230700DF5B06 /* Color+Extension.swift */,
 				04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */,
 				04C410E92B3C8A690084BF81 /* Date+Extension.swift */,
+				04B1BFEF2B4F127700ABA765 /* Double+Extension.swift */,
+				0463BECD2B50FB4000302121 /* View+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -295,6 +319,7 @@
 			children = (
 				045294802B30ADF800BB2513 /* User.swift */,
 				04C410E52B3C87B30084BF81 /* ExpenseList.swift */,
+				04B1BFED2B4EB6DE00ABA765 /* PlaceAddress.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -345,11 +370,23 @@
 		04742F292B02599800850F24 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				041D19CC2B5506E700FB8978 /* ExpenseEdit */,
+				04B1BFE82B4EA27700ABA765 /* ExpenseInput */,
 				0452946D2B30A2B500BB2513 /* Tabs */,
 				042D1C5F2B0785AD009FCE92 /* Map */,
 				042D1C5E2B078598009FCE92 /* Home */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		04B1BFE82B4EA27700ABA765 /* ExpenseInput */ = {
+			isa = PBXGroup;
+			children = (
+				04B1BFE92B4EA28A00ABA765 /* ExpenseInputView.swift */,
+				04B1BFEB2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift */,
+				041D19CD2B55072000FB8978 /* CurrencyPickerView.swift */,
+			);
+			path = ExpenseInput;
 			sourceTree = "<group>";
 		};
 		04CBF1462B15215600DF5B06 /* UI */ = {
@@ -479,10 +516,15 @@
 			files = (
 				04CBF1452B15199200DF5B06 /* HomeViewModel.swift in Sources */,
 				045294702B30A33D00BB2513 /* TabScreen.swift in Sources */,
+				04B1BFEA2B4EA28A00ABA765 /* ExpenseInputView.swift in Sources */,
 				04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */,
+				04B1BFEE2B4EB6DE00ABA765 /* PlaceAddress.swift in Sources */,
+				04B1BFF02B4F127700ABA765 /* Double+Extension.swift in Sources */,
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,
+				04B1BFEC2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift in Sources */,
 				04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */,
 				045294812B30ADF800BB2513 /* User.swift in Sources */,
+				0463BECE2B50FB4000302121 /* View+Extension.swift in Sources */,
 				04C410E82B3C8A0D0084BF81 /* DateFormatter+Extenson.swift in Sources */,
 				04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */,
 				042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */,
@@ -492,6 +534,7 @@
 				0452947D2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift in Sources */,
 				045294782B30A46400BB2513 /* AddExpenseScreen.swift in Sources */,
 				04CBF1432B15197B00DF5B06 /* HomeScreen.swift in Sources */,
+				04B1BFF22B4F154800ABA765 /* ExpenseEditView.swift in Sources */,
 				0418DCE72B15A25500AF975A /* AppCoordinatorViewModel.swift in Sources */,
 				04EEC1A82B0E30F300AC445E /* LocationSearchView.swift in Sources */,
 				04C410E62B3C87B30084BF81 /* ExpenseList.swift in Sources */,
@@ -510,6 +553,7 @@
 				04073E512B17092800BDE21B /* AppDelegate.swift in Sources */,
 				04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */,
 				04C410E42B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift in Sources */,
+				041D19CE2B55072000FB8978 /* CurrencyPickerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
