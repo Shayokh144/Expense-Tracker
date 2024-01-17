@@ -119,12 +119,11 @@ final class FirebaseRealtimeDBUseCase {
             if let firstChild = snapshot.children.allObjects.first as? DataSnapshot {
                 self.lastFetchedDataKey = firstChild.key
             }
-            print("snap cnt: \(dataModels.count)")
+//            print("snap cnt: \(dataModels.count)")
             completion(dataModels, isNewDataAdded)
             isNewDataAdded = false
         }
     }
-
 
     // MARK: - Model conversion
 

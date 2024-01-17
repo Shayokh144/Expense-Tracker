@@ -37,6 +37,20 @@ struct ExpenseInputView: View {
         }
     }
 
+    private var customPlaceInputView: some View {
+        VStack {
+            TextField("place name", text: $viewModel.customPlaceName)
+                .textFieldStyle(.roundedBorder)
+            HStack(spacing: 16.0) {
+                TextField("city", text: $viewModel.customPlaceCity)
+                    .textFieldStyle(.roundedBorder)
+                Spacer()
+                TextField("country", text: $viewModel.customPlaceCountry)
+                    .textFieldStyle(.roundedBorder)
+            }
+        }
+    }
+
     private var addExpenseButton: some View {
         Button(
             action: {
@@ -72,8 +86,12 @@ struct ExpenseInputView: View {
                 selectedLocationView(address: selectedPlace)
                 addExpenseButton
             } else {
-                TextField("place", text: $viewModel.searchText)
-                    .textFieldStyle(.roundedBorder)
+                if viewModel.isPlaceApiError {
+                    customPlaceInputView
+                } else {
+                    TextField("place", text: $viewModel.searchText)
+                        .textFieldStyle(.roundedBorder)
+                }
                 if !viewModel.searchResults.isEmpty {
                     placeSearchResult
                 }

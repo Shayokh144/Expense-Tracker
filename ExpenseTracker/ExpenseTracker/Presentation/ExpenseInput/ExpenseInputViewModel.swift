@@ -19,6 +19,9 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
     @Published var place: String = ""
     @Published var selectedPlace: PlaceAddress? = nil
     @Published var isPlaceApiError: Bool = false
+    @Published var customPlaceName: String = ""
+    @Published var customPlaceCity: String = ""
+    @Published var customPlaceCountry: String = ""
 
     private var cancellable: AnyCancellable?
     private let searchCompleter: MKLocalSearchCompleter!
@@ -50,6 +53,15 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
 
     func onTapAddExpense() -> Expense {
         let dateTime = DateFormatter.fullDateTimeFormat.string(from: Date())
+        if selectedPlace == nil && !customPlaceName.isEmpty {
+            selectedPlace = PlaceAddress(
+                name: customPlaceName,
+                city: customPlaceCity,
+                country: customPlaceCountry,
+                longitude: nil,
+                latitude: nil
+            )
+        }
         let expense = Expense(
             id: dateTime,
             name: productName,
@@ -74,7 +86,8 @@ extension ExpenseInputViewModel: MKLocalSearchCompleterDelegate {
     }
 
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print("LocationSearchViewModel error: \(error)")
+        isPlaceApiError = true
+        NSLog("LocationSearchViewModel error: \(error)")
     }
 
     private func convertToPlaceAddressResult(_ results: [MKLocalSearchCompletion]) {
@@ -87,7 +100,7 @@ extension ExpenseInputViewModel: MKLocalSearchCompleterDelegate {
                     return
                 }
                 if let error = error {
-                    print("Error performing local search: \(error.localizedDescription)")
+                    NSLog("Error performing local search: \(error.localizedDescription)")
                     isPlaceApiError = true
                     return
                 }

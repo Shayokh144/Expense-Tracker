@@ -69,7 +69,7 @@ final class ExpenseHistoryViewModel: ObservableObject {
                         return item1.dateTime > item2.dateTime
                     }
                     calculateTotal()
-                    print("expenseHistoryItems cnt: \(expenseHistoryItems.count)")
+//                    print("expenseHistoryItems cnt: \(expenseHistoryItems.count)")
                 }
                 self.state = .loaded
             }
