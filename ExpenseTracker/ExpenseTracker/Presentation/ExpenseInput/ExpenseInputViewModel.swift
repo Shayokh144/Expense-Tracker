@@ -18,6 +18,7 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
     @Published var productType: String = ""
     @Published var place: String = ""
     @Published var selectedPlace: PlaceAddress? = nil
+    @Published var isPlaceApiError: Bool = false
 
     private var cancellable: AnyCancellable?
     private let searchCompleter: MKLocalSearchCompleter!
@@ -29,7 +30,7 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
 
         cancellable = $searchText
             .receive(on: DispatchQueue.main)
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main, options: nil)
+            .debounce(for: .milliseconds(600), scheduler: RunLoop.main, options: nil)
             .sink(receiveValue: { fragment in
                 if !fragment.isEmpty {
                     self.searchCompleter.queryFragment = fragment
@@ -77,12 +78,17 @@ extension ExpenseInputViewModel: MKLocalSearchCompleterDelegate {
     }
 
     private func convertToPlaceAddressResult(_ results: [MKLocalSearchCompletion]) {
+        isPlaceApiError = false
         for result in results {
             let searchRequest = MKLocalSearch.Request(completion: result)
             let localSearch = MKLocalSearch(request: searchRequest)
             localSearch.start { [weak self] (response, error) in
+                guard let self = self else {
+                    return
+                }
                 if let error = error {
                     print("Error performing local search: \(error.localizedDescription)")
+                    isPlaceApiError = true
                     return
                 }
                 if let mapItem = response?.mapItems.first {
@@ -93,7 +99,11 @@ extension ExpenseInputViewModel: MKLocalSearchCompleterDelegate {
                         longitude: mapItem.placemark.coordinate.longitude,
                         latitude: mapItem.placemark.coordinate.latitude
                     )
-                    self?.searchResults.append(address)
+                    if !self.searchResults.contains(where: {
+                        $0.latitude == address.latitude && $0.longitude == address.longitude
+                    }) {
+                        self.searchResults.append(address)
+                    }
                 }
             }
         }

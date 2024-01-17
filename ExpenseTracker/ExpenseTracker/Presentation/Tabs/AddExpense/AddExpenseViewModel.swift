@@ -24,7 +24,7 @@ final class AddExpenseViewModel: ObservableObject {
     @Published var editCountry: String = ""
     @Published var editCity: String = ""
 
-    init(firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase()) {
+    init(firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase.shared) {
         self.firebaseRealtimeDBUseCase = firebaseRealtimeDBUseCase
         addedLocalExpenseList = []
         currentTotal = 0.0

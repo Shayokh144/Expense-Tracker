@@ -12,7 +12,8 @@ extension DateFormatter {
     static let fullDateTimeFormat: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        dateFormatter.locale = Locale.current
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
         return dateFormatter
     }()
 
@@ -21,6 +22,7 @@ extension DateFormatter {
         let displayDateFormatter = DateFormatter()
         displayDateFormatter.dateFormat = "d MMM yyyy, h:mm a"
         displayDateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        displayDateFormatter.calendar = Calendar(identifier: .gregorian)
         return displayDateFormatter
     }()
 }

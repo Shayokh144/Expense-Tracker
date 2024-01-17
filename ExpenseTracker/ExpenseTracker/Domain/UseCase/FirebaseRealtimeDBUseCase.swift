@@ -10,19 +10,28 @@ import FirebaseDatabase
 
 final class FirebaseRealtimeDBUseCase {
 
+    static let shared = FirebaseRealtimeDBUseCase()
+    var isNewDataAdded: Bool
+
     private lazy var databasePath: DatabaseReference? = {
-      guard let uid = Auth.auth().currentUser?.uid else {
-        return nil
-      }
-      let ref = Database.database()
-        .reference()
-        .child("users/\(uid)/expenseLists")
-      return ref
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return nil
+        }
+        let ref = Database.database()
+            .reference()
+            .child("users/\(uid)/expenseLists")
+        ref.keepSynced(true)
+        return ref
     }()
 
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     private var lastFetchedDataKey: String?
+
+    private init() {
+        isNewDataAdded = false
+        lastFetchedDataKey = nil
+    }
 
     // MARK: - Post data to FBRDB
 
@@ -30,6 +39,7 @@ final class FirebaseRealtimeDBUseCase {
         expenseList: ExpenseList,
         isSuccessCompletion: @escaping (Bool) -> Void
     ) {
+        isNewDataAdded = false
         guard let databasePath = databasePath else {
             NSLog("Database path not found")
             isSuccessCompletion(false)
@@ -45,6 +55,7 @@ final class FirebaseRealtimeDBUseCase {
             let json = try JSONSerialization.jsonObject(with: data)
             databasePath.childByAutoId()
                 .setValue(json)
+            isNewDataAdded = true
             isSuccessCompletion(true)
         } catch let error {
             NSLog("Post method error: \(error)")
@@ -74,28 +85,28 @@ final class FirebaseRealtimeDBUseCase {
      */
     func getLatestExpenseLists(
         queryLimit: UInt,
-        completion: @escaping ([ExpenseList]?) -> Void
+        completion: @escaping ([ExpenseList]?, Bool?) -> Void
     ) {
         guard let databasePath = databasePath else {
             NSLog("Database path not found")
-            completion(nil)
+            completion(nil, nil)
             return
         }
+        var queryGet: DatabaseQuery
 
-        var query: DatabaseQuery
+        if let lastFetchedDataKey = lastFetchedDataKey, !isNewDataAdded {
 
-        if let lastFetchedDataKey = lastFetchedDataKey {
-            query = databasePath
-                .queryEnding(beforeValue: nil, childKey: lastFetchedDataKey)
-                .queryOrdered(byChild: "datetime")
+            queryGet = databasePath
+                .queryOrderedByKey()
+                .queryEnding(atValue: lastFetchedDataKey) // if query ordered by key
                 .queryLimited(toLast: queryLimit)
         } else {
-            query = databasePath
-                .queryOrdered(byChild: "datetime")
+            queryGet = databasePath
+                .queryOrdered(byChild: "id")
                 .queryLimited(toLast: queryLimit)
         }
 
-        query.observeSingleEvent(of: .value) { [weak self] snapshot in
+        queryGet.observeSingleEvent(of: .value) { [weak self] snapshot in
             guard let self = self else { return }
             var dataModels: [ExpenseList] = []
             for child in snapshot.children {
@@ -108,8 +119,9 @@ final class FirebaseRealtimeDBUseCase {
             if let firstChild = snapshot.children.allObjects.first as? DataSnapshot {
                 self.lastFetchedDataKey = firstChild.key
             }
-            // Reverse the array to get the last one on top
-            completion(dataModels.reversed())
+            print("snap cnt: \(dataModels.count)")
+            completion(dataModels, isNewDataAdded)
+            isNewDataAdded = false
         }
     }
 

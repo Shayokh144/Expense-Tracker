@@ -17,7 +17,7 @@ final class ExpenseHistoryViewModel: ObservableObject {
     private let firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase
     
     init(
-        firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase()
+        firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase.shared
     ) {
         self.firebaseRealtimeDBUseCase = firebaseRealtimeDBUseCase
         state = .idle
@@ -25,23 +25,51 @@ final class ExpenseHistoryViewModel: ObservableObject {
         totalExpense = 0.0
     }
 
+//    func loadExpenseData() {
+//        state = .loading
+//        firebaseRealtimeDBUseCase.getExpenses { expenseList in
+//            if let expenseList = expenseList {
+//                DispatchQueue.main.async { [weak self] in
+//                    guard let self = self else {
+//                        return
+//                    }
+//                    if !self.expenseHistoryItems.contains(where: { $0.id == expenseList.id }) {
+//                        self.populateUIList(expenseList: expenseList)
+//                    }
+//                    self.expenseHistoryItems = self.expenseHistoryItems.sorted { (item1, item2) -> Bool in
+//                        return item1.dateTime > item2.dateTime
+//                    }
+//                    calculateTotal()
+//                    state = .loaded
+//                    print("expenseHistoryItems cnt: \(expenseHistoryItems.count)")
+//                }
+//            }
+//        }
+//    }
+
     func loadExpenseData() {
         state = .loading
         firebaseRealtimeDBUseCase.getLatestExpenseLists(
             queryLimit: 10
-        ) {  expenseList in
+        ) {  expenseList, isNewDataAdded in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {
                     return
                 }
-                if let expenses = expenseList {
+                if let expenses = expenseList, let isInitialData = isNewDataAdded {
+                    if isInitialData {
+                        self.expenseHistoryItems.removeAll()
+                    }
                     for expense in expenses {
-                        self.populateUIList(expenseList: expense)
+                        if !self.expenseHistoryItems.contains(where: { $0.id == expense.id }) {
+                            self.populateUIList(expenseList: expense)
+                        }
                     }
                     self.expenseHistoryItems = self.expenseHistoryItems.sorted { (item1, item2) -> Bool in
                         return item1.dateTime > item2.dateTime
                     }
                     calculateTotal()
+                    print("expenseHistoryItems cnt: \(expenseHistoryItems.count)")
                 }
                 self.state = .loaded
             }

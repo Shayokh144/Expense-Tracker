@@ -35,7 +35,7 @@ struct ExpenseHistoryScreen: View {
                 .frame(height: 1.0)
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, -16.0)
-                .padding(.vertical, 8.0)
+                .padding(.bottom, 8.0)
             Button(
                 action: {
                     viewModel.loadExpenseData()
@@ -53,7 +53,8 @@ struct ExpenseHistoryScreen: View {
             )
             .disabled(viewModel.state == .loading)
         }
-        .padding()
+        .padding(.bottom)
+        .padding(.horizontal)
     }
 
     private var totalExpenseView: some View {

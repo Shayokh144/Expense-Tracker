@@ -74,7 +74,12 @@ struct ExpenseInputView: View {
             } else {
                 TextField("place", text: $viewModel.searchText)
                     .textFieldStyle(.roundedBorder)
-                placeSearchResult
+                if !viewModel.searchResults.isEmpty {
+                    placeSearchResult
+                }
+                if viewModel.isPlaceApiError && viewModel.searchResults.isEmpty {
+                    addExpenseButton
+                }
             }
         }
     }
