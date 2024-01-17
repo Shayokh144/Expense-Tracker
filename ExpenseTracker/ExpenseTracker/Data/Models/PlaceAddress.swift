@@ -7,8 +7,11 @@
 
 import Foundation
 
-struct PlaceAddress: Hashable {
+struct PlaceAddress: Hashable, Identifiable {
 
+    var id: String {
+        String(longitude ?? 0.0)
+    }
     let name: String
     let city: String
     let country: String

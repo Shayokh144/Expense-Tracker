@@ -25,7 +25,7 @@ struct CurrencyPickerView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 8.0)
                     .stroke(
-                        Color.purple,
+                        Color(hexString: Constants.AppColors.tabSelectionColor),
                         lineWidth: 1.0
                     )
             )

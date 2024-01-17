@@ -18,7 +18,7 @@ struct TabScreen: View {
                 .tabItem {
                     Label(Constants.AppText.tabAdd, systemImage: "note.text.badge.plus")
                 }
-            ExpenseHistoryScreen()
+            ExpenseHistoryScreen(viewModel: ExpenseHistoryViewModel())
                 .tabItem {
                     Label(Constants.AppText.tabHistory, systemImage: "list.bullet.rectangle")
                 }

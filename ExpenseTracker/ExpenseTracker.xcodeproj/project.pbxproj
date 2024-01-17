@@ -49,6 +49,10 @@
 		042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350122B036385005C6D0C /* UserDefaults+Extension.swift */; };
 		042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350142B0363F9005C6D0C /* UserDefaultsManager.swift */; };
 		042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042470F82B08BA8100A4E2C2 /* CurrentLocationView.swift */; };
+		0439F5C32B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */; };
+		0439F5C52B55A8E600AF3B1B /* ExpenseHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */; };
+		0439F5C82B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C72B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift */; };
+		0439F5CA2B564E1A00AF3B1B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C92B564E1A00AF3B1B /* String+Extension.swift */; };
 		045294702B30A33D00BB2513 /* TabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0452946F2B30A33D00BB2513 /* TabScreen.swift */; };
 		045294722B30A39600BB2513 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294712B30A39600BB2513 /* ProfileScreen.swift */; };
 		045294782B30A46400BB2513 /* AddExpenseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294772B30A46400BB2513 /* AddExpenseScreen.swift */; };
@@ -96,6 +100,10 @@
 		042350122B036385005C6D0C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		042350142B0363F9005C6D0C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		042470F82B08BA8100A4E2C2 /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
+		0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryViewModel.swift; sourceTree = "<group>"; };
+		0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryItemView.swift; sourceTree = "<group>"; };
+		0439F5C72B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryItemUIModel.swift; sourceTree = "<group>"; };
+		0439F5C92B564E1A00AF3B1B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		0452946F2B30A33D00BB2513 /* TabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabScreen.swift; sourceTree = "<group>"; };
 		045294712B30A39600BB2513 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		045294772B30A46400BB2513 /* AddExpenseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseScreen.swift; sourceTree = "<group>"; };
@@ -227,6 +235,7 @@
 				04C410E92B3C8A690084BF81 /* Date+Extension.swift */,
 				04B1BFEF2B4F127700ABA765 /* Double+Extension.swift */,
 				0463BECD2B50FB4000302121 /* View+Extension.swift */,
+				0439F5C92B564E1A00AF3B1B /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -258,6 +267,14 @@
 				04742F1D2B02557500850F24 /* CurrentLocationScreen.swift */,
 			);
 			path = CurrentLocation;
+			sourceTree = "<group>";
+		};
+		0439F5C62B563B6400AF3B1B /* UIModel */ = {
+			isa = PBXGroup;
+			children = (
+				0439F5C72B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift */,
+			);
+			path = UIModel;
 			sourceTree = "<group>";
 		};
 		0452946D2B30A2B500BB2513 /* Tabs */ = {
@@ -294,6 +311,8 @@
 			isa = PBXGroup;
 			children = (
 				045294792B30A49900BB2513 /* ExpenseHistoryScreen.swift */,
+				0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */,
+				0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */,
 			);
 			path = ExpenseHistory;
 			sourceTree = "<group>";
@@ -370,6 +389,7 @@
 		04742F292B02599800850F24 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				0439F5C62B563B6400AF3B1B /* UIModel */,
 				041D19CC2B5506E700FB8978 /* ExpenseEdit */,
 				04B1BFE82B4EA27700ABA765 /* ExpenseInput */,
 				0452946D2B30A2B500BB2513 /* Tabs */,
@@ -521,10 +541,12 @@
 				04B1BFEE2B4EB6DE00ABA765 /* PlaceAddress.swift in Sources */,
 				04B1BFF02B4F127700ABA765 /* Double+Extension.swift in Sources */,
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,
+				0439F5C32B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift in Sources */,
 				04B1BFEC2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift in Sources */,
 				04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */,
 				045294812B30ADF800BB2513 /* User.swift in Sources */,
 				0463BECE2B50FB4000302121 /* View+Extension.swift in Sources */,
+				0439F5CA2B564E1A00AF3B1B /* String+Extension.swift in Sources */,
 				04C410E82B3C8A0D0084BF81 /* DateFormatter+Extenson.swift in Sources */,
 				04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */,
 				042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */,
@@ -541,6 +563,7 @@
 				041152962B17A16A00D93FFC /* Typealias.swift in Sources */,
 				04FA489E2B2C4803000B7949 /* CommonError.swift in Sources */,
 				04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */,
+				0439F5C82B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift in Sources */,
 				04C410EA2B3C8A690084BF81 /* Date+Extension.swift in Sources */,
 				04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */,
 				04C410EC2B3C8D000084BF81 /* AddExpenseViewModel.swift in Sources */,
@@ -549,6 +572,7 @@
 				042350102B0362B2005C6D0C /* Constants.swift in Sources */,
 				04FA489A2B2C3BCB000B7949 /* AuthState.swift in Sources */,
 				045294832B30BA3A00BB2513 /* ProfileScreenViewModel.swift in Sources */,
+				0439F5C52B55A8E600AF3B1B /* ExpenseHistoryItemView.swift in Sources */,
 				045294722B30A39600BB2513 /* ProfileScreen.swift in Sources */,
 				04073E512B17092800BDE21B /* AppDelegate.swift in Sources */,
 				04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */,
