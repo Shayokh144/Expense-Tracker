@@ -11,26 +11,26 @@ import FirebaseDatabase
 final class FirebaseRealtimeDBUseCase {
 
     static let shared = FirebaseRealtimeDBUseCase()
-    var isNewDataAdded: Bool
-
-    private lazy var databasePath: DatabaseReference? = {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return nil
-        }
-        let ref = Database.database()
-            .reference()
-            .child("users/\(uid)/expenseLists")
-        ref.keepSynced(true)
-        return ref
-    }()
 
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     private var lastFetchedDataKey: String?
+    private var databaseReference: DatabaseReference?
 
     private init() {
-        isNewDataAdded = false
         lastFetchedDataKey = nil
+        databaseReference = nil
+    }
+
+    func clearDBSession(isSingedIn: Bool) {
+        NSLog("clearDBSession: \(isSingedIn)")
+        lastFetchedDataKey = nil
+        if isSingedIn {
+            databaseReference = getDatabaseReference()
+        } else {
+            databaseReference?.removeAllObservers()
+            databaseReference = nil
+        }
     }
 
     // MARK: - Post data to FBRDB
@@ -39,8 +39,7 @@ final class FirebaseRealtimeDBUseCase {
         expenseList: ExpenseList,
         isSuccessCompletion: @escaping (Bool) -> Void
     ) {
-        isNewDataAdded = false
-        guard let databasePath = databasePath else {
+        guard let databasePath = databaseReference else {
             NSLog("Database path not found")
             isSuccessCompletion(false)
             return
@@ -55,7 +54,7 @@ final class FirebaseRealtimeDBUseCase {
             let json = try JSONSerialization.jsonObject(with: data)
             databasePath.childByAutoId()
                 .setValue(json)
-            isNewDataAdded = true
+            clearDBSession(isSingedIn: true)
             isSuccessCompletion(true)
         } catch let error {
             NSLog("Post method error: \(error)")
@@ -67,7 +66,7 @@ final class FirebaseRealtimeDBUseCase {
 
     /// This method will fetch expense list one by one, from oldest to newest
     func getExpenses(completion: @escaping (ExpenseList?) -> Void) {
-        guard let databasePath = databasePath else {
+        guard let databasePath = databaseReference else {
             NSLog("Database path not found")
             completion(nil)
             return
@@ -85,17 +84,15 @@ final class FirebaseRealtimeDBUseCase {
      */
     func getLatestExpenseLists(
         queryLimit: UInt,
-        completion: @escaping ([ExpenseList]?, Bool?) -> Void
+        completion: @escaping ([ExpenseList]?) -> Void
     ) {
-        guard let databasePath = databasePath else {
+        guard let databasePath = databaseReference else {
             NSLog("Database path not found")
-            completion(nil, nil)
+            completion(nil)
             return
         }
         var queryGet: DatabaseQuery
-
-        if let lastFetchedDataKey = lastFetchedDataKey, !isNewDataAdded {
-
+        if let lastFetchedDataKey = lastFetchedDataKey {
             queryGet = databasePath
                 .queryOrderedByKey()
                 .queryEnding(atValue: lastFetchedDataKey) // if query ordered by key
@@ -120,8 +117,7 @@ final class FirebaseRealtimeDBUseCase {
                 self.lastFetchedDataKey = firstChild.key
             }
 //            print("snap cnt: \(dataModels.count)")
-            completion(dataModels, isNewDataAdded)
-            isNewDataAdded = false
+            completion(dataModels)
         }
     }
 
@@ -143,7 +139,20 @@ final class FirebaseRealtimeDBUseCase {
         return nil
     }
 
+    private func getDatabaseReference() -> DatabaseReference? {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return nil
+        }
+        NSLog("USER: \(String(describing: Auth.auth().currentUser?.email))")
+        let database = Database.database()
+        let ref = database
+            .reference()
+            .child("users/\(uid)/expenseLists")
+        ref.keepSynced(true)
+        return ref
+    }
+
     deinit {
-        databasePath?.removeAllObservers()
+        databaseReference?.removeAllObservers()
     }
 }

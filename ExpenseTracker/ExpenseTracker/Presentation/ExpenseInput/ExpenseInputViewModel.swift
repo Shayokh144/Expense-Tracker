@@ -51,6 +51,11 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
         selectedPlace = nil
     }
 
+    func onTapManualInput() {
+        isPlaceApiError = true
+        searchResults.removeAll()
+    }
+
     func onTapAddExpense() -> Expense {
         let dateTime = DateFormatter.fullDateTimeFormat.string(from: Date())
         if selectedPlace == nil && !customPlaceName.isEmpty {

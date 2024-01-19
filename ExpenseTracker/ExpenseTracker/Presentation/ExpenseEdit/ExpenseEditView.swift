@@ -12,6 +12,7 @@ struct ExpenseEditView: View {
     @Binding var editName: String
     @Binding var editPrice: String
     @Binding var editType: String
+    @Binding var editPlace: String
     @Binding var editCountry: String
     @Binding var editCity: String
     private let onTapSaveEdit: () -> Void
@@ -36,6 +37,14 @@ struct ExpenseEditView: View {
         return VStack(alignment: .leading, spacing: 4.0) {
             Text("Type")
             TextField("", text: $editType)
+                .textFieldStyle(.roundedBorder)
+        }
+    }
+
+    private var placeEditView: some View {
+        return VStack(alignment: .leading, spacing: 4.0) {
+            Text("Place")
+            TextField("", text: $editPlace)
                 .textFieldStyle(.roundedBorder)
         }
     }
@@ -67,6 +76,7 @@ struct ExpenseEditView: View {
                     nameEditView
                     priceEditView
                     typeEditView
+                    placeEditView
                     cityEditView
                     countryEditView
                     Button {
@@ -91,6 +101,7 @@ struct ExpenseEditView: View {
         editName: Binding<String>,
         editPrice: Binding<String>,
         editType: Binding<String>,
+        editPlace: Binding<String>,
         editCountry: Binding<String>,
         editCity: Binding<String>,
         onTapSaveEdit: @escaping () -> Void
@@ -98,6 +109,7 @@ struct ExpenseEditView: View {
         _editName = editName
         _editPrice = editPrice
         _editType = editType
+        _editPlace = editPlace
         _editCountry = editCountry
         _editCity = editCity
         self.onTapSaveEdit = onTapSaveEdit

@@ -60,7 +60,6 @@ struct AddExpenseScreen: View {
         ExpenseInputView(
             viewModel: expenseInputViewModel
         ) { expense in
-            print(expense)
             viewModel.onAddLocalExpense(expense: expense)
         }
     }
@@ -177,6 +176,7 @@ struct AddExpenseScreen: View {
             editName: $viewModel.editName,
             editPrice: $viewModel.editPrice,
             editType: $viewModel.editType,
+            editPlace: $viewModel.editPlace,
             editCountry: $viewModel.editCountry,
             editCity: $viewModel.editCity,
             onTapSaveEdit: {
