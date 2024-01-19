@@ -37,6 +37,20 @@ struct ExpenseInputView: View {
         }
     }
 
+    private var customPlaceInputView: some View {
+        VStack {
+            TextField("place name", text: $viewModel.customPlaceName)
+                .textFieldStyle(.roundedBorder)
+            HStack(spacing: 16.0) {
+                TextField("city", text: $viewModel.customPlaceCity)
+                    .textFieldStyle(.roundedBorder)
+                Spacer()
+                TextField("country", text: $viewModel.customPlaceCountry)
+                    .textFieldStyle(.roundedBorder)
+            }
+        }
+    }
+
     private var addExpenseButton: some View {
         Button(
             action: {
@@ -57,6 +71,30 @@ struct ExpenseInputView: View {
         .padding(.vertical)
     }
 
+    private var placeSearchView: some View {
+        HStack(spacing: 8.0) {
+            TextField("place", text: $viewModel.searchText)
+                .textFieldStyle(.roundedBorder)
+            Spacer()
+            Button(
+                action: {
+                    viewModel.onTapManualInput()
+                },
+                label: {
+                    Text("Manual input")
+                        .padding(.horizontal, 4.0)
+                }
+            )
+            .buttonStyle(
+                TextButtonStyle(
+                    backgroundColor: Color.orange,
+                    textColor: .black
+                )
+            )
+        }
+        .padding(.zero)
+    }
+
     var body: some View {
         VStack(spacing: 16.0) {
             TextField("product name", text: $viewModel.productName)
@@ -72,12 +110,14 @@ struct ExpenseInputView: View {
                 selectedLocationView(address: selectedPlace)
                 addExpenseButton
             } else {
-                TextField("place", text: $viewModel.searchText)
-                    .textFieldStyle(.roundedBorder)
+                if viewModel.isPlaceApiError {
+                    customPlaceInputView
+                } else {
+                    placeSearchView
+                }
                 if !viewModel.searchResults.isEmpty {
                     placeSearchResult
-                }
-                if viewModel.isPlaceApiError && viewModel.searchResults.isEmpty {
+                } else {
                     addExpenseButton
                 }
             }

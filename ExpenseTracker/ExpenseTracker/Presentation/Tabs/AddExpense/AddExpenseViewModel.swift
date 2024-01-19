@@ -21,6 +21,7 @@ final class AddExpenseViewModel: ObservableObject {
     @Published var editName: String = ""
     @Published var editPrice: String = ""
     @Published var editType: String = ""
+    @Published var editPlace: String = ""
     @Published var editCountry: String = ""
     @Published var editCity: String = ""
 
@@ -38,8 +39,10 @@ final class AddExpenseViewModel: ObservableObject {
             firebaseRealtimeDBUseCase.postExpanse(
                 expenseList: expenseList
             ) { [weak self] isSuccess in
-                print("XYZ POST RESULT: \(isSuccess)")
-                self?.addedLocalExpenseList.removeAll()
+                NSLog("XYZ POST RESULT: \(isSuccess)")
+                if isSuccess {
+                    self?.addedLocalExpenseList.removeAll()
+                }
             }
         }
     }
@@ -53,6 +56,7 @@ final class AddExpenseViewModel: ObservableObject {
         editName = expense.name
         editPrice = expense.price.fractionTwoDigitString
         editType = expense.type
+        editPlace = expense.place
         editCity = expense.city
         editCountry = expense.country
         state = .edit(expense)
@@ -63,6 +67,7 @@ final class AddExpenseViewModel: ObservableObject {
             addedLocalExpenseList[editIndex].name = editName
             addedLocalExpenseList[editIndex].price = Double(editPrice) ?? 0.0
             addedLocalExpenseList[editIndex].type = editType
+            addedLocalExpenseList[editIndex].place = editPlace
             addedLocalExpenseList[editIndex].city = editCity
             addedLocalExpenseList[editIndex].country = editCountry
         }

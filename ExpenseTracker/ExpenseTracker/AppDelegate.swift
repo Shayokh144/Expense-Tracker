@@ -27,7 +27,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         open url: URL,
         options: [UIApplication.OpenURLOptionsKey: Any] = [:]
     ) -> Bool {
-        print("UIApplication url: \(url)")
+        NSLog("UIApplication url: \(url)")
         return GIDSignIn.sharedInstance.handle(url)
     }
 }

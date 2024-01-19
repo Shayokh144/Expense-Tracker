@@ -51,15 +51,12 @@ final class ExpenseHistoryViewModel: ObservableObject {
         state = .loading
         firebaseRealtimeDBUseCase.getLatestExpenseLists(
             queryLimit: 10
-        ) {  expenseList, isNewDataAdded in
+        ) {  expenseList in
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {
                     return
                 }
-                if let expenses = expenseList, let isInitialData = isNewDataAdded {
-                    if isInitialData {
-                        self.expenseHistoryItems.removeAll()
-                    }
+                if let expenses = expenseList {
                     for expense in expenses {
                         if !self.expenseHistoryItems.contains(where: { $0.id == expense.id }) {
                             self.populateUIList(expenseList: expense)
@@ -69,7 +66,7 @@ final class ExpenseHistoryViewModel: ObservableObject {
                         return item1.dateTime > item2.dateTime
                     }
                     calculateTotal()
-                    print("expenseHistoryItems cnt: \(expenseHistoryItems.count)")
+//                    print("expenseHistoryItems cnt: \(expenseHistoryItems.count)")
                 }
                 self.state = .loaded
             }
