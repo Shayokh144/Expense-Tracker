@@ -12,7 +12,8 @@ struct AddExpenseScreen: View {
     @EnvironmentObject var navigator: AppCoordinatorViewModel
     @ObservedObject private var viewModel: AddExpenseViewModel
     @State private var isKeyboardPresented: Bool = false
-    private let expenseInputViewModel = ExpenseInputViewModel()
+    @StateObject private var expenseInputViewModel = ExpenseInputViewModel()
+
     private var saveExpenseButton: some View {
         Button {
             viewModel.saveExpenseList()
@@ -101,12 +102,10 @@ struct AddExpenseScreen: View {
                         )
                     }
                 }
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.gray, lineWidth: 1)
-                )
-                .padding(.bottom, 8.0)
+                .padding(12.0)
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(12.0)
+                .padding(.bottom, 4.0)
             }
         }
     }
@@ -147,6 +146,15 @@ struct AddExpenseScreen: View {
             }
         }
         .padding(.horizontal)
+        .alertView(
+            isPresenting: $viewModel.isShowingAlert,
+            title: viewModel.alertData.title,
+            description: viewModel.alertData.description,
+            isError: viewModel.alertData.isError,
+            didTap: {
+                viewModel.isShowingAlert = false
+            }
+        )
         .onReceive(
             NotificationCenter
                 .default

@@ -20,6 +20,7 @@ struct ExpenseEditView: View {
     private var nameEditView: some View {
         return VStack(alignment: .leading, spacing: 4.0) {
             Text("Name")
+                .font(.system(size: 14.0, weight: .bold))
             TextField("", text: $editName)
                 .textFieldStyle(.roundedBorder)
         }
@@ -28,6 +29,7 @@ struct ExpenseEditView: View {
     private var priceEditView: some View {
         return VStack(alignment: .leading, spacing: 4.0) {
             Text("Price")
+                .font(.system(size: 14.0, weight: .bold))
             TextField("", text: $editPrice)
                 .textFieldStyle(.roundedBorder)
         }
@@ -36,6 +38,7 @@ struct ExpenseEditView: View {
     private var typeEditView: some View {
         return VStack(alignment: .leading, spacing: 4.0) {
             Text("Type")
+                .font(.system(size: 14.0, weight: .bold))
             TextField("", text: $editType)
                 .textFieldStyle(.roundedBorder)
         }
@@ -44,6 +47,7 @@ struct ExpenseEditView: View {
     private var placeEditView: some View {
         return VStack(alignment: .leading, spacing: 4.0) {
             Text("Place")
+                .font(.system(size: 14.0, weight: .bold))
             TextField("", text: $editPlace)
                 .textFieldStyle(.roundedBorder)
         }
@@ -52,6 +56,7 @@ struct ExpenseEditView: View {
     private var countryEditView: some View {
         return VStack(alignment: .leading, spacing: 4.0) {
             Text("Country")
+                .font(.system(size: 14.0, weight: .bold))
             TextField("", text: $editCountry)
                 .textFieldStyle(.roundedBorder)
         }
@@ -60,6 +65,7 @@ struct ExpenseEditView: View {
     private var cityEditView: some View {
         VStack(alignment: .leading, spacing: 4.0) {
             Text("City")
+                .font(.system(size: 14.0, weight: .bold))
             TextField("", text: $editCity)
                 .textFieldStyle(.roundedBorder)
         }
@@ -72,7 +78,7 @@ struct ExpenseEditView: View {
                 .padding(.bottom, 8.0)
                 .padding(.bottom, 16.0)
             ScrollView {
-                VStack(spacing: 12.0) {
+                VStack(spacing: 16.0) {
                     nameEditView
                     priceEditView
                     typeEditView

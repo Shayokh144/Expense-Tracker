@@ -22,6 +22,7 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
     @Published var customPlaceName: String = ""
     @Published var customPlaceCity: String = ""
     @Published var customPlaceCountry: String = ""
+    @Published var isValidationError: Bool = false
 
     private var cancellable: AnyCancellable?
     private let searchCompleter: MKLocalSearchCompleter!
@@ -56,7 +57,11 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
         searchResults.removeAll()
     }
 
-    func onTapAddExpense() -> Expense {
+    func onTapAddExpense() -> Expense? {
+        isValidationError = !isValidInput()
+        if isValidationError {
+            return nil
+        }
         let dateTime = DateFormatter.fullDateTimeFormat.string(from: Date())
         if selectedPlace == nil && !customPlaceName.isEmpty {
             selectedPlace = PlaceAddress(
@@ -80,6 +85,20 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
         productPrice = ""
         productType = ""
         return expense
+    }
+
+    private func isValidInput() -> Bool {
+        if productName.isEmpty || productType.isEmpty {
+            return false
+        }
+        guard let _ = Double(productPrice) else {
+            return false
+        }
+        if selectedPlace == nil && 
+            (customPlaceName.isEmpty || customPlaceCity.isEmpty || customPlaceCountry.isEmpty) {
+            return false
+        }
+        return true
     }
 }
 
