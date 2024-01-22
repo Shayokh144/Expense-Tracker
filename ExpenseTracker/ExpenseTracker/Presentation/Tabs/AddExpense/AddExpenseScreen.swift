@@ -155,6 +155,7 @@ struct AddExpenseScreen: View {
                 viewModel.isShowingAlert = false
             }
         )
+        .animation(.linear(duration: 0.2), value: viewModel.isShowingAlert)
         .onReceive(
             NotificationCenter
                 .default
