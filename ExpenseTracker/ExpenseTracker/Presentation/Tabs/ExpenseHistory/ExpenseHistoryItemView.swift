@@ -11,6 +11,13 @@ struct ExpenseHistoryItemView: View {
 
     private let uiModel: ExpenseHistoryItemUIModel
 
+    private var itemCountText: String {
+        if uiModel.itemCount <= 1 {
+            return "\(uiModel.itemCount) Item"
+        }
+        return "\(uiModel.itemCount) Items"
+    }
+
     private var titleText: String {
         if uiModel.itemCount <= 1 {
             return uiModel.mostExpensiveItemName
@@ -22,15 +29,19 @@ struct ExpenseHistoryItemView: View {
         VStack(alignment: .leading, spacing: .zero) {
             Text(titleText)
                 .font(.system(size: 16.0, weight: .bold))
-                .padding(.bottom, 8.0)
+                .padding(.bottom, 4.0)
             HStack(spacing: 8.0) {
-                Text(uiModel.dateTimeString)
-                    .font(.system(size: 12.0, weight: .semibold))
+                Text(itemCountText)
+                    .font(.system(size: 14.0, weight: .semibold))
                 Text("·")
-                    .font(.system(size: 12.0, weight: .semibold))
+                    .font(.system(size: 14.0, weight: .semibold))
                 Text(uiModel.country)
-                    .font(.system(size: 12.0, weight: .semibold))
+                    .font(.system(size: 14.0, weight: .semibold))
             }
+
+            Text(uiModel.dateTimeString)
+                .font(.system(size: 16.0, weight: .semibold))
+                .padding(.top, 4.0)
         }
     }
 

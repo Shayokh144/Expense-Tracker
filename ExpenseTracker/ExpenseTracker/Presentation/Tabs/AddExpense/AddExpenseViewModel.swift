@@ -24,6 +24,20 @@ final class AddExpenseViewModel: ObservableObject {
     @Published var editPlace: String = ""
     @Published var editCountry: String = ""
     @Published var editCity: String = ""
+    @Published var isShowingAlert: Bool = false
+    @Published private(set) var isDataAddSuccess = false
+
+    var alertData: AlertUIModel {
+        let title = isDataAddSuccess ? "Success!" : "Error!"
+        let description = isDataAddSuccess ?
+        "Expense list added successfully." :
+        "Failed to add expense list"
+        return .init(
+            title: title,
+            description: description,
+            isError: !isDataAddSuccess
+        )
+    }
 
     init(firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase.shared) {
         self.firebaseRealtimeDBUseCase = firebaseRealtimeDBUseCase
@@ -40,9 +54,11 @@ final class AddExpenseViewModel: ObservableObject {
                 expenseList: expenseList
             ) { [weak self] isSuccess in
                 NSLog("XYZ POST RESULT: \(isSuccess)")
+                self?.isDataAddSuccess = isSuccess
                 if isSuccess {
                     self?.addedLocalExpenseList.removeAll()
                 }
+                self?.isShowingAlert = true
             }
         }
     }

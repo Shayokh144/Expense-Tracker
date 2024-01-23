@@ -16,11 +16,9 @@ struct ExpenseHistoryScreen: View {
             VStack {
                 ForEach(viewModel.expenseHistoryItems, id: \.self) { expense in
                     ExpenseHistoryItemView(uiModel: expense)
-                        .padding(.bottom, 8.0)
-                    Rectangle()
-                        .fill(Color.gray)
-                        .frame(height: 1.0)
-                        .frame(maxWidth: .infinity)
+                        .padding(12.0)
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(12.0)
                         .padding(.bottom, 12.0)
                 }
             }

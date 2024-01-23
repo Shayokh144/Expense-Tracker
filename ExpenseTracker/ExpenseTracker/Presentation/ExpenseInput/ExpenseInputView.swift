@@ -52,23 +52,37 @@ struct ExpenseInputView: View {
     }
 
     private var addExpenseButton: some View {
-        Button(
-            action: {
-                let expense = viewModel.onTapAddExpense()
-                onTapAddExpense(expense)
-            },
-            label: {
-                Text("Add to list")
+        VStack(spacing: 4.0) {
+            if viewModel.isValidationError {
+                Text("Please provide all information correctly.")
+                    .font(.system(size: 14.0, weight: .bold))
                     .frame(maxWidth: .infinity)
+                    .padding(4.0)
+                    .background(
+                        Color(hexString: Constants.AppColors.errorBackgroundColor)
+                            .opacity(0.8)
+                    )
+                    .cornerRadius(10.0)
             }
-        )
-        .buttonStyle(
-            TextButtonStyle(
-                backgroundColor: Color.green,
-                textColor: .black
+            Button(
+                action: {
+                    if let expense = viewModel.onTapAddExpense() {
+                        onTapAddExpense(expense)
+                    }
+                },
+                label: {
+                    Text("Add to list")
+                        .frame(maxWidth: .infinity)
+                }
             )
-        )
-        .padding(.vertical)
+            .buttonStyle(
+                TextButtonStyle(
+                    backgroundColor: Color.green,
+                    textColor: .black
+                )
+            )
+            .padding(.bottom)
+        }
     }
 
     private var placeSearchView: some View {

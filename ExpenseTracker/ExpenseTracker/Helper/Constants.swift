@@ -15,6 +15,7 @@ extension Constants {
         static let redButtonColor = "#AD2533"
         static let blueButtonColor = "#2529AD"
         static let tabSelectionColor = "#3BC1AF"
+        static let errorBackgroundColor = "#E72E1B"
     }
 }
 
