@@ -11,10 +11,46 @@ struct ExpenseHistoryScreen: View {
     
     @ObservedObject private var viewModel: ExpenseHistoryViewModel
 
+    private var startDateView: some View {
+        DatePicker("", selection: $viewModel.startDate, displayedComponents: .date)
+            .datePickerStyle(.compact)
+            .clipped()
+            .labelsHidden()
+
+    }
+
+    private var endDateView: some View {
+        DatePicker("", selection: $viewModel.endDate, displayedComponents: .date)
+            .datePickerStyle(.compact)
+            .clipped()
+            .labelsHidden()
+    }
+
+    private var filterView: some View {
+        VStack(alignment: .leading, spacing: 4.0) {
+            HStack {
+                Text("Start date")
+                    .font(.system(size: 16.0, weight: .semibold))
+                Spacer()
+                Text("End date")
+                    .font(.system(size: 16.0, weight: .semibold))
+            }
+            HStack {
+                startDateView
+                Spacer()
+                Toggle("", isOn: $viewModel.isFilterOn)
+                    .labelsHidden()
+                Spacer()
+                endDateView
+            }
+        }
+        .padding()
+    }
+
     private var expenseItemListView: some View {
         ScrollView {
             VStack {
-                ForEach(viewModel.expenseHistoryItems, id: \.self) { expense in
+                ForEach(viewModel.uiExpenseList, id: \.self) { expense in
                     ExpenseHistoryItemView(uiModel: expense)
                         .padding(12.0)
                         .background(Color.gray.opacity(0.2))
@@ -58,11 +94,12 @@ struct ExpenseHistoryScreen: View {
     private var totalExpenseView: some View {
         HStack {
             Text("Total expense in BDT")
+                .font(.system(size: 14.0, weight: .bold))
             Spacer()
             Text("\(viewModel.totalExpense.fractionTwoDigitString)")
-                .font(.system(.title3))
+                .font(.system(size: 20.0, weight: .bold))
         }
-        .padding()
+        .padding(.horizontal)
     }
 
     var body: some View {
@@ -75,7 +112,8 @@ struct ExpenseHistoryScreen: View {
                 ProgressView()
                     .progressViewStyle(.circular)
             case .loaded, .idle:
-                if !viewModel.expenseHistoryItems.isEmpty {
+                filterView
+                if !viewModel.uiExpenseList.isEmpty {
                     totalExpenseView
                     expenseItemListView
                 }

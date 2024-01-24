@@ -12,8 +12,30 @@ final class ExpenseHistoryViewModel: ObservableObject {
 
     @Published private(set) var state: State
     @Published private(set) var totalExpense: Double
-    @Published private(set) var expenseHistoryItems: [ExpenseHistoryItemUIModel]
+    @Published private(set) var uiExpenseList: [ExpenseHistoryItemUIModel]
+    @Published var startDate = Date.now {
+        didSet {
+            if isFilterOn {
+                updateUIData()
+            }
+        }
+    }
 
+    @Published var endDate = Date.now {
+        didSet {
+            if isFilterOn {
+                updateUIData()
+            }
+        }
+    }
+
+    @Published var isFilterOn = false {
+        didSet {
+            updateUIData()
+        }
+    }
+
+    private var expenseHistoryItems: [ExpenseHistoryItemUIModel]
     private let firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase
     
     init(
@@ -22,6 +44,7 @@ final class ExpenseHistoryViewModel: ObservableObject {
         self.firebaseRealtimeDBUseCase = firebaseRealtimeDBUseCase
         state = .idle
         expenseHistoryItems = []
+        uiExpenseList = []
         totalExpense = 0.0
     }
 
@@ -65,7 +88,7 @@ final class ExpenseHistoryViewModel: ObservableObject {
                     self.expenseHistoryItems = self.expenseHistoryItems.sorted { (item1, item2) -> Bool in
                         return item1.dateTime > item2.dateTime
                     }
-                    calculateTotal()
+                    updateUIData()
 //                    print("expenseHistoryItems cnt: \(expenseHistoryItems.count)")
                 }
                 self.state = .loaded
@@ -73,8 +96,39 @@ final class ExpenseHistoryViewModel: ObservableObject {
         }
     }
 
+    private func updateUIData() {
+        if state != .loading {
+            state = .loading
+        }
+        if isFilterOn {
+            uiExpenseList.removeAll()
+            filterDataWithDate()
+        } else {
+            uiExpenseList = expenseHistoryItems
+        }
+        calculateTotal()
+        state = .loaded
+    }
+
+    private func filterDataWithDate() {
+        uiExpenseList = expenseHistoryItems.filter {
+            let currentDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: $0.dateTime)
+            let fromDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startDate)
+            let toDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: endDate)
+            if let currentDate = Calendar.current.date(from: currentDateComponents),
+                let fromDate = Calendar.current.date(from: fromDateComponents),
+                let toDate = Calendar.current.date(from: toDateComponents) {
+
+                if fromDate <= currentDate && currentDate <= toDate {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+
     private func calculateTotal() {
-        let uniqueCurrencies = Set(expenseHistoryItems.map { $0.currency })
+        let uniqueCurrencies = Set(uiExpenseList.map { $0.currency })
         var cost: Double = 0.0
         for currency in uniqueCurrencies {
             cost += getCostInBdt(from: currency)
@@ -83,7 +137,7 @@ final class ExpenseHistoryViewModel: ObservableObject {
     }
 
     private func getCostInBdt(from currency: String) -> Double {
-        let expenses = expenseHistoryItems.filter {
+        let expenses = uiExpenseList.filter {
             getCurrency(for: $0.currency, country: $0.country) == currency
         }
         let cost = expenses.reduce(0) { result, item in
