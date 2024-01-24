@@ -11,6 +11,14 @@ struct ExpenseHistoryScreen: View {
     
     @ObservedObject private var viewModel: ExpenseHistoryViewModel
 
+    private var currencyPickerView: some View {
+        CurrencyPickerView(
+            currencyList: Constants.AppData.currencyList,
+            selectedCurrency: $viewModel.selectedCurrency
+        )
+        .padding(.horizontal)
+    }
+
     private var startDateView: some View {
         DatePicker("", selection: $viewModel.startDate, displayedComponents: .date)
             .datePickerStyle(.compact)
@@ -93,17 +101,17 @@ struct ExpenseHistoryScreen: View {
 
     private var totalExpenseView: some View {
         HStack {
-            Text("Total expense in BDT")
+            Text("Total expense in \(viewModel.selectedCurrency)")
                 .font(.system(size: 14.0, weight: .bold))
             Spacer()
             Text("\(viewModel.totalExpense.fractionTwoDigitString)")
                 .font(.system(size: 20.0, weight: .bold))
         }
-        .padding(.horizontal)
+        .padding([.horizontal, .top])
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: .zero) {
             Text("Expense History")
                 .font(.system(.title2))
             switch viewModel.state {
@@ -113,6 +121,7 @@ struct ExpenseHistoryScreen: View {
                     .progressViewStyle(.circular)
             case .loaded, .idle:
                 filterView
+                currencyPickerView
                 if !viewModel.uiExpenseList.isEmpty {
                     totalExpenseView
                     expenseItemListView

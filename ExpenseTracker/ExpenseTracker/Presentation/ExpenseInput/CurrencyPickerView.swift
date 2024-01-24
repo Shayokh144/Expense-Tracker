@@ -13,7 +13,7 @@ struct CurrencyPickerView: View {
     @Binding private var selectedCurrency: String
 
     var body: some View {
-        HStack {
+        HStack(spacing: .zero) {
             Spacer()
             Picker("", selection: $selectedCurrency) {
                 ForEach(currencyList, id: \.self) {
@@ -22,6 +22,8 @@ struct CurrencyPickerView: View {
                 }
             }
             .pickerStyle(.menu)
+            .clipped()
+            .labelsHidden()
             .overlay(
                 RoundedRectangle(cornerRadius: 8.0)
                     .stroke(

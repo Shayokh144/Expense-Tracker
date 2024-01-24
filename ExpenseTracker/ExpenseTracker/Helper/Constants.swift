@@ -35,3 +35,13 @@ extension Constants {
         static let selectDate = "Select date"
     }
 }
+
+extension Constants {
+
+    enum AppData {
+
+        static var currencyList: [String] {
+            ["BDT", "THB", "USD"]
+        }
+    }
+}

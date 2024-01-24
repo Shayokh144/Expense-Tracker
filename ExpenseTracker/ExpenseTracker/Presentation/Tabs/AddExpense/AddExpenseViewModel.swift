@@ -11,7 +11,6 @@ import Foundation
 final class AddExpenseViewModel: ObservableObject {
 
     private let firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase
-    let currencyList: [String] = ["BDT", "THB", "USD"]
     @Published private(set) var addedLocalExpenseList: [Expense]
     @Published private(set) var currentTotal: Double
     @Published private(set) var state: State
@@ -44,7 +43,7 @@ final class AddExpenseViewModel: ObservableObject {
         addedLocalExpenseList = []
         currentTotal = 0.0
         state = .add
-        selectedCurrency = currencyList.first ?? "BDT"
+        selectedCurrency = Constants.AppData.currencyList.first ?? "BDT"
     }
 
     func saveExpenseList() {

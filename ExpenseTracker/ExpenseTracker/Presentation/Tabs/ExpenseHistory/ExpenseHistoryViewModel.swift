@@ -13,6 +13,14 @@ final class ExpenseHistoryViewModel: ObservableObject {
     @Published private(set) var state: State
     @Published private(set) var totalExpense: Double
     @Published private(set) var uiExpenseList: [ExpenseHistoryItemUIModel]
+    @Published var selectedCurrency: String {
+        didSet {
+            if !uiExpenseList.isEmpty {
+                calculateTotal()
+            }
+        }
+    }
+    
     @Published var startDate = Date.now {
         didSet {
             if isFilterOn {
@@ -37,7 +45,9 @@ final class ExpenseHistoryViewModel: ObservableObject {
 
     private var expenseHistoryItems: [ExpenseHistoryItemUIModel]
     private let firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase
-    
+    private let thbValueToBdt: Double = 3.2
+    private let usdValueToBdt: Double = 121.0
+
     init(
         firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase.shared
     ) {
@@ -46,6 +56,7 @@ final class ExpenseHistoryViewModel: ObservableObject {
         expenseHistoryItems = []
         uiExpenseList = []
         totalExpense = 0.0
+        selectedCurrency = Constants.AppData.currencyList.first ?? "BDT"
     }
 
 //    func loadExpenseData() {
@@ -133,6 +144,11 @@ final class ExpenseHistoryViewModel: ObservableObject {
         for currency in uniqueCurrencies {
             cost += getCostInBdt(from: currency)
         }
+        if selectedCurrency == "THB" {
+            cost /= thbValueToBdt
+        } else if selectedCurrency == "USD" {
+            cost /= usdValueToBdt
+        }
         totalExpense = cost
     }
 
@@ -144,9 +160,9 @@ final class ExpenseHistoryViewModel: ObservableObject {
             result + (Double(item.totalCost) ?? 0.0)
         }
         if currency == "THB" {
-            return cost * 3.2
+            return cost * thbValueToBdt
         } else if currency == "USD" {
-            return cost * 121.0
+            return cost * usdValueToBdt
         }
         return cost
     }
