@@ -36,7 +36,7 @@ struct AddExpenseScreen: View {
             Text("Select currency")
             Spacer()
             CurrencyPickerView(
-                currencyList: viewModel.currencyList,
+                currencyList: Constants.AppData.currencyList,
                 selectedCurrency: $viewModel.selectedCurrency
             )
         }
