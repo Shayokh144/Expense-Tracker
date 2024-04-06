@@ -28,6 +28,12 @@ struct AppCoordinator: View {
                 CurrentLocationScreen(viewModel: viewModel)
             case .tabScreen(let user):
                 TabScreen(user: user)
+            case .expenseHistoryDetails:
+                ExpenseHistoryDetailsScreen(
+                    onTapBack: {
+                        coordinator.goBack()
+                    }
+                )
             }
         }
         .environmentObject(coordinator)

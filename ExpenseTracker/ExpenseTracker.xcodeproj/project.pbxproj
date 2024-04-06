@@ -87,6 +87,7 @@
 		04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEC1AA2B0E336300AC445E /* LocationSearchViewModel.swift */; };
 		04FA489A2B2C3BCB000B7949 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA48992B2C3BCB000B7949 /* AuthState.swift */; };
 		04FA489E2B2C4803000B7949 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA489D2B2C4803000B7949 /* CommonError.swift */; };
+		E02258572B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02258562B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 		04EEC1AA2B0E336300AC445E /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		04FA48992B2C3BCB000B7949 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		04FA489D2B2C4803000B7949 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		E02258562B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryDetailsScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +319,7 @@
 		045294752B30A3E100BB2513 /* ExpenseHistory */ = {
 			isa = PBXGroup;
 			children = (
+				E02258552B73620500B91925 /* Details */,
 				045294792B30A49900BB2513 /* ExpenseHistoryScreen.swift */,
 				0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */,
 				0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */,
@@ -435,6 +438,14 @@
 			path = LocationSearch;
 			sourceTree = "<group>";
 		};
+		E02258552B73620500B91925 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				E02258562B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -547,6 +558,7 @@
 				045294702B30A33D00BB2513 /* TabScreen.swift in Sources */,
 				04B1BFEA2B4EA28A00ABA765 /* ExpenseInputView.swift in Sources */,
 				04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */,
+				E02258572B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift in Sources */,
 				04B1BFEE2B4EB6DE00ABA765 /* PlaceAddress.swift in Sources */,
 				04B1BFF02B4F127700ABA765 /* Double+Extension.swift in Sources */,
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,

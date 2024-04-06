@@ -10,6 +10,7 @@ import SwiftUI
 struct ExpenseHistoryScreen: View {
     
     @ObservedObject private var viewModel: ExpenseHistoryViewModel
+    @EnvironmentObject var navigator: AppCoordinatorViewModel
 
     private var currencyPickerView: some View {
         CurrencyPickerView(
@@ -64,6 +65,9 @@ struct ExpenseHistoryScreen: View {
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(12.0)
                         .padding(.bottom, 12.0)
+                        .onTapGesture {
+                            navigator.goToExpenseHistoryDetailsView()
+                        }
                 }
             }
         }

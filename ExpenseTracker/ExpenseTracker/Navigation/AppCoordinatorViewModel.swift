@@ -40,9 +40,15 @@ final class AppCoordinatorViewModel: ObservableObject {
 
     func goToTabScreen(user: User) {
         routes = [.root(.tabScreen(user))]
+        print("COUNT: \(routes.count)")
     }
 
     func goToHome() {
         routes = [.root(.home(HomeViewModel()))]
+    }
+    
+    func goToExpenseHistoryDetailsView() {
+        routes.presentCover(.expenseHistoryDetails, embedInNavigationView: true)
+        print("COUNT: \(routes.count)")
     }
 }
