@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExpenseHistoryScreen: View {
     
-    @ObservedObject private var viewModel: ExpenseHistoryViewModel
+    @StateObject private var viewModel: ExpenseHistoryViewModel
     @EnvironmentObject var navigator: AppCoordinatorViewModel
 
     private var currencyPickerView: some View {
@@ -60,14 +60,21 @@ struct ExpenseHistoryScreen: View {
         ScrollView {
             VStack {
                 ForEach(viewModel.uiExpenseList, id: \.self) { expense in
-                    ExpenseHistoryItemView(uiModel: expense)
-                        .padding(12.0)
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(12.0)
-                        .padding(.bottom, 12.0)
-                        .onTapGesture {
-                            navigator.goToExpenseHistoryDetailsView()
+                    Button(
+                        action: {
+                            DispatchQueue.main.async {
+                                navigator.goToExpenseHistoryDetailsView()
+                            }
+                        },
+                        label: {
+                            ExpenseHistoryItemView(uiModel: expense)
+                                .padding(12.0)
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(12.0)
+                                .padding(.bottom, 12.0)
                         }
+                    )
+                    .buttonStyle(.plain)
                 }
             }
         }
@@ -139,6 +146,6 @@ struct ExpenseHistoryScreen: View {
     }
 
     init(viewModel: ExpenseHistoryViewModel) {
-        self.viewModel = viewModel
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 }

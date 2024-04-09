@@ -12,29 +12,27 @@ struct ExpenseHistoryDetailsScreen: View {
     @EnvironmentObject var navigator: AppCoordinatorViewModel
     private let onTapBack: () -> Void
     
+    private var backButton: some View {
+        Button(
+            action: {
+                navigator.goBack()
+            },
+            label: {
+                Label("Back", systemImage: "arrow.left.circle")
+            }
+        )
+    }
+    
     var body: some View {
         VStack {
-            Text("EXPENSE DETAILS")
-            Button(
-                action: onTapBack,
-                label: {
-                    Text("...BACK...")
-                }
-            )
+            Text("Show details")
             Spacer()
         }
-        .background(Color.blue)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            // BACK BUTTON
-            ToolbarItem(placement: .topBarLeading) {
-                Button(action: {
-                    navigator.goBack()
-                }) {
-                    Label("Back", systemImage: "arrow.left.circle")
-                }
-            }
-        }
+        .commonNavigationBar(
+            title: "Expense Details",
+            leftButton: { backButton },
+            rightButton: { Color.clear }
+        )
     }
         
     

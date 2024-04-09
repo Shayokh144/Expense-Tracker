@@ -5,6 +5,7 @@
 //  Created by Taher on 28/11/23.
 //
 
+import Combine
 import FlowStacks
 import SwiftUI
 
@@ -13,7 +14,7 @@ final class AppCoordinatorViewModel: ObservableObject {
     @Published var routes: Routes<Screen>
 
     init() {
-        self.routes = [.root(.home(HomeViewModel()))]
+        self.routes = [.root(.home(HomeViewModel()), embedInNavigationView: true)]
     }
 
     func goBack() {
@@ -39,16 +40,16 @@ final class AppCoordinatorViewModel: ObservableObject {
     }
 
     func goToTabScreen(user: User) {
-        routes = [.root(.tabScreen(user))]
-        print("COUNT: \(routes.count)")
+        routes = [.root(.tabScreen(user), embedInNavigationView: true)]
     }
 
     func goToHome() {
-        routes = [.root(.home(HomeViewModel()))]
+        routes = [.root(.home(HomeViewModel()), embedInNavigationView: true)]
     }
     
     func goToExpenseHistoryDetailsView() {
-        routes.presentCover(.expenseHistoryDetails, embedInNavigationView: true)
-        print("COUNT: \(routes.count)")
+        RouteSteps.withDelaysIfUnsupported(self, \.routes) {
+          $0.push(.expenseHistoryDetails)
+        }
     }
 }
