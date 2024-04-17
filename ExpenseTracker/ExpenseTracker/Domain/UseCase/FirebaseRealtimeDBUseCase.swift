@@ -64,6 +64,20 @@ final class FirebaseRealtimeDBUseCase {
 
     // MARK: - Get data from FBRDB
 
+    
+    /// This method will fetch expense list using id
+    func getExpenseList(id: String, completion: @escaping (ExpenseList?) -> Void) {
+        guard let databasePath = databaseReference else {
+            NSLog("Database path not found")
+            completion(nil)
+            return
+        }
+        databasePath.child(id).observeSingleEvent(of: .value) { [weak self] snapshot  in
+            let dataModel = self?.getExpenseModel(snapshot: snapshot)
+            completion(dataModel)
+        }
+    }
+    
     /// This method will fetch expense list one by one, from oldest to newest
     func getExpenses(completion: @escaping (ExpenseList?) -> Void) {
         guard let databasePath = databaseReference else {

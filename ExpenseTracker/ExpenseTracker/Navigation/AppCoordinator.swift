@@ -28,8 +28,9 @@ struct AppCoordinator: View {
                 CurrentLocationScreen(viewModel: viewModel)
             case .tabScreen(let user):
                 TabScreen(user: user)
-            case .expenseHistoryDetails:
+            case let .expenseHistoryDetails(viewModel):
                 ExpenseHistoryDetailsScreen(
+                    viewModel: viewModel,
                     onTapBack: {
                         coordinator.goBack()
                     }

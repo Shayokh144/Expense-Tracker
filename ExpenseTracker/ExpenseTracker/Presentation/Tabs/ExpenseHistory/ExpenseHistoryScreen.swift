@@ -62,9 +62,8 @@ struct ExpenseHistoryScreen: View {
                 ForEach(viewModel.uiExpenseList, id: \.self) { expense in
                     Button(
                         action: {
-                            DispatchQueue.main.async {
-                                navigator.goToExpenseHistoryDetailsView()
-                            }
+                            let detailsViewModel = ExpenseHistoryDetailsViewModel(id: expense.id)
+                            navigator.goToExpenseHistoryDetailsView(viewModel: detailsViewModel)
                         },
                         label: {
                             ExpenseHistoryItemView(uiModel: expense)
