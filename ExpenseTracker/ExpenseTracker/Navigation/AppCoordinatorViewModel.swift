@@ -47,9 +47,9 @@ final class AppCoordinatorViewModel: ObservableObject {
         routes = [.root(.home(HomeViewModel()), embedInNavigationView: true)]
     }
     
-    func goToExpenseHistoryDetailsView() {
+    func goToExpenseHistoryDetailsView(viewModel: ExpenseHistoryDetailsViewModel) {
         RouteSteps.withDelaysIfUnsupported(self, \.routes) {
-          $0.push(.expenseHistoryDetails)
+          $0.push(.expenseHistoryDetails(viewModel))
         }
     }
 }

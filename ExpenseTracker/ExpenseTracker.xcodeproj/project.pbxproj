@@ -61,6 +61,8 @@
 		045294812B30ADF800BB2513 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294802B30ADF800BB2513 /* User.swift */; };
 		045294832B30BA3A00BB2513 /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */; };
 		0463BECE2B50FB4000302121 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463BECD2B50FB4000302121 /* View+Extension.swift */; };
+		046FC7A42BCFD4FF00CEEC08 /* ExpenseHistoryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FC7A32BCFD4FF00CEEC08 /* ExpenseHistoryDetailsViewModel.swift */; };
+		046FC7A62BCFEA9E00CEEC08 /* ExpenseDetailsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FC7A52BCFEA9E00CEEC08 /* ExpenseDetailsItemView.swift */; };
 		04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F1B2B02557500850F24 /* ExpenseTrackerApp.swift */; };
 		04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F1D2B02557500850F24 /* CurrentLocationScreen.swift */; };
 		04742F202B02557700850F24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04742F1F2B02557700850F24 /* Assets.xcassets */; };
@@ -117,6 +119,8 @@
 		045294802B30ADF800BB2513 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
 		0463BECD2B50FB4000302121 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		046FC7A32BCFD4FF00CEEC08 /* ExpenseHistoryDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryDetailsViewModel.swift; sourceTree = "<group>"; };
+		046FC7A52BCFEA9E00CEEC08 /* ExpenseDetailsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsItemView.swift; sourceTree = "<group>"; };
 		04742F182B02557500850F24 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04742F1B2B02557500850F24 /* ExpenseTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTrackerApp.swift; sourceTree = "<group>"; };
 		04742F1D2B02557500850F24 /* CurrentLocationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationScreen.swift; sourceTree = "<group>"; };
@@ -453,6 +457,8 @@
 			isa = PBXGroup;
 			children = (
 				E02258562B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift */,
+				046FC7A32BCFD4FF00CEEC08 /* ExpenseHistoryDetailsViewModel.swift */,
+				046FC7A52BCFEA9E00CEEC08 /* ExpenseDetailsItemView.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -566,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CBF1452B15199200DF5B06 /* HomeViewModel.swift in Sources */,
+				046FC7A62BCFEA9E00CEEC08 /* ExpenseDetailsItemView.swift in Sources */,
 				045294702B30A33D00BB2513 /* TabScreen.swift in Sources */,
 				04B1BFEA2B4EA28A00ABA765 /* ExpenseInputView.swift in Sources */,
 				04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */,
@@ -578,6 +585,7 @@
 				04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */,
 				045294812B30ADF800BB2513 /* User.swift in Sources */,
 				0463BECE2B50FB4000302121 /* View+Extension.swift in Sources */,
+				046FC7A42BCFD4FF00CEEC08 /* ExpenseHistoryDetailsViewModel.swift in Sources */,
 				0439F5CA2B564E1A00AF3B1B /* String+Extension.swift in Sources */,
 				04C410E82B3C8A0D0084BF81 /* DateFormatter+Extenson.swift in Sources */,
 				04742F2B2B025B5A00850F24 /* CurrentLocationViewModel.swift in Sources */,
