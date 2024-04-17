@@ -6,6 +6,7 @@
 //
 
 import FirebaseCore
+import FirebaseDatabase
 import GoogleSignIn
 import SwiftUI
 
@@ -17,6 +18,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         return true
     }
 
@@ -25,7 +27,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         open url: URL,
         options: [UIApplication.OpenURLOptionsKey: Any] = [:]
     ) -> Bool {
-        print("UIApplication url: \(url)")
+        NSLog("UIApplication url: \(url)")
         return GIDSignIn.sharedInstance.handle(url)
     }
 }

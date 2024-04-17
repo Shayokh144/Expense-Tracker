@@ -7,20 +7,35 @@
 
 import Combine
 import Foundation
+import FirebaseAuth
 
 final class HomeViewModel: ObservableObject {
 
     private let loginGmailUseCase: LoginGmailUseCaseProtocol
-    
-    @Published var authState: AuthState = .signedOut
+    private let firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase
+
+    @Published var authState: AuthState = .signedOut {
+        didSet {
+            firebaseRealtimeDBUseCase.clearDBSession(isSingedIn: authState == .signedIn)
+        }
+    }
     private var cancellable = Set<AnyCancellable>()
 
-    init(loginGmailUseCase: LoginGmailUseCaseProtocol = LoginGmailUseCase()) {
+    init(
+        loginGmailUseCase: LoginGmailUseCaseProtocol = LoginGmailUseCase(),
+        firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase.shared
+    ) {
         self.loginGmailUseCase = loginGmailUseCase
+        self.firebaseRealtimeDBUseCase = firebaseRealtimeDBUseCase
     }
 
     func checkAuthSate() {
         authState = .loading
+        if let user = Auth.auth().currentUser {
+            NSLog("XYZ UID:  \(user.uid)")
+            self.authState = .signedIn
+            return
+        }
         loginGmailUseCase.checkAuthStatus()
             .receive(on: DispatchQueue.main)
             .sink(
@@ -28,7 +43,7 @@ final class HomeViewModel: ObservableObject {
                     switch completion {
                     case let .failure(error):
                         if let newErr = error as? CommonError {
-                            print(newErr.localizedDescription)
+                            NSLog("Auth error: \(newErr.localizedDescription)")
                             self?.authState = .error(message: newErr.localizedDescription)
                         } else {
                             self?.authState = .error(message: CommonError.unknown.localizedDescription)
@@ -53,7 +68,7 @@ final class HomeViewModel: ObservableObject {
                     switch completion {
                     case let .failure(error):
                         if let newErr = error as? CommonError {
-                            print(newErr.localizedDescription)
+                            NSLog("Auth error: \(newErr.localizedDescription)")
                             self?.authState = .error(message: newErr.localizedDescription)
                         } else {
                             self?.authState = .error(message: CommonError.unknown.localizedDescription)
@@ -63,7 +78,8 @@ final class HomeViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] user in
-                    print("USER: \(user)")
+                    NSLog("FB USR: \(String(describing: Auth.auth().currentUser?.email))")
+                    NSLog("USER: \(user)")
                     self?.authState = .signedIn
                 }
             )
@@ -84,6 +100,13 @@ final class HomeViewModel: ObservableObject {
     }
 
     func getUser() -> User? {
+        if let fUser = Auth.auth().currentUser {
+            return User(
+                id: fUser.uid,
+                name: fUser.displayName ?? "No name found",
+                email: fUser.email ?? "No email found"
+            )
+        }
         guard let gUser = loginGmailUseCase.getCurrentUser() else {
             return nil
         }

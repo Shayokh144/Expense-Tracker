@@ -15,6 +15,7 @@ extension Constants {
         static let redButtonColor = "#AD2533"
         static let blueButtonColor = "#2529AD"
         static let tabSelectionColor = "#3BC1AF"
+        static let errorBackgroundColor = "#E72E1B"
     }
 }
 
@@ -30,5 +31,17 @@ extension Constants {
         static let tabProfile = "Profile"
         static let tabHistory = "History"
         static let tabAnalysis = "Analysis"
+        static let addExpense = "Add expense"
+        static let selectDate = "Select date"
+    }
+}
+
+extension Constants {
+
+    enum AppData {
+
+        static var currencyList: [String] {
+            ["BDT", "THB", "USD"]
+        }
     }
 }

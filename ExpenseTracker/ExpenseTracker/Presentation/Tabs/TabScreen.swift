@@ -14,11 +14,11 @@ struct TabScreen: View {
 
     var body: some View {
         TabView {
-            AddExpenseScreen()
+            AddExpenseScreen(viewModel: AddExpenseViewModel())
                 .tabItem {
                     Label(Constants.AppText.tabAdd, systemImage: "note.text.badge.plus")
                 }
-            ExpenseHistoryScreen()
+            ExpenseHistoryScreen(viewModel: ExpenseHistoryViewModel())
                 .tabItem {
                     Label(Constants.AppText.tabHistory, systemImage: "list.bullet.rectangle")
                 }

@@ -26,6 +26,10 @@ struct LocationSearchScreen: View {
                             Divider()
                         }
                         .padding(.bottom, 8.0)
+                        .background(Color.clear)
+                        .onTapGesture {
+                            viewModel.onTapPlaceSearchResult(result: completionResult)
+                        }
                     }
                 }
                 .padding()
