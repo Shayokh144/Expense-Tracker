@@ -27,4 +27,18 @@ extension View {
             )
         )
     }
+    
+    func commonNavigationBar<LeftButton, RightButton>(
+        title: String,
+        @ViewBuilder leftButton: @escaping () -> LeftButton,
+        @ViewBuilder rightButton: @escaping () -> RightButton
+    ) -> some View where LeftButton : View, RightButton : View {
+        modifier(
+            CommonNavigationBarModifier(
+                title: title,
+                leftButton: leftButton,
+                rightButton: rightButton
+            )
+        )
+    }
 }

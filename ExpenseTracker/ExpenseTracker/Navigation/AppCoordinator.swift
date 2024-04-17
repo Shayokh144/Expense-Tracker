@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AppCoordinator: View {
     
-    @ObservedObject var coordinator: AppCoordinatorViewModel
+    @StateObject var coordinator: AppCoordinatorViewModel
 
     var body: some View {
         Router($coordinator.routes) { screen, _  in
@@ -28,8 +28,18 @@ struct AppCoordinator: View {
                 CurrentLocationScreen(viewModel: viewModel)
             case .tabScreen(let user):
                 TabScreen(user: user)
+            case .expenseHistoryDetails:
+                ExpenseHistoryDetailsScreen(
+                    onTapBack: {
+                        coordinator.goBack()
+                    }
+                )
             }
         }
         .environmentObject(coordinator)
+    }
+    
+    init(coordinator: AppCoordinatorViewModel) {
+        _coordinator = StateObject(wrappedValue: coordinator)
     }
 }

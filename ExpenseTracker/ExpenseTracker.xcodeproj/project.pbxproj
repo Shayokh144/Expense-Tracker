@@ -69,6 +69,7 @@
 		047A7EC82B5E3C1E00B11B10 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A7EC72B5E3C1E00B11B10 /* AlertView.swift */; };
 		047A7ECA2B5E3D2900B11B10 /* AlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A7EC92B5E3D2900B11B10 /* AlertViewModifier.swift */; };
 		047A7ECC2B5E47B600B11B10 /* AlertUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047A7ECB2B5E47B600B11B10 /* AlertUIModel.swift */; };
+		048D78A12BC558E400318B93 /* CommonNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048D78A02BC558E400318B93 /* CommonNavigationBar.swift */; };
 		04B1BFEA2B4EA28A00ABA765 /* ExpenseInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BFE92B4EA28A00ABA765 /* ExpenseInputView.swift */; };
 		04B1BFEC2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BFEB2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift */; };
 		04B1BFEE2B4EB6DE00ABA765 /* PlaceAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BFED2B4EB6DE00ABA765 /* PlaceAddress.swift */; };
@@ -87,6 +88,7 @@
 		04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEC1AA2B0E336300AC445E /* LocationSearchViewModel.swift */; };
 		04FA489A2B2C3BCB000B7949 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA48992B2C3BCB000B7949 /* AuthState.swift */; };
 		04FA489E2B2C4803000B7949 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA489D2B2C4803000B7949 /* CommonError.swift */; };
+		E02258572B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02258562B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +126,7 @@
 		047A7EC72B5E3C1E00B11B10 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		047A7EC92B5E3D2900B11B10 /* AlertViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModifier.swift; sourceTree = "<group>"; };
 		047A7ECB2B5E47B600B11B10 /* AlertUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUIModel.swift; sourceTree = "<group>"; };
+		048D78A02BC558E400318B93 /* CommonNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNavigationBar.swift; sourceTree = "<group>"; };
 		04B1BFE92B4EA28A00ABA765 /* ExpenseInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseInputView.swift; sourceTree = "<group>"; };
 		04B1BFEB2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseInputViewModel.swift; sourceTree = "<group>"; };
 		04B1BFED2B4EB6DE00ABA765 /* PlaceAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAddress.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 		04EEC1AA2B0E336300AC445E /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		04FA48992B2C3BCB000B7949 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		04FA489D2B2C4803000B7949 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		E02258562B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryDetailsScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +227,7 @@
 		0423500E2B03628A005C6D0C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				048D789F2BC554E400318B93 /* ViewModifier */,
 				04CBF1462B15215600DF5B06 /* UI */,
 				0423500F2B0362B2005C6D0C /* Constants.swift */,
 				042350142B0363F9005C6D0C /* UserDefaultsManager.swift */,
@@ -317,6 +322,7 @@
 		045294752B30A3E100BB2513 /* ExpenseHistory */ = {
 			isa = PBXGroup;
 			children = (
+				E02258552B73620500B91925 /* Details */,
 				045294792B30A49900BB2513 /* ExpenseHistoryScreen.swift */,
 				0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */,
 				0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */,
@@ -406,6 +412,14 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		048D789F2BC554E400318B93 /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				048D78A02BC558E400318B93 /* CommonNavigationBar.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
 		04B1BFE82B4EA27700ABA765 /* ExpenseInput */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +447,14 @@
 				04EEC1AA2B0E336300AC445E /* LocationSearchViewModel.swift */,
 			);
 			path = LocationSearch;
+			sourceTree = "<group>";
+		};
+		E02258552B73620500B91925 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				E02258562B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -547,6 +569,7 @@
 				045294702B30A33D00BB2513 /* TabScreen.swift in Sources */,
 				04B1BFEA2B4EA28A00ABA765 /* ExpenseInputView.swift in Sources */,
 				04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */,
+				E02258572B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift in Sources */,
 				04B1BFEE2B4EB6DE00ABA765 /* PlaceAddress.swift in Sources */,
 				04B1BFF02B4F127700ABA765 /* Double+Extension.swift in Sources */,
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,
@@ -561,6 +584,7 @@
 				042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */,
 				041152942B179F1100D93FFC /* LoginGmailUseCase.swift in Sources */,
 				042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */,
+				048D78A12BC558E400318B93 /* CommonNavigationBar.swift in Sources */,
 				0418DCE32B159FBA00AF975A /* Screen.swift in Sources */,
 				0452947D2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift in Sources */,
 				047A7EC82B5E3C1E00B11B10 /* AlertView.swift in Sources */,

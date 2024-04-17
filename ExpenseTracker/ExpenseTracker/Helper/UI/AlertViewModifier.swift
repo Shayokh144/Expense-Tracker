@@ -43,6 +43,7 @@ struct AlertViewModifier: ViewModifier {
                 )
             }
         }
+        .animation(.linear, value: isPresenting)
     }
 }
 
