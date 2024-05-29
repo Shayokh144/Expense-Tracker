@@ -22,7 +22,7 @@ struct TabScreen: View {
                 .tabItem {
                     Label(Constants.AppText.tabHistory, systemImage: "list.bullet.rectangle")
                 }
-            ExpenseAnalysisScreen()
+            ExpenseAnalysisScreen(viewModel: ExpenseAnalysisViewModel())
                 .tabItem {
                     Label(Constants.AppText.tabAnalysis, systemImage: "chart.bar.xaxis")
                 }
