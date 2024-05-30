@@ -198,6 +198,7 @@ private extension ExpenseAnalysisViewModel {
             )
             placeMaxPrice = max(placeMaxPrice, value)
         }
+        categoryBarUIData = categoryBarUIData.sorted { $0.actualValue > $1.actualValue }
         let categoryBarChartUIData = BarChartUIModel(
             id: UUID().uuidString,
             name: "Data based on Category for last \(inputNumOfDay) days",
@@ -208,6 +209,7 @@ private extension ExpenseAnalysisViewModel {
             chartData: categoryBarUIData,
             barItemMaxValue: categoryMaxPrice
         )
+        placeBarUIData = placeBarUIData.sorted { $0.actualValue > $1.actualValue }
         let placeBarChartUIData = BarChartUIModel(
             id: UUID().uuidString,
             name: "Data based on Place for last \(inputNumOfDay) days",
