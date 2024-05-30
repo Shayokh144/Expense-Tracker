@@ -49,6 +49,7 @@
 		042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350122B036385005C6D0C /* UserDefaults+Extension.swift */; };
 		042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350142B0363F9005C6D0C /* UserDefaultsManager.swift */; };
 		042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042470F82B08BA8100A4E2C2 /* CurrentLocationView.swift */; };
+		04346F1B2C059A8D003CCFDC /* BarChartUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04346F1A2C059A8D003CCFDC /* BarChartUIModel.swift */; };
 		0439F5C32B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */; };
 		0439F5C52B55A8E600AF3B1B /* ExpenseHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */; };
 		0439F5C82B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C72B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift */; };
@@ -61,6 +62,7 @@
 		045294812B30ADF800BB2513 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294802B30ADF800BB2513 /* User.swift */; };
 		045294832B30BA3A00BB2513 /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */; };
 		0463BECE2B50FB4000302121 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463BECD2B50FB4000302121 /* View+Extension.swift */; };
+		0469EE252C04AFD7008F6C6E /* ExpenseAnalysisViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469EE242C04AFD7008F6C6E /* ExpenseAnalysisViewModel.swift */; };
 		046FC7A42BCFD4FF00CEEC08 /* ExpenseHistoryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FC7A32BCFD4FF00CEEC08 /* ExpenseHistoryDetailsViewModel.swift */; };
 		046FC7A62BCFEA9E00CEEC08 /* ExpenseDetailsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FC7A52BCFEA9E00CEEC08 /* ExpenseDetailsItemView.swift */; };
 		04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04742F1B2B02557500850F24 /* ExpenseTrackerApp.swift */; };
@@ -82,6 +84,7 @@
 		04C410E82B3C8A0D0084BF81 /* DateFormatter+Extenson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */; };
 		04C410EA2B3C8A690084BF81 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E92B3C8A690084BF81 /* Date+Extension.swift */; };
 		04C410EC2B3C8D000084BF81 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410EB2B3C8D000084BF81 /* AddExpenseViewModel.swift */; };
+		04C4449E2C0740C7000D47A6 /* BarChartItemUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C4449D2C0740C7000D47A6 /* BarChartItemUIModel.swift */; };
 		04CBF1432B15197B00DF5B06 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1422B15197B00DF5B06 /* HomeScreen.swift */; };
 		04CBF1452B15199200DF5B06 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1442B15199200DF5B06 /* HomeViewModel.swift */; };
 		04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1472B15216800DF5B06 /* TextButtonStyle.swift */; };
@@ -107,6 +110,7 @@
 		042350122B036385005C6D0C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		042350142B0363F9005C6D0C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		042470F82B08BA8100A4E2C2 /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
+		04346F1A2C059A8D003CCFDC /* BarChartUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartUIModel.swift; sourceTree = "<group>"; };
 		0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryViewModel.swift; sourceTree = "<group>"; };
 		0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryItemView.swift; sourceTree = "<group>"; };
 		0439F5C72B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryItemUIModel.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 		045294802B30ADF800BB2513 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		045294822B30BA3A00BB2513 /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
 		0463BECD2B50FB4000302121 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		0469EE242C04AFD7008F6C6E /* ExpenseAnalysisViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAnalysisViewModel.swift; sourceTree = "<group>"; };
 		046FC7A32BCFD4FF00CEEC08 /* ExpenseHistoryDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryDetailsViewModel.swift; sourceTree = "<group>"; };
 		046FC7A52BCFEA9E00CEEC08 /* ExpenseDetailsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailsItemView.swift; sourceTree = "<group>"; };
 		04742F182B02557500850F24 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +146,7 @@
 		04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extenson.swift"; sourceTree = "<group>"; };
 		04C410E92B3C8A690084BF81 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		04C410EB2B3C8D000084BF81 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
+		04C4449D2C0740C7000D47A6 /* BarChartItemUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartItemUIModel.swift; sourceTree = "<group>"; };
 		04CBF1422B15197B00DF5B06 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		04CBF1442B15199200DF5B06 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		04CBF1472B15216800DF5B06 /* TextButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButtonStyle.swift; sourceTree = "<group>"; };
@@ -289,6 +295,8 @@
 			children = (
 				0439F5C72B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift */,
 				047A7ECB2B5E47B600B11B10 /* AlertUIModel.swift */,
+				04346F1A2C059A8D003CCFDC /* BarChartUIModel.swift */,
+				04C4449D2C0740C7000D47A6 /* BarChartItemUIModel.swift */,
 			);
 			path = UIModel;
 			sourceTree = "<group>";
@@ -338,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				0452947C2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift */,
+				0469EE242C04AFD7008F6C6E /* ExpenseAnalysisViewModel.swift */,
 			);
 			path = ExpenseAnalysis;
 			sourceTree = "<group>";
@@ -578,6 +587,7 @@
 				04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */,
 				E02258572B7364E200B91925 /* ExpenseHistoryDetailsScreen.swift in Sources */,
 				04B1BFEE2B4EB6DE00ABA765 /* PlaceAddress.swift in Sources */,
+				04346F1B2C059A8D003CCFDC /* BarChartUIModel.swift in Sources */,
 				04B1BFF02B4F127700ABA765 /* Double+Extension.swift in Sources */,
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,
 				0439F5C32B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift in Sources */,
@@ -592,6 +602,7 @@
 				042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */,
 				041152942B179F1100D93FFC /* LoginGmailUseCase.swift in Sources */,
 				042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */,
+				0469EE252C04AFD7008F6C6E /* ExpenseAnalysisViewModel.swift in Sources */,
 				048D78A12BC558E400318B93 /* CommonNavigationBar.swift in Sources */,
 				0418DCE32B159FBA00AF975A /* Screen.swift in Sources */,
 				0452947D2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift in Sources */,
@@ -608,6 +619,7 @@
 				04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */,
 				0439F5C82B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift in Sources */,
 				04C410EA2B3C8A690084BF81 /* Date+Extension.swift in Sources */,
+				04C4449E2C0740C7000D47A6 /* BarChartItemUIModel.swift in Sources */,
 				04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */,
 				04C410EC2B3C8D000084BF81 /* AddExpenseViewModel.swift in Sources */,
 				0452947A2B30A49900BB2513 /* ExpenseHistoryScreen.swift in Sources */,

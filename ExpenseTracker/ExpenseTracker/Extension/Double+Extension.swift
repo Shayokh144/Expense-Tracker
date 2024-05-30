@@ -12,4 +12,8 @@ extension Double {
     var fractionTwoDigitString:String {
         return String(format: "%.2f", self)
     }
+    
+    var fractionOneDigitString:String {
+        return String(format: "%.1f", self)
+    }
 }

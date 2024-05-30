@@ -15,16 +15,19 @@ final class FirebaseRealtimeDBUseCase {
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     private var lastFetchedDataKey: String?
+    private var lastFetchedAnalyticsDataKey: String?
     private var databaseReference: DatabaseReference?
 
     private init() {
         lastFetchedDataKey = nil
+        lastFetchedAnalyticsDataKey = nil
         databaseReference = nil
     }
 
     func clearDBSession(isSingedIn: Bool) {
         NSLog("clearDBSession: \(isSingedIn)")
         lastFetchedDataKey = nil
+        lastFetchedAnalyticsDataKey = nil
         if isSingedIn {
             databaseReference = getDatabaseReference()
         } else {
@@ -97,6 +100,7 @@ final class FirebaseRealtimeDBUseCase {
      For example, if total 100 records, first it will read 90 to 100, then it will read 80-89 and so on.
      */
     func getLatestExpenseLists(
+        forAnalytics: Bool = false,
         queryLimit: UInt,
         completion: @escaping ([ExpenseList]?) -> Void
     ) {
@@ -105,18 +109,12 @@ final class FirebaseRealtimeDBUseCase {
             completion(nil)
             return
         }
-        var queryGet: DatabaseQuery
-        if let lastFetchedDataKey = lastFetchedDataKey {
-            queryGet = databasePath
-                .queryOrderedByKey()
-                .queryEnding(atValue: lastFetchedDataKey) // if query ordered by key
-                .queryLimited(toLast: queryLimit)
-        } else {
-            queryGet = databasePath
-                .queryOrdered(byChild: "id")
-                .queryLimited(toLast: queryLimit)
-        }
-
+        let queryGet = getDataBaseQuery(
+            forAnalytics: forAnalytics,
+            databasePath: databasePath,
+            queryLimit: queryLimit
+        )
+        
         queryGet.observeSingleEvent(of: .value) { [weak self] snapshot in
             guard let self = self else { return }
             var dataModels: [ExpenseList] = []
@@ -164,6 +162,35 @@ final class FirebaseRealtimeDBUseCase {
             .child("users/\(uid)/expenseLists")
         ref.keepSynced(true)
         return ref
+    }
+    
+    private func getDataBaseQuery(
+        forAnalytics: Bool,
+        databasePath: DatabaseReference,
+        queryLimit: UInt
+    ) -> DatabaseQuery {
+        if forAnalytics {
+            if let lastFetchedDataKey = lastFetchedAnalyticsDataKey {
+                return databasePath
+                    .queryOrderedByKey()
+                    .queryEnding(atValue: lastFetchedDataKey) // if query ordered by key
+                    .queryLimited(toLast: queryLimit)
+            } else {
+                return databasePath
+                    .queryOrdered(byChild: "id")
+                    .queryLimited(toLast: queryLimit)
+            }
+        }
+        if let lastFetchedDataKey = lastFetchedDataKey {
+            return databasePath
+                .queryOrderedByKey()
+                .queryEnding(atValue: lastFetchedDataKey) // if query ordered by key
+                .queryLimited(toLast: queryLimit)
+        } else {
+            return databasePath
+                .queryOrdered(byChild: "id")
+                .queryLimited(toLast: queryLimit)
+        }
     }
 
     deinit {
