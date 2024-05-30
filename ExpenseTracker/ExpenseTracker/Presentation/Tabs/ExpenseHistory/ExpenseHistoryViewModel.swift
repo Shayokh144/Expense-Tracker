@@ -122,10 +122,10 @@ final class ExpenseHistoryViewModel: ObservableObject {
     }
 
     private func filterDataWithDate() {
+        let fromDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startDate)
+        let toDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: endDate)
         uiExpenseList = expenseHistoryItems.filter {
             let currentDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: $0.dateTime)
-            let fromDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: startDate)
-            let toDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: endDate)
             if let currentDate = Calendar.current.date(from: currentDateComponents),
                 let fromDate = Calendar.current.date(from: fromDateComponents),
                 let toDate = Calendar.current.date(from: toDateComponents) {

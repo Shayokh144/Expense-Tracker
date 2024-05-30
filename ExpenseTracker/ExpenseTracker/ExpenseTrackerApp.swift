@@ -15,7 +15,11 @@ struct ExpenseTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppCoordinator(coordinator: AppCoordinatorViewModel())
+            if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+                Text("UNIT TEST")
+            } else {
+                AppCoordinator(coordinator: AppCoordinatorViewModel())
+            }
         }
     }
 }

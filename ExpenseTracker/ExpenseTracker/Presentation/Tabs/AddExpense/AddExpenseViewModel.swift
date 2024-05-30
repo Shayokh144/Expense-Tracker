@@ -43,7 +43,7 @@ final class AddExpenseViewModel: ObservableObject {
         addedLocalExpenseList = []
         currentTotal = 0.0
         state = .add
-        selectedCurrency = Constants.AppData.currencyList.first ?? "BDT"
+        selectedCurrency = Constants.AppData.currencyList.first ?? "THB"
     }
 
     func saveExpenseList() {

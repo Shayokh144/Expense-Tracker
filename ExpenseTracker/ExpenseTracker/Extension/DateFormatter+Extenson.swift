@@ -25,4 +25,13 @@ extension DateFormatter {
         displayDateFormatter.calendar = Calendar(identifier: .gregorian)
         return displayDateFormatter
     }()
+    
+    /// Result: "12 Dec 2023, 3:30 PM"
+    static let displayDateFormat: DateFormatter = {
+        let displayDateFormatter = DateFormatter()
+        displayDateFormatter.dateFormat = "d MMM yyyy"
+        displayDateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        displayDateFormatter.calendar = Calendar(identifier: .gregorian)
+        return displayDateFormatter
+    }()
 }
