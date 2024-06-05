@@ -15,6 +15,18 @@ struct ExpenseList: Codable, Identifiable {
     let country: String
     let currency: String?
     let expenses: [Expense]
+    var dayDifferenceFromToday: Int?
+    
+    func withDateDifference(difference: Int?) -> ExpenseList {
+        ExpenseList(
+            dateTime: dateTime,
+            totalCost: totalCost,
+            country: country,
+            currency: currency,
+            expenses: expenses,
+            dayDifferenceFromToday: difference
+        )
+    }
 }
 
 

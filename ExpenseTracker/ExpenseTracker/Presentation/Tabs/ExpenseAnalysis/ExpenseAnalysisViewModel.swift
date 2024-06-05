@@ -19,6 +19,7 @@ final class ExpenseAnalysisViewModel: ObservableObject {
     private var maxBarHeight: Double = 220.0
     private var apiExpenseListCollection: [ExpenseList]
     private var savedDataKeys: [String: Bool]
+    private var currentMaxDayDifference = 0
     
     init(
         firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase.shared
@@ -48,8 +49,14 @@ final class ExpenseAnalysisViewModel: ObservableObject {
             showError(message: "Invalid input, enter a valid integer number.")
             return
         }
-        guard inputNumOfDay > previousSelectedDays, inputNumOfDay != 0 else {
+        guard inputNumOfDay != previousSelectedDays, inputNumOfDay != 0 else {
             showError(message: "Result already presented, change input.")
+            return
+        }
+        
+        guard inputNumOfDay > currentMaxDayDifference - 1 else {
+            generateAnalytics(numOfDay: inputNumOfDay)
+            state = .loaded
             return
         }
         previousSelectedDays = inputNumOfDay
@@ -113,16 +120,20 @@ private extension ExpenseAnalysisViewModel {
                 self.showError(message: "No data found, check internet connection.")
                 return
             }
-            saveApiData(expenseListCollection: expenseList)
+            saveApiDataWithDayDifference(expenseListCollection: expenseList)
             processApiData(numOfDay: inputNumOfDay)
         }
     }
     
-    func saveApiData(expenseListCollection: [ExpenseList]) {
+    func saveApiDataWithDayDifference(expenseListCollection: [ExpenseList]) {
+        let today = Date()
         for expenseList in expenseListCollection {
             if let listId = expenseList.id, savedDataKeys[listId] == nil {
                 savedDataKeys[listId] = true
-                apiExpenseListCollection.append(expenseList)
+                let expenseDate = DateFormatter.fullDateTimeFormat.date(from: expenseList.dateTime) ?? Date()
+                let dayDifference = Date.daysBetween(expenseDate, today)
+                currentMaxDayDifference = max(currentMaxDayDifference, dayDifference ?? 0)
+                apiExpenseListCollection.append(expenseList.withDateDifference(difference: dayDifference))
             }
         }
     }
@@ -261,8 +272,11 @@ private extension ExpenseAnalysisViewModel {
             guard let self else {
                 return
             }
+            let filteredData = apiExpenseListCollection
+                .filter { ($0.dayDifferenceFromToday ?? 0) <= numOfDay }
+                .sorted { ($0.dayDifferenceFromToday ?? 0) > ($1.dayDifferenceFromToday ?? 0) }
             barChartUIModel = getBarChartUIData(
-                expenseListCollection: apiExpenseListCollection,
+                expenseListCollection: filteredData,
                 inputNumOfDay: numOfDay
             )
         }
