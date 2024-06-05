@@ -10,6 +10,7 @@ import Foundation
 struct BarChartUIModel: Identifiable {
 
     let id: String
+    let graphType: AnalysisGraphType
     let name: String // chart name
     let startDate: String
     let endDate: String
@@ -23,6 +24,7 @@ extension BarChartUIModel {
     
     static let dummyData: BarChartUIModel = .init(
         id: UUID().uuidString,
+        graphType: .categoryBar,
         name: "Data based on Category for last 10 days",
         startDate: "22 May 2024",
         endDate: "28 May 2024",
@@ -33,7 +35,8 @@ extension BarChartUIModel {
     )
     
     static let dummyDat2: BarChartUIModel = .init(
-        id: UUID().uuidString,
+        id: UUID().uuidString, 
+        graphType: .locationBar,
         name: "Location Data",
         startDate: "22 May 2024",
         endDate: "28 May 2024",

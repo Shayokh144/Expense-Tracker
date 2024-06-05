@@ -91,6 +91,7 @@
 		04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1492B15230700DF5B06 /* Color+Extension.swift */; };
 		04D448522C084E2B00FB3640 /* ExpenseTrackerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D448512C084E2B00FB3640 /* ExpenseTrackerUnitTests.swift */; };
 		04D4485A2C084E8400FB3640 /* ConstantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D448592C084E8400FB3640 /* ConstantsTests.swift */; };
+		04D448632C097D7F00FB3640 /* AnalysisGraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D448622C097D7F00FB3640 /* AnalysisGraphType.swift */; };
 		04EEC1A82B0E30F300AC445E /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEC1A72B0E30F300AC445E /* LocationSearchView.swift */; };
 		04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEC1AA2B0E336300AC445E /* LocationSearchViewModel.swift */; };
 		04FA489A2B2C3BCB000B7949 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FA48992B2C3BCB000B7949 /* AuthState.swift */; };
@@ -166,6 +167,7 @@
 		04D4484F2C084E2B00FB3640 /* ExpenseTrackerUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpenseTrackerUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D448512C084E2B00FB3640 /* ExpenseTrackerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTrackerUnitTests.swift; sourceTree = "<group>"; };
 		04D448592C084E8400FB3640 /* ConstantsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsTests.swift; sourceTree = "<group>"; };
+		04D448622C097D7F00FB3640 /* AnalysisGraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisGraphType.swift; sourceTree = "<group>"; };
 		04EEC1A72B0E30F300AC445E /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		04EEC1AA2B0E336300AC445E /* LocationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewModel.swift; sourceTree = "<group>"; };
 		04FA48992B2C3BCB000B7949 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			children = (
 				045294772B30A46400BB2513 /* AddExpenseScreen.swift */,
 				04C410EB2B3C8D000084BF81 /* AddExpenseViewModel.swift */,
+				04D448622C097D7F00FB3640 /* AnalysisGraphType.swift */,
 			);
 			path = AddExpense;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				04742F1C2B02557500850F24 /* ExpenseTrackerApp.swift in Sources */,
 				0439F5C82B563B7B00AF3B1B /* ExpenseHistoryItemUIModel.swift in Sources */,
 				04C410EA2B3C8A690084BF81 /* Date+Extension.swift in Sources */,
+				04D448632C097D7F00FB3640 /* AnalysisGraphType.swift in Sources */,
 				04C4449E2C0740C7000D47A6 /* BarChartItemUIModel.swift in Sources */,
 				04CBF1482B15216800DF5B06 /* TextButtonStyle.swift in Sources */,
 				04C410EC2B3C8D000084BF81 /* AddExpenseViewModel.swift in Sources */,

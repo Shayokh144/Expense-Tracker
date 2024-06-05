@@ -201,6 +201,7 @@ private extension ExpenseAnalysisViewModel {
         categoryBarUIData = categoryBarUIData.sorted { $0.actualValue > $1.actualValue }
         let categoryBarChartUIData = BarChartUIModel(
             id: UUID().uuidString,
+            graphType: .categoryBar,
             name: "Data based on Category for last \(inputNumOfDay) days",
             startDate: endDateString,
             endDate: startDateString,
@@ -211,7 +212,8 @@ private extension ExpenseAnalysisViewModel {
         )
         placeBarUIData = placeBarUIData.sorted { $0.actualValue > $1.actualValue }
         let placeBarChartUIData = BarChartUIModel(
-            id: UUID().uuidString,
+            id: UUID().uuidString, 
+            graphType: .locationBar,
             name: "Data based on Place for last \(inputNumOfDay) days",
             startDate: endDateString,
             endDate: startDateString,
