@@ -126,7 +126,11 @@ final class FirebaseRealtimeDBUseCase {
                 }
             }
             if let firstChild = snapshot.children.allObjects.first as? DataSnapshot {
-                self.lastFetchedDataKey = firstChild.key
+                if forAnalytics {
+                    self.lastFetchedAnalyticsDataKey = firstChild.key
+                } else {
+                    self.lastFetchedDataKey = firstChild.key
+                }
             }
 //            print("snap cnt: \(dataModels.count)")
             completion(dataModels)
@@ -170,10 +174,10 @@ final class FirebaseRealtimeDBUseCase {
         queryLimit: UInt
     ) -> DatabaseQuery {
         if forAnalytics {
-            if let lastFetchedDataKey = lastFetchedAnalyticsDataKey {
+            if let lastFetchedAnalyticsDataKey = lastFetchedAnalyticsDataKey {
                 return databasePath
                     .queryOrderedByKey()
-                    .queryEnding(atValue: lastFetchedDataKey) // if query ordered by key
+                    .queryEnding(atValue: lastFetchedAnalyticsDataKey) // if query ordered by key
                     .queryLimited(toLast: queryLimit)
             } else {
                 return databasePath

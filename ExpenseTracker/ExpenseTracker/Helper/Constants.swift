@@ -41,7 +41,35 @@ extension Constants {
     enum AppData {
 
         static var currencyList: [String] {
-            ["BDT", "THB", "USD"]
+            ["THB", "BDT", "USD"]
+        }
+        
+        static func currencyConversionRate(
+            fromCurrency:  String,
+            toCurrency: String
+        ) -> Double {
+            if fromCurrency == "THB" {
+                if toCurrency == "USD" {
+                    return 0.27
+                } else if toCurrency == "BDT" {
+                    return 3.2
+                }
+            }
+            if fromCurrency == "BDT" {
+                if toCurrency == "USD" {
+                    return 0.0085
+                } else if toCurrency == "THB" {
+                    return 1 / 3.2
+                }
+            }
+            if fromCurrency == "USD" {
+                if toCurrency == "BDT" {
+                    return 117.9
+                } else if toCurrency == "THB" {
+                    return 36.94
+                }
+            }
+            return 1.0
         }
     }
 }

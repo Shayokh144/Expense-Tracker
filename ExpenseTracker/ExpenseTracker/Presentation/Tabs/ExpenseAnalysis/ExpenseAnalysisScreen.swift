@@ -28,7 +28,10 @@ struct ExpenseAnalysisScreen: View {
                     .keyboardType(.numberPad)
                     .textFieldStyle(.roundedBorder)
                 Button(
-                    action: viewModel.findAnalytics,
+                    action: {
+                        viewModel.findAnalyticsSimpleVersion()
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    },
                     label: {
                         Text("Show Analysis")
                             .padding(.horizontal, 4.0)
