@@ -142,14 +142,22 @@ private extension ExpenseAnalysisViewModel {
         expenseListCollection: [ExpenseList],
         inputNumOfDay: UInt
     ) -> [BarChartUIModel] {
+        var totalCost: Double = 0.0
+        
+        // CATEGORY DATA
         var categoryBarUIData: [BarChartItemUIModel] = []
         var categoryContainer: [String: Double] = [:]
-        var totalCost: Double = 0.0
         var categoryMaxPrice: Double = 0.0
         
+        // PLACE DATA
         var placeBarUIData: [BarChartItemUIModel] = []
         var placeContainer: [String: Double] = [:]
         var placeMaxPrice: Double = 0.0
+        
+        // MONTH DATA
+        var monthBarUIData: [BarChartItemUIModel] = []
+        var monthContainer: [String: Double] = [:]
+        var monthMaxPrice: Double = 0.0
         
         let startDate = DateFormatter.fullDateTimeFormat.date(
             from: expenseListCollection.first?.dateTime ?? ""
@@ -180,11 +188,21 @@ private extension ExpenseAnalysisViewModel {
                     placeContainer[placeName] = thbPrice
                 }
             }
-            totalCost += convertToThaiCurrency(
+            let currentTotal = convertToThaiCurrency(
                 inputCurrency: expenseList.currency ?? "",
                 price: expenseList.totalCost
             )
+            totalCost += currentTotal
+            // MONTH DATA
+            let monthYear = getYearMonth(from: expenseList.dateTime)
+            if let oldMonthPrice = monthContainer[monthYear] {
+                monthContainer[monthYear] = oldMonthPrice + currentTotal
+            } else {
+                monthContainer[monthYear] = currentTotal
+            }
         }
+        
+        /// Create UI Model
         for (key, value) in categoryContainer {
             categoryBarUIData.append(
                 BarChartItemUIModel(
@@ -209,6 +227,20 @@ private extension ExpenseAnalysisViewModel {
             )
             placeMaxPrice = max(placeMaxPrice, value)
         }
+        for (key, value) in monthContainer {
+            monthBarUIData.append(
+                BarChartItemUIModel(
+                    id: key,
+                    name: key,
+                    actualValue: value,
+                    actualCurrency: "THB",
+                    mappedCurrency: "THB"
+                )
+            )
+            monthMaxPrice = max(monthMaxPrice, value)
+        }
+        
+        // CATEGORY DATA
         categoryBarUIData = categoryBarUIData.sorted { $0.actualValue > $1.actualValue }
         let categoryBarChartUIData = BarChartUIModel(
             id: UUID().uuidString,
@@ -221,6 +253,8 @@ private extension ExpenseAnalysisViewModel {
             chartData: categoryBarUIData,
             barItemMaxValue: categoryMaxPrice
         )
+        
+        // PLACE DATA
         placeBarUIData = placeBarUIData.sorted { $0.actualValue > $1.actualValue }
         let placeBarChartUIData = BarChartUIModel(
             id: UUID().uuidString, 
@@ -233,7 +267,21 @@ private extension ExpenseAnalysisViewModel {
             chartData: placeBarUIData,
             barItemMaxValue: placeMaxPrice
         )
-        return [categoryBarChartUIData, placeBarChartUIData]
+        
+        // MONTH DATA
+        monthBarUIData = monthBarUIData.sorted { $0.name < $1.name }
+        let monthBarChartUIData = BarChartUIModel(
+            id: UUID().uuidString,
+            graphType: .monthBar,
+            name: "Data based on month for last \(inputNumOfDay) days",
+            startDate: endDateString,
+            endDate: startDateString,
+            total: totalCost,
+            currency: "THB",
+            chartData: monthBarUIData,
+            barItemMaxValue: monthMaxPrice
+        )
+        return [categoryBarChartUIData, placeBarChartUIData, monthBarChartUIData]
     }
     
     func convertToThaiCurrency(inputCurrency: String, price: Double) -> Double {
@@ -280,5 +328,14 @@ private extension ExpenseAnalysisViewModel {
                 inputNumOfDay: numOfDay
             )
         }
+    }
+    
+    /// input: 2024-01-18T22:50:26 output: 2024-01
+    func getYearMonth(from dateText: String) -> String {
+        let dateArr = dateText.split(separator: "-")
+        if dateArr.count >= 1 {
+            return "\(dateArr[0])-\(dateArr[1])"
+        }
+        return dateText
     }
 }

@@ -11,4 +11,5 @@ enum AnalysisGraphType {
     
     case categoryBar
     case locationBar
+    case monthBar
 }

@@ -26,7 +26,7 @@ extension DateFormatter {
         return displayDateFormatter
     }()
     
-    /// Result: "12 Dec 2023, 3:30 PM"
+    /// Result: "12 Dec 2023"
     static let displayDateFormat: DateFormatter = {
         let displayDateFormatter = DateFormatter()
         displayDateFormatter.dateFormat = "d MMM yyyy"
