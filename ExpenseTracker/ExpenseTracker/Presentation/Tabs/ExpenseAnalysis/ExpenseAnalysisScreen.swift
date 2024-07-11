@@ -10,6 +10,7 @@ import SwiftUI
 struct ExpenseAnalysisScreen: View {
     
     @StateObject private var viewModel: ExpenseAnalysisViewModel
+    @EnvironmentObject var navigator: AppCoordinatorViewModel
     
     private var maxBarNameLength: Double {
         UIScreen.main.bounds.width / 3.5
@@ -147,18 +148,34 @@ struct ExpenseAnalysisScreen: View {
         VStack(alignment: .leading, spacing: 4.0) {
             ScrollView {
                 ForEach(barChartInfo.chartData) { chartData in
-                    HStack(spacing: 8.0) {
-                        HStack {
-                            Spacer()
-                            Text(chartData.name)
-                                .font(.system(size: 12.0))
-                                .minimumScaleFactor(0.8)
-                                .lineLimit(1)
+                    Button(
+                        action: {
+                            let detailsUIModel = viewModel.getDetailsUIModel(
+                                barChartUIModel: barChartInfo,
+                                itemName: chartData.name
+                            )
+                            let detailsViewModel = ExpenseAnalysisDetailsViewModel(
+                                barChartUIModel: detailsUIModel,
+                                graphType: barChartInfo.graphType,
+                                itemName: chartData.name
+                            )
+                            navigator.goToExpenseAnalysisDetailsView(viewModel: detailsViewModel)
+                        },
+                        label: {
+                            HStack(spacing: 8.0) {
+                                HStack {
+                                    Spacer()
+                                    Text(chartData.name)
+                                        .font(.system(size: 12.0))
+                                        .minimumScaleFactor(0.8)
+                                        .lineLimit(1)
+                                }
+                                .frame(width: maxBarNameLength, height: 20.0)
+                                barView(barData: chartData,  maxValue: barChartInfo.barItemMaxValue)
+                                Spacer()
+                            }
                         }
-                        .frame(width: maxBarNameLength, height: 20.0)
-                        barView(barData: chartData,  maxValue: barChartInfo.barItemMaxValue)
-                        Spacer()
-                    }
+                    )
                 }
             }
         }

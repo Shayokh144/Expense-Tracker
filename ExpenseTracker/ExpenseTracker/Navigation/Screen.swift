@@ -14,4 +14,5 @@ enum Screen {
     case showCurrentLocation(CurrentLocationViewModel)
     case tabScreen(User)
     case expenseHistoryDetails(ExpenseHistoryDetailsViewModel)
+    case expenseAnalysisDetails(ExpenseAnalysisDetailsViewModel)
 }

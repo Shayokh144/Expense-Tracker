@@ -49,6 +49,8 @@
 		042350132B036385005C6D0C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350122B036385005C6D0C /* UserDefaults+Extension.swift */; };
 		042350152B0363F9005C6D0C /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042350142B0363F9005C6D0C /* UserDefaultsManager.swift */; };
 		042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042470F82B08BA8100A4E2C2 /* CurrentLocationView.swift */; };
+		043282202C2C73BB0053F4B2 /* ExpenseAnalysisDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432821F2C2C73BB0053F4B2 /* ExpenseAnalysisDetailsViewModel.swift */; };
+		043282222C2C73D50053F4B2 /* ExpenseAnalysisDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043282212C2C73D50053F4B2 /* ExpenseAnalysisDetailsScreen.swift */; };
 		04346F1B2C059A8D003CCFDC /* BarChartUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04346F1A2C059A8D003CCFDC /* BarChartUIModel.swift */; };
 		0439F5C32B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */; };
 		0439F5C52B55A8E600AF3B1B /* ExpenseHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */; };
@@ -123,6 +125,8 @@
 		042350122B036385005C6D0C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		042350142B0363F9005C6D0C /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		042470F82B08BA8100A4E2C2 /* CurrentLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationView.swift; sourceTree = "<group>"; };
+		0432821F2C2C73BB0053F4B2 /* ExpenseAnalysisDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAnalysisDetailsViewModel.swift; sourceTree = "<group>"; };
+		043282212C2C73D50053F4B2 /* ExpenseAnalysisDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAnalysisDetailsScreen.swift; sourceTree = "<group>"; };
 		04346F1A2C059A8D003CCFDC /* BarChartUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartUIModel.swift; sourceTree = "<group>"; };
 		0439F5C22B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryViewModel.swift; sourceTree = "<group>"; };
 		0439F5C42B55A8E600AF3B1B /* ExpenseHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryItemView.swift; sourceTree = "<group>"; };
@@ -314,6 +318,15 @@
 			path = CurrentLocation;
 			sourceTree = "<group>";
 		};
+		0432821E2C2C73830053F4B2 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				0432821F2C2C73BB0053F4B2 /* ExpenseAnalysisDetailsViewModel.swift */,
+				043282212C2C73D50053F4B2 /* ExpenseAnalysisDetailsScreen.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 		0439F5C62B563B6400AF3B1B /* UIModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +383,7 @@
 		045294762B30A3FD00BB2513 /* ExpenseAnalysis */ = {
 			isa = PBXGroup;
 			children = (
+				0432821E2C2C73830053F4B2 /* Details */,
 				0452947C2B30A4F400BB2513 /* ExpenseAnalysisScreen.swift */,
 				0469EE242C04AFD7008F6C6E /* ExpenseAnalysisViewModel.swift */,
 			);
@@ -666,6 +680,7 @@
 				042470F92B08BA8100A4E2C2 /* CurrentLocationView.swift in Sources */,
 				0439F5C32B55A8B300AF3B1B /* ExpenseHistoryViewModel.swift in Sources */,
 				04B1BFEC2B4EA6EF00ABA765 /* ExpenseInputViewModel.swift in Sources */,
+				043282222C2C73D50053F4B2 /* ExpenseAnalysisDetailsScreen.swift in Sources */,
 				04742F1E2B02557500850F24 /* CurrentLocationScreen.swift in Sources */,
 				045294812B30ADF800BB2513 /* User.swift in Sources */,
 				0463BECE2B50FB4000302121 /* View+Extension.swift in Sources */,
@@ -684,6 +699,7 @@
 				045294782B30A46400BB2513 /* AddExpenseScreen.swift in Sources */,
 				04CBF1432B15197B00DF5B06 /* HomeScreen.swift in Sources */,
 				04B1BFF22B4F154800ABA765 /* ExpenseEditView.swift in Sources */,
+				043282202C2C73BB0053F4B2 /* ExpenseAnalysisDetailsViewModel.swift in Sources */,
 				0418DCE72B15A25500AF975A /* AppCoordinatorViewModel.swift in Sources */,
 				04EEC1A82B0E30F300AC445E /* LocationSearchView.swift in Sources */,
 				047A7ECA2B5E3D2900B11B10 /* AlertViewModifier.swift in Sources */,
