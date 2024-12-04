@@ -10,24 +10,29 @@ import SwiftUI
 struct TabScreen: View {
 
     @EnvironmentObject var navigator: AppCoordinatorViewModel
+    @StateObject private var addExpenseViewModel: AddExpenseViewModel
+    @StateObject private var expenseHistoryViewModel: ExpenseHistoryViewModel
+    @StateObject private var expenseAnalysisViewModel: ExpenseAnalysisViewModel
+    @StateObject private var profileScreenViewModel: ProfileScreenViewModel
+    
     private let user: User
 
     var body: some View {
         TabView {
-            AddExpenseScreen(viewModel: AddExpenseViewModel())
+            AddExpenseScreen(viewModel: addExpenseViewModel)
                 .tabItem {
                     Label(Constants.AppText.tabAdd, systemImage: "note.text.badge.plus")
                 }
-            ExpenseHistoryScreen(viewModel: ExpenseHistoryViewModel())
+            ExpenseHistoryScreen(viewModel: expenseHistoryViewModel)
                 .tabItem {
                     Label(Constants.AppText.tabHistory, systemImage: "list.bullet.rectangle")
                 }
-            ExpenseAnalysisScreen(viewModel: ExpenseAnalysisViewModel())
+            ExpenseAnalysisScreen(viewModel: expenseAnalysisViewModel)
                 .tabItem {
                     Label(Constants.AppText.tabAnalysis, systemImage: "chart.bar.xaxis")
                 }
             ProfileScreen(
-                viewModel: ProfileScreenViewModel(user: user),
+                viewModel: profileScreenViewModel,
                 onSignOutSuccess: {
                     navigator.goToHome()
                 }
@@ -42,5 +47,9 @@ struct TabScreen: View {
 
     init(user: User) {
         self.user = user
+        _addExpenseViewModel = StateObject(wrappedValue: AddExpenseViewModel())
+        _expenseHistoryViewModel = StateObject(wrappedValue: ExpenseHistoryViewModel())
+        _expenseAnalysisViewModel = StateObject(wrappedValue: ExpenseAnalysisViewModel())
+        _profileScreenViewModel = StateObject(wrappedValue: ProfileScreenViewModel(user: user))
     }
 }
