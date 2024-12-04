@@ -55,6 +55,7 @@ final class ExpenseAnalysisViewModel: ObservableObject {
         }
         
         guard inputNumOfDay > currentMaxDayDifference - 1 else {
+            previousSelectedDays = inputNumOfDay
             generateAnalytics(numOfDay: inputNumOfDay)
             state = .loaded
             return
@@ -62,6 +63,89 @@ final class ExpenseAnalysisViewModel: ObservableObject {
         previousSelectedDays = inputNumOfDay
         fetchApiData(queryLimit: inputNumOfDay + 10, inputNumOfDay: inputNumOfDay)
         state = .loaded
+    }
+    
+    func getDetailsUIModel(barChartUIModel: BarChartUIModel, itemName: String) -> BarChartUIModel {
+        state = .loading
+        let filteredData = apiExpenseListCollection
+            .filter { ($0.dayDifferenceFromToday ?? 0) <= previousSelectedDays }
+            .sorted { ($0.dayDifferenceFromToday ?? 0) > ($1.dayDifferenceFromToday ?? 0) }
+        var totalCost: Double = 0.0
+        var maxCost: Double = 0.0
+        var newBarUIData: [BarChartItemUIModel] = []
+        var detailsContainer: [String: Double] = [:]
+        for expenseList in filteredData {
+            switch barChartUIModel.graphType {
+                case .categoryBar, .locationBar:
+                    for expense in expenseList.expenses {
+                        let selectionName: String
+                        if barChartUIModel.graphType == .categoryBar {
+                            selectionName = expense.type.lowercased().trimmingCharacters(in: .whitespaces)
+                        } else {
+                            selectionName = expense.place.lowercased().trimmingCharacters(in: .whitespaces)
+                        }
+                        if selectionName == itemName {
+                            
+                            let currentPrice = convertToThaiCurrency(
+                                inputCurrency: expenseList.currency ?? "",
+                                price: expense.price
+                            )
+                            let expenseName = expense.name.lowercased().trimmingCharacters(in: .whitespaces)
+                            totalCost += currentPrice
+                            if let oldPrice = detailsContainer[expenseName] {
+                                detailsContainer[expenseName] = oldPrice + currentPrice
+                            } else {
+                                detailsContainer[expenseName] = currentPrice
+                            }
+                        }
+                    }
+                case .monthBar:
+                    let currentMonthYear = getYearMonth(from: expenseList.dateTime)
+                    if currentMonthYear == itemName {
+                        for expense in expenseList.expenses {
+                            let currentPrice = convertToThaiCurrency(
+                                inputCurrency: expenseList.currency ?? "",
+                                price: expense.price
+                            )
+                            let expenseName = expense.name.lowercased().trimmingCharacters(in: .whitespaces)
+                            totalCost += currentPrice
+                            if let oldPrice = detailsContainer[expenseName] {
+                                detailsContainer[expenseName] = oldPrice + currentPrice
+                            } else {
+                                detailsContainer[expenseName] = currentPrice
+                            }
+                        }
+                    }
+            }
+            
+        }
+        
+        for (key, value) in detailsContainer {
+            newBarUIData.append(
+                BarChartItemUIModel(
+                    id: key,
+                    name: key,
+                    actualValue: value,
+                    actualCurrency: "THB",
+                    mappedCurrency: "THB"
+                )
+            )
+            maxCost = max(maxCost, value)
+        }
+        newBarUIData = newBarUIData.sorted { $0.actualValue > $1.actualValue }
+        let detailsUIModel = BarChartUIModel(
+            id: barChartUIModel.id,
+            graphType: barChartUIModel.graphType,
+            name: barChartUIModel.name,
+            startDate: barChartUIModel.startDate,
+            endDate: barChartUIModel.endDate,
+            total: totalCost,
+            currency: "THB",
+            chartData: newBarUIData,
+            barItemMaxValue: maxCost
+        )
+        state = .loaded
+        return detailsUIModel
     }
     
     func findAnalytics() {

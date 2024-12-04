@@ -52,4 +52,10 @@ final class AppCoordinatorViewModel: ObservableObject {
           $0.push(.expenseHistoryDetails(viewModel))
         }
     }
+    
+    func goToExpenseAnalysisDetailsView(viewModel: ExpenseAnalysisDetailsViewModel) {
+        RouteSteps.withDelaysIfUnsupported(self, \.routes) {
+            $0.push(.expenseAnalysisDetails(viewModel))
+        }
+    }
 }

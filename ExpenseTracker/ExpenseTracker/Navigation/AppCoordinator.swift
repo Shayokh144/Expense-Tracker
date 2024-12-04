@@ -35,6 +35,8 @@ struct AppCoordinator: View {
                         coordinator.goBack()
                     }
                 )
+            case let .expenseAnalysisDetails(viewModel):
+                ExpenseAnalysisDetailsScreen(viewModel: viewModel)
             }
         }
         .environmentObject(coordinator)
