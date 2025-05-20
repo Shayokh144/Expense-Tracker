@@ -13,10 +13,17 @@ final class ExpenseAnalysisDetailsViewModel: ObservableObject {
     @Published var barChartUIModel: BarChartUIModel
     let graphType: AnalysisGraphType
     let itemName: String
+    let totalPrice: String
     
-    init(barChartUIModel: BarChartUIModel, graphType: AnalysisGraphType, itemName: String) {
+    init(
+        barChartUIModel: BarChartUIModel,
+        graphType: AnalysisGraphType,
+        itemName: String,
+        totalPrice: String
+    ) {
         self.barChartUIModel = barChartUIModel
         self.graphType = graphType
         self.itemName = itemName
+        self.totalPrice = totalPrice
     }
 }

@@ -48,6 +48,22 @@ struct ExpenseInputView: View {
                 TextField("country", text: $viewModel.customPlaceCountry)
                     .textFieldStyle(.roundedBorder)
             }
+            Button(
+                action: {
+                    viewModel.onTapSearchLocation()
+                },
+                label: {
+                    Text("Search Location")
+                        .frame(maxWidth: .infinity)
+                }
+            )
+            .buttonStyle(
+                TextButtonStyle(
+                    backgroundColor: Color.orange,
+                    textColor: .black
+                )
+            )
+            .padding(.bottom)
         }
     }
 
