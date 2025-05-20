@@ -56,6 +56,11 @@ final class ExpenseInputViewModel: NSObject, ObservableObject {
         isPlaceApiError = true
         searchResults.removeAll()
     }
+    
+    func onTapSearchLocation() {
+        isPlaceApiError = false
+        searchResults.removeAll()
+    }
 
     func onTapAddExpense() -> Expense? {
         isValidationError = !isValidInput()

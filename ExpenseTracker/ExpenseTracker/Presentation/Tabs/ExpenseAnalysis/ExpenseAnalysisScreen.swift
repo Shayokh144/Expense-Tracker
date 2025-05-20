@@ -157,7 +157,8 @@ struct ExpenseAnalysisScreen: View {
                             let detailsViewModel = ExpenseAnalysisDetailsViewModel(
                                 barChartUIModel: detailsUIModel,
                                 graphType: barChartInfo.graphType,
-                                itemName: chartData.name
+                                itemName: chartData.name,
+                                totalPrice: "\(chartData.actualValue.fractionOneDigitString) \(chartData.actualCurrency)"
                             )
                             navigator.goToExpenseAnalysisDetailsView(viewModel: detailsViewModel)
                         },

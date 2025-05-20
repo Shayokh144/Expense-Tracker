@@ -37,10 +37,11 @@ struct ExpenseAnalysisDetailsScreen: View {
     var body: some View {
         VStack {
             barContentView(barChartInfo: viewModel.barChartUIModel)
+            Text("Total: \(viewModel.totalPrice)")
         }
         .padding()
         .commonNavigationBar(
-            title: "Expense Analysis Details",
+            title: "Expense Details",
             leftButton: { backButton },
             rightButton: { Color.clear }
         )
