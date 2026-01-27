@@ -44,7 +44,7 @@ extension Constants {
             ["THB", "BDT", "USD"]
         }
         
-        static let oneThbInBdt: Double = 3.6
+        static let oneThbInBdt: Double = 3.8
         
         static func currencyConversionRate(
             fromCurrency:  String,
