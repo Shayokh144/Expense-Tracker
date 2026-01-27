@@ -65,7 +65,7 @@ final class ExpenseAnalysisViewModel: ObservableObject {
         state = .loaded
     }
     
-    func getDetailsUIModel(barChartUIModel: BarChartUIModel, itemName: String) -> BarChartUIModel {
+    func getDetailsUIModel(barChartUIModel: BarChartUIModel, itemName: String) -> (BarChartUIModel, [String: String]) {
         state = .loading
         let filteredData = apiExpenseListCollection
             .filter { ($0.dayDifferenceFromToday ?? 0) <= previousSelectedDays }
@@ -74,6 +74,7 @@ final class ExpenseAnalysisViewModel: ObservableObject {
         var maxCost: Double = 0.0
         var newBarUIData: [BarChartItemUIModel] = []
         var detailsContainer: [String: Double] = [:]
+        var categoryDict: [String: String] = [:]
         for expenseList in filteredData {
             switch barChartUIModel.graphType {
                 case .categoryBar, .locationBar:
@@ -114,6 +115,7 @@ final class ExpenseAnalysisViewModel: ObservableObject {
                             } else {
                                 detailsContainer[expenseName] = currentPrice
                             }
+                            categoryDict[expenseName] = expense.type.lowercased().trimmingCharacters(in: .whitespaces)
                         }
                     }
             }
@@ -145,7 +147,7 @@ final class ExpenseAnalysisViewModel: ObservableObject {
             barItemMaxValue: maxCost
         )
         state = .loaded
-        return detailsUIModel
+        return (detailsUIModel, categoryDict)
     }
     
     func findAnalytics() {
@@ -370,7 +372,7 @@ private extension ExpenseAnalysisViewModel {
     
     func convertToThaiCurrency(inputCurrency: String, price: Double) -> Double {
         if inputCurrency == "BDT" {
-            return price / 3.2
+            return price / Constants.AppData.oneThbInBdt
         } else if inputCurrency == "USD" {
             return price * 36.8
         }

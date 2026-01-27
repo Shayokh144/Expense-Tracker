@@ -16,7 +16,7 @@ final class ConstantsTests: XCTestCase {
             toCurrency: "BDT"
         )
         let thbValue = 1000.0
-        let bdtValue = thbValue * 3.2
+        let bdtValue = thbValue * Constants.AppData.oneThbInBdt
         XCTAssert(thbValue * bdtRate == bdtValue)
     }
     
@@ -26,7 +26,7 @@ final class ConstantsTests: XCTestCase {
             toCurrency: "THB"
         )
         let bdtValue = 1000.0
-        let thbValue = bdtValue / 3.2
+        let thbValue = bdtValue / Constants.AppData.oneThbInBdt
         print("XYZ thb: \(thbValue) res: \(bdtValue * thbRate)")
         XCTAssert(bdtValue * thbRate == thbValue)
     }
