@@ -36,8 +36,14 @@ struct ExpenseAnalysisDetailsScreen: View {
     
     var body: some View {
         VStack {
+            if viewModel.graphType == .monthBar {
+                categorySwitchView
+            }
             barContentView(barChartInfo: viewModel.barChartUIModel)
             Text("Total: \(viewModel.totalPrice)")
+        }
+        .onAppear {
+            viewModel.updateUIData()
         }
         .padding()
         .commonNavigationBar(
@@ -45,6 +51,14 @@ struct ExpenseAnalysisDetailsScreen: View {
             leftButton: { backButton },
             rightButton: { Color.clear }
         )
+    }
+    
+    private var categorySwitchView: some View {
+        HStack {
+            Toggle("Category Data", isOn: $viewModel.isCategoryFilterOn)
+                .font(.system(size: 14.0))
+        }
+        .padding([.horizontal, .bottom])
     }
     
     init(viewModel: ExpenseAnalysisDetailsViewModel) {

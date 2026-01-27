@@ -8,6 +8,7 @@
 import Combine
 import GoogleSignIn
 import Firebase
+import FirebaseAuth
 
 protocol LoginGmailUseCaseProtocol {
 

@@ -44,6 +44,8 @@ extension Constants {
             ["THB", "BDT", "USD"]
         }
         
+        static let oneThbInBdt: Double = 3.8
+        
         static func currencyConversionRate(
             fromCurrency:  String,
             toCurrency: String
@@ -52,14 +54,14 @@ extension Constants {
                 if toCurrency == "USD" {
                     return 0.27
                 } else if toCurrency == "BDT" {
-                    return 3.2
+                    return oneThbInBdt
                 }
             }
             if fromCurrency == "BDT" {
                 if toCurrency == "USD" {
                     return 0.0085
                 } else if toCurrency == "THB" {
-                    return 1 / 3.2
+                    return 1 / oneThbInBdt
                 }
             }
             if fromCurrency == "USD" {

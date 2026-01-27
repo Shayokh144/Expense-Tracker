@@ -45,7 +45,7 @@ final class ExpenseHistoryViewModel: ObservableObject {
 
     private var expenseHistoryItems: [ExpenseHistoryItemUIModel]
     private let firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase
-    private let thbValueToBdt: Double = 3.2
+    private let thbValueToBdt: Double = Constants.AppData.oneThbInBdt
     private let usdValueToBdt: Double = 121.0
 
     init(
