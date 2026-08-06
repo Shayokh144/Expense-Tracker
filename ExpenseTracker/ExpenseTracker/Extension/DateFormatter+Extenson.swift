@@ -34,4 +34,13 @@ extension DateFormatter {
         displayDateFormatter.calendar = Calendar(identifier: .gregorian)
         return displayDateFormatter
     }()
+
+    /// Result: "06/07/2026"
+    static let budgetDateFormat: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
+        return dateFormatter
+    }()
 }

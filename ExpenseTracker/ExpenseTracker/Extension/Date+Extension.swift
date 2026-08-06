@@ -20,4 +20,12 @@ extension Date {
         let components = calendar.dateComponents([.day], from: start, to: end)
         return components.day
     }
+
+    var yearMonthKey: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.calendar = Calendar(identifier: .gregorian)
+        return formatter.string(from: self)
+    }
 }

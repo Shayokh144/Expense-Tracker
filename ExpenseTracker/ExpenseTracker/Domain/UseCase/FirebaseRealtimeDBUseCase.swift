@@ -137,6 +137,34 @@ final class FirebaseRealtimeDBUseCase {
         }
     }
 
+    /// Fetches the most recent expense lists without using pagination cursor state.
+    func getRecentExpenseLists(
+        queryLimit: UInt,
+        completion: @escaping ([ExpenseList]?) -> Void
+    ) {
+        guard let databasePath = databaseReference else {
+            NSLog("Database path not found")
+            completion(nil)
+            return
+        }
+
+        databasePath
+            .queryOrdered(byChild: "id")
+            .queryLimited(toLast: queryLimit)
+            .observeSingleEvent(of: .value) { [weak self] snapshot in
+                guard let self = self else { return }
+                var dataModels: [ExpenseList] = []
+                for child in snapshot.children {
+                    if let snapshot = child as? DataSnapshot {
+                        if let dataModel = self.getExpenseModel(snapshot: snapshot) {
+                            dataModels.append(dataModel)
+                        }
+                    }
+                }
+                completion(dataModels)
+            }
+    }
+
     // MARK: - Model conversion
 
     private func getExpenseModel(snapshot: DataSnapshot) ->  ExpenseList? {

@@ -5,11 +5,12 @@
 //  Created by nimble on 13/11/23.
 //
 
+import SwiftData
 import SwiftUI
 
 @main
 struct ExpenseTrackerApp: App {
-    
+
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
@@ -21,5 +22,6 @@ struct ExpenseTrackerApp: App {
                 AppCoordinator(coordinator: AppCoordinatorViewModel())
             }
         }
+        .modelContainer(MonthlyBudgetUseCase.shared.modelContainer)
     }
 }

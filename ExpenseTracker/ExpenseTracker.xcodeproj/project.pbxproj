@@ -69,6 +69,12 @@
 		04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBF1492B15230700DF5B06 /* Color+Extension.swift */; };
 		04D448522C084E2B00FB3640 /* ExpenseTrackerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D448512C084E2B00FB3640 /* ExpenseTrackerUnitTests.swift */; };
 		04D4485A2C084E8400FB3640 /* ConstantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D448592C084E8400FB3640 /* ConstantsTests.swift */; };
+		04MBGT012D10000100BUDGET /* MonthlyBudget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04MBGT002D10000100BUDGET /* MonthlyBudget.swift */; };
+		04MBGT032D10000100BUDGET /* MonthlyBudgetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04MBGT022D10000100BUDGET /* MonthlyBudgetUseCase.swift */; };
+		04BGPR012D20000100BUDGET /* BudgetProgressUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BGPR002D20000100BUDGET /* BudgetProgressUIModel.swift */; };
+		04BGPR032D20000100BUDGET /* BudgetProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BGPR022D20000100BUDGET /* BudgetProgressView.swift */; };
+		04BGEX012D30000100BUDGET /* BudgetExpenseItemUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BGEX002D30000100BUDGET /* BudgetExpenseItemUIModel.swift */; };
+		04BGEX032D30000100BUDGET /* BudgetExpenseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BGEX022D30000100BUDGET /* BudgetExpenseSheetView.swift */; };
 		04D448632C097D7F00FB3640 /* AnalysisGraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D448622C097D7F00FB3640 /* AnalysisGraphType.swift */; };
 		04EEC1A82B0E30F300AC445E /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEC1A72B0E30F300AC445E /* LocationSearchView.swift */; };
 		04EEC1AB2B0E336300AC445E /* LocationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EEC1AA2B0E336300AC445E /* LocationSearchViewModel.swift */; };
@@ -145,6 +151,12 @@
 		04CBF1472B15216800DF5B06 /* TextButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextButtonStyle.swift; sourceTree = "<group>"; };
 		04CBF1492B15230700DF5B06 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		04D4484F2C084E2B00FB3640 /* ExpenseTrackerUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpenseTrackerUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04MBGT002D10000100BUDGET /* MonthlyBudget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyBudget.swift; sourceTree = "<group>"; };
+		04MBGT022D10000100BUDGET /* MonthlyBudgetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyBudgetUseCase.swift; sourceTree = "<group>"; };
+		04BGPR002D20000100BUDGET /* BudgetProgressUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetProgressUIModel.swift; sourceTree = "<group>"; };
+		04BGPR022D20000100BUDGET /* BudgetProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetProgressView.swift; sourceTree = "<group>"; };
+		04BGEX002D30000100BUDGET /* BudgetExpenseItemUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetExpenseItemUIModel.swift; sourceTree = "<group>"; };
+		04BGEX022D30000100BUDGET /* BudgetExpenseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetExpenseSheetView.swift; sourceTree = "<group>"; };
 		04D448512C084E2B00FB3640 /* ExpenseTrackerUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTrackerUnitTests.swift; sourceTree = "<group>"; };
 		04D448592C084E8400FB3640 /* ConstantsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsTests.swift; sourceTree = "<group>"; };
 		04D448622C097D7F00FB3640 /* AnalysisGraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisGraphType.swift; sourceTree = "<group>"; };
@@ -192,6 +204,7 @@
 			children = (
 				041152932B179F1100D93FFC /* LoginGmailUseCase.swift */,
 				04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */,
+				04MBGT022D10000100BUDGET /* MonthlyBudgetUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -286,6 +299,8 @@
 				047A7ECB2B5E47B600B11B10 /* AlertUIModel.swift */,
 				04346F1A2C059A8D003CCFDC /* BarChartUIModel.swift */,
 				04C4449D2C0740C7000D47A6 /* BarChartItemUIModel.swift */,
+				04BGPR002D20000100BUDGET /* BudgetProgressUIModel.swift */,
+				04BGEX002D30000100BUDGET /* BudgetExpenseItemUIModel.swift */,
 			);
 			path = UIModel;
 			sourceTree = "<group>";
@@ -356,6 +371,7 @@
 				045294802B30ADF800BB2513 /* User.swift */,
 				04C410E52B3C87B30084BF81 /* ExpenseList.swift */,
 				04B1BFED2B4EB6DE00ABA765 /* PlaceAddress.swift */,
+				04MBGT002D10000100BUDGET /* MonthlyBudget.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -450,6 +466,8 @@
 				04CBF1472B15216800DF5B06 /* TextButtonStyle.swift */,
 				047A7EC72B5E3C1E00B11B10 /* AlertView.swift */,
 				047A7EC92B5E3D2900B11B10 /* AlertViewModifier.swift */,
+				04BGPR022D20000100BUDGET /* BudgetProgressView.swift */,
+				04BGEX022D30000100BUDGET /* BudgetExpenseSheetView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -659,6 +677,12 @@
 				04073E512B17092800BDE21B /* AppDelegate.swift in Sources */,
 				04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */,
 				04C410E42B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift in Sources */,
+				04MBGT012D10000100BUDGET /* MonthlyBudget.swift in Sources */,
+				04MBGT032D10000100BUDGET /* MonthlyBudgetUseCase.swift in Sources */,
+				04BGPR012D20000100BUDGET /* BudgetProgressUIModel.swift in Sources */,
+				04BGPR032D20000100BUDGET /* BudgetProgressView.swift in Sources */,
+				04BGEX012D30000100BUDGET /* BudgetExpenseItemUIModel.swift in Sources */,
+				04BGEX032D30000100BUDGET /* BudgetExpenseSheetView.swift in Sources */,
 				041D19CE2B55072000FB8978 /* CurrencyPickerView.swift in Sources */,
 				047A7ECC2B5E47B600B11B10 /* AlertUIModel.swift in Sources */,
 			);
@@ -816,7 +840,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -848,7 +872,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
