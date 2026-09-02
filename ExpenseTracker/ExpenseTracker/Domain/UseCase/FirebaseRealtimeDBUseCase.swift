@@ -65,6 +65,68 @@ final class FirebaseRealtimeDBUseCase {
         }
     }
 
+    // MARK: - Update / Delete data in FBRDB
+
+    func updateExpenseList(
+        expenseList: ExpenseList,
+        isSuccessCompletion: @escaping (Bool) -> Void
+    ) {
+        guard let databasePath = databaseReference else {
+            NSLog("Database path not found")
+            isSuccessCompletion(false)
+            return
+        }
+        guard let id = expenseList.id, !id.isEmpty else {
+            NSLog("Expense list id not found")
+            isSuccessCompletion(false)
+            return
+        }
+        if expenseList.expenses.isEmpty {
+            NSLog("expenseList.expenses isEmpty")
+            isSuccessCompletion(false)
+            return
+        }
+        do {
+            let data = try encoder.encode(expenseList)
+            let json = try JSONSerialization.jsonObject(with: data)
+            databasePath.child(id).setValue(json) { error, _ in
+                if let error = error {
+                    NSLog("Update method error: \(error)")
+                    isSuccessCompletion(false)
+                    return
+                }
+                isSuccessCompletion(true)
+            }
+        } catch let error {
+            NSLog("Update method error: \(error)")
+            isSuccessCompletion(false)
+        }
+    }
+
+    func deleteExpenseList(
+        id: String,
+        isSuccessCompletion: @escaping (Bool) -> Void
+    ) {
+        guard let databasePath = databaseReference else {
+            NSLog("Database path not found")
+            isSuccessCompletion(false)
+            return
+        }
+        guard !id.isEmpty else {
+            NSLog("Expense list id not found")
+            isSuccessCompletion(false)
+            return
+        }
+        databasePath.child(id).removeValue { error, _ in
+            if let error = error {
+                NSLog("Delete method error: \(error)")
+                isSuccessCompletion(false)
+                return
+            }
+            isSuccessCompletion(true)
+        }
+    }
+
     // MARK: - Get data from FBRDB
 
     

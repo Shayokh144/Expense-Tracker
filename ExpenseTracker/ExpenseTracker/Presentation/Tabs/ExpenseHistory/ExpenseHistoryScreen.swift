@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ExpenseHistoryScreen: View {
-    
+
     @StateObject private var viewModel: ExpenseHistoryViewModel
     @EnvironmentObject var navigator: AppCoordinatorViewModel
+    @State private var expenseIdPendingDelete: String?
 
     private var currencyPickerView: some View {
         CurrencyPickerView(
@@ -57,27 +58,34 @@ struct ExpenseHistoryScreen: View {
     }
 
     private var expenseItemListView: some View {
-        ScrollView {
-            VStack {
-                ForEach(viewModel.uiExpenseList, id: \.self) { expense in
-                    Button(
-                        action: {
-                            let detailsViewModel = ExpenseHistoryDetailsViewModel(id: expense.id)
-                            navigator.goToExpenseHistoryDetailsView(viewModel: detailsViewModel)
-                        },
-                        label: {
-                            ExpenseHistoryItemView(uiModel: expense)
-                                .padding(12.0)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(12.0)
-                                .padding(.bottom, 12.0)
-                        }
-                    )
-                    .buttonStyle(.plain)
+        List {
+            ForEach(viewModel.uiExpenseList, id: \.self) { expense in
+                Button(
+                    action: {
+                        openExpenseDetails(for: expense)
+                    },
+                    label: {
+                        ExpenseHistoryItemView(uiModel: expense)
+                            .padding(12.0)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(12.0)
+                    }
+                )
+                .buttonStyle(.plain)
+                .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 12, trailing: 16))
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    Button(role: .destructive) {
+                        expenseIdPendingDelete = expense.id
+                    } label: {
+                        Label(Constants.AppText.delete, systemImage: "trash")
+                    }
                 }
             }
         }
-        .padding()
+        .listStyle(.plain)
+        .padding(.top, 4.0)
     }
 
     private var loadButtonView: some View {
@@ -142,9 +150,47 @@ struct ExpenseHistoryScreen: View {
         .safeAreaInset(edge: .bottom, spacing: .zero) {
             loadButtonView
         }
+        .confirmationDialog(
+            Constants.AppText.deleteExpenseListTitle,
+            isPresented: Binding(
+                get: { expenseIdPendingDelete != nil },
+                set: { isPresented in
+                    if !isPresented {
+                        expenseIdPendingDelete = nil
+                    }
+                }
+            ),
+            titleVisibility: .visible
+        ) {
+            Button(Constants.AppText.delete, role: .destructive) {
+                if let expenseIdPendingDelete {
+                    viewModel.deleteExpenseList(id: expenseIdPendingDelete)
+                }
+                expenseIdPendingDelete = nil
+            }
+            Button(Constants.AppText.cancel, role: .cancel) {
+                expenseIdPendingDelete = nil
+            }
+        } message: {
+            Text(Constants.AppText.deleteExpenseListMessage)
+        }
     }
 
     init(viewModel: ExpenseHistoryViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
+    private func openExpenseDetails(for expense: ExpenseHistoryItemUIModel) {
+        let historyViewModel = viewModel
+        let detailsViewModel = ExpenseHistoryDetailsViewModel(
+            id: expense.id,
+            onExpenseListDeleted: { id in
+                historyViewModel.removeExpenseList(id: id)
+            },
+            onExpenseListUpdated: { updatedList in
+                historyViewModel.updateExpenseList(updatedList)
+            }
+        )
+        navigator.goToExpenseHistoryDetailsView(viewModel: detailsViewModel)
     }
 }

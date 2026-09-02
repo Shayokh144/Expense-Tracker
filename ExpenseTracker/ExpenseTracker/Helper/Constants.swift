@@ -53,6 +53,16 @@ extension Constants {
         static let filterExpenses = "Filter expenses"
         static let budgetExpenseDetails = "Monthly expenses"
         static let budgetExpenseEmpty = "No expenses found for this month."
+        static let edit = "Edit"
+        static let delete = "Delete"
+        static let deleteExpenseListTitle = "Delete expense list"
+        static let deleteExpenseListMessage = "This will permanently delete this expense list."
+        static let deleteExpenseItemTitle = "Delete expense"
+        static let deleteExpenseItemMessage = "This will permanently delete this expense item."
+        static let expenseUpdateSuccess = "Expense updated successfully."
+        static let expenseUpdateFailed = "Failed to update expense."
+        static let expenseDeleteSuccess = "Expense deleted successfully."
+        static let expenseDeleteFailed = "Failed to delete expense."
     }
 }
 

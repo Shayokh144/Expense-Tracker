@@ -12,6 +12,7 @@ struct CommonNavigationBarModifier<LeftButton: View, RightButton: View>: ViewMod
     private let leftButton: LeftButton
     private let rightButton: RightButton
     private let title: String
+    private let showsRightButton: Bool
 
     func body(content: Content) -> some View {
         content
@@ -21,19 +22,23 @@ struct CommonNavigationBarModifier<LeftButton: View, RightButton: View>: ViewMod
                 ToolbarItem(placement: .topBarLeading) {
                     leftButton
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    rightButton
+                if showsRightButton {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        rightButton
+                    }
                 }
             }
     }
 
     init(
         title: String,
+        showsRightButton: Bool = true,
         @ViewBuilder leftButton: () -> LeftButton,
         @ViewBuilder rightButton: () -> RightButton
     ) where LeftButton: View, RightButton: View {
         self.title = title
-        self.leftButton =  leftButton()
-        self.rightButton =  rightButton()
+        self.showsRightButton = showsRightButton
+        self.leftButton = leftButton()
+        self.rightButton = rightButton()
     }
 }

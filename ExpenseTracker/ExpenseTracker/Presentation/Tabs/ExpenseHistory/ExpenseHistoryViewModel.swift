@@ -107,6 +107,28 @@ final class ExpenseHistoryViewModel: ObservableObject {
         }
     }
 
+    func deleteExpenseList(id: String) {
+        firebaseRealtimeDBUseCase.deleteExpenseList(id: id) { [weak self] isSuccess in
+            DispatchQueue.main.async {
+                guard let self = self, isSuccess else { return }
+                self.removeExpenseList(id: id)
+            }
+        }
+    }
+
+    func removeExpenseList(id: String) {
+        expenseHistoryItems.removeAll { $0.id == id }
+        updateUIData()
+    }
+
+    func updateExpenseList(_ expenseList: ExpenseList) {
+        guard let id = expenseList.id else { return }
+        expenseHistoryItems.removeAll { $0.id == id }
+        populateUIList(expenseList: expenseList)
+        expenseHistoryItems = expenseHistoryItems.sorted { $0.dateTime > $1.dateTime }
+        updateUIData()
+    }
+
     private func updateUIData() {
         if state != .loading {
             state = .loading
