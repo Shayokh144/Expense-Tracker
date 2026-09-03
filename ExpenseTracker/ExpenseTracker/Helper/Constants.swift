@@ -63,6 +63,33 @@ extension Constants {
         static let expenseUpdateFailed = "Failed to update expense."
         static let expenseDeleteSuccess = "Expense deleted successfully."
         static let expenseDeleteFailed = "Failed to delete expense."
+        static let addFromNotes = "Add from notes"
+        static let addManually = "Add manually"
+        static let addMore = "Add more"
+        static let addNewItem = "Add new item"
+        static let createList = "Create list"
+        static let creatingList = "Creating list..."
+        static let notesPlaceholder = """
+        electric bill 500 Aspire
+        home rent 10000 Aspire
+        egg, milk 200 7-11
+        """
+        static let notesEmpty = "Please write some expenses first."
+        static let notesParseFailed = "Could not create a list from these notes. Try again."
+        static let notesServiceBusy = "The notes service is busy. Please try again."
+        static let notesNoItems = "No expenses were found in these notes."
+        static let expenseListAddSuccess = "Expense list added successfully."
+        static let expenseListAddFailed = "Failed to add expense list"
+    }
+}
+
+extension Constants {
+
+    enum Gemini {
+
+        static let modelName = "gemini-3.6-flash"
+        static let maxContextItems = 40
+        static let maxRetries = 2
     }
 }
 

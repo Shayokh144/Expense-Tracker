@@ -5,6 +5,7 @@
 //  Created by Taher on 29/11/23.
 //
 
+import FirebaseAppCheck
 import FirebaseCore
 import FirebaseDatabase
 import GoogleSignIn
@@ -17,6 +18,9 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
+        #if DEBUG
+        AppCheck.setAppCheckProviderFactory(AppCheckDebugProviderFactory())
+        #endif
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
         return true
