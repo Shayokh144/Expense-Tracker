@@ -1,0 +1,73 @@
+---
+description: Expense Tracker iOS project layout, architecture, and build commands
+alwaysApply: true
+---
+
+# Expense Tracker — Project Overview
+
+iOS app (SwiftUI) for tracking daily expenses and viewing analytics. Firebase Realtime Database for persistence; Gmail sign-in via Firebase Auth.
+
+## Repository layout
+
+```
+Expense-Tracker/
+├── ExpenseTracker/
+│   ├── ExpenseTracker.xcodeproj
+│   ├── ExpenseTracker/          # App source
+│   │   ├── Data/Models/
+│   │   ├── Domain/UseCase/
+│   │   ├── Presentation/
+│   │   ├── Navigation/
+│   │   ├── Helper/
+│   │   └── Extension/
+│   └── ExpenseTrackerUnitTests/
+└── README.md
+```
+
+## Architecture
+
+Layered MVVM with coordinator-based navigation:
+
+| Layer | Location | Responsibility |
+|-------|----------|----------------|
+| Data | `Data/Models/` | Domain models (`User`, `ExpenseList`, `PlaceAddress`) |
+| Domain | `Domain/UseCase/` | Business logic (`FirebaseRealtimeDBUseCase`, `LoginGmailUseCase`) |
+| Presentation | `Presentation/` | `*Screen`, `*ViewModel`, `*UIModel` |
+| Navigation | `Navigation/` | `AppCoordinator`, `Screen` enum, FlowStacks routing |
+
+- Screens are SwiftUI `View` structs; ViewModels are `final class` conforming to `ObservableObject`.
+- Navigation uses FlowStacks (`Router`, `Screen` cases with embedded ViewModels).
+- Shared constants live in `Helper/Constants.swift` via nested `enum Constants` extensions.
+- Reusable UI helpers live in `Helper/UI/`; Swift extensions in `Extension/`.
+
+## Build & verify
+
+Run from the `ExpenseTracker/` directory (where `ExpenseTracker.xcodeproj` lives):
+
+```bash
+cd ExpenseTracker
+
+xcodebuild -project ExpenseTracker.xcodeproj \
+           -scheme "ExpenseTracker" \
+           -configuration Debug \
+           -sdk iphonesimulator \
+           -destination 'id=5B796620-1BAE-4D71-A5F0-3428712C9C3C' \
+           build
+```
+
+Run unit tests:
+
+```bash
+xcodebuild -project ExpenseTracker.xcodeproj \
+           -scheme "ExpenseTracker" \
+           -configuration Debug \
+           -sdk iphonesimulator \
+           -destination 'id=5B796620-1BAE-4D71-A5F0-3428712C9C3C' \
+           test
+```
+
+## Dependencies
+
+- SwiftUI, Combine
+- Firebase (Auth, Realtime Database)
+- FlowStacks (navigation)

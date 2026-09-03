@@ -19,12 +19,27 @@ struct ExpenseList: Codable, Identifiable {
     
     func withDateDifference(difference: Int?) -> ExpenseList {
         ExpenseList(
+            id: id,
             dateTime: dateTime,
             totalCost: totalCost,
             country: country,
             currency: currency,
             expenses: expenses,
             dayDifferenceFromToday: difference
+        )
+    }
+
+    func updating(expenses updatedExpenses: [Expense]) -> ExpenseList {
+        let total = updatedExpenses.map(\.price).reduce(0.0, +)
+        let updatedCountry = updatedExpenses.first?.country ?? country
+        return ExpenseList(
+            id: id,
+            dateTime: dateTime,
+            totalCost: total,
+            country: updatedCountry,
+            currency: currency,
+            expenses: updatedExpenses,
+            dayDifferenceFromToday: dayDifferenceFromToday
         )
     }
 }

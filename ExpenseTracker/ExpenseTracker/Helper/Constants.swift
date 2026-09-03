@@ -16,6 +16,8 @@ extension Constants {
         static let blueButtonColor = "#2529AD"
         static let tabSelectionColor = "#3BC1AF"
         static let errorBackgroundColor = "#E72E1B"
+        static let budgetSpentColor = "#E67E22"
+        static let budgetRemainingColor = "#3BC1AF"
     }
 }
 
@@ -33,6 +35,34 @@ extension Constants {
         static let tabAnalysis = "Analysis"
         static let addExpense = "Add expense"
         static let selectDate = "Select date"
+        static let monthlyBudget = "Monthly budget"
+        static let budgetAmount = "Budget amount"
+        static let selectCurrency = "Select currency"
+        static let saveBudget = "Save budget"
+        static let updateBudget = "Update budget"
+        static let budgetAlertTitle = "Set monthly budget"
+        static let budgetAlertMessage = "You have not set a budget for this month. Set one to track your spending."
+        static let setBudget = "Set budget"
+        static let cancel = "Cancel"
+        static let budgetSaveSuccess = "Monthly budget saved successfully."
+        static let budgetSaveFailed = "Failed to save monthly budget."
+        static let budgetInvalidAmount = "Please enter a valid budget amount."
+        static let remainingThisMonth = "Remaining this month"
+        static let budgetUsedFormat = "%@ of %@ %@ used"
+        static let done = "Done"
+        static let filterExpenses = "Filter expenses"
+        static let budgetExpenseDetails = "Monthly expenses"
+        static let budgetExpenseEmpty = "No expenses found for this month."
+        static let edit = "Edit"
+        static let delete = "Delete"
+        static let deleteExpenseListTitle = "Delete expense list"
+        static let deleteExpenseListMessage = "This will permanently delete this expense list."
+        static let deleteExpenseItemTitle = "Delete expense"
+        static let deleteExpenseItemMessage = "This will permanently delete this expense item."
+        static let expenseUpdateSuccess = "Expense updated successfully."
+        static let expenseUpdateFailed = "Failed to update expense."
+        static let expenseDeleteSuccess = "Expense deleted successfully."
+        static let expenseDeleteFailed = "Failed to delete expense."
     }
 }
 

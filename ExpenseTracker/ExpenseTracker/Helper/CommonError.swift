@@ -13,6 +13,7 @@ enum CommonError: LocalizedError {
     case noPreviousAccountFound
     case signOutFailed
     case firebaseSignInFailed
+    case invalidData
     case unknown
 
     var localizedDescription: String {
@@ -25,6 +26,8 @@ enum CommonError: LocalizedError {
             return "Sign out process failed, try again"
         case .firebaseSignInFailed:
             return "Sign in to firebase failed"
+        case .invalidData:
+            return "Invalid data provided"
         case .unknown:
             return "Unknown error occurred"
         }

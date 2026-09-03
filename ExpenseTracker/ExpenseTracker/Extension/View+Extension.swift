@@ -30,15 +30,26 @@ extension View {
     
     func commonNavigationBar<LeftButton, RightButton>(
         title: String,
+        showsRightButton: Bool = true,
         @ViewBuilder leftButton: @escaping () -> LeftButton,
         @ViewBuilder rightButton: @escaping () -> RightButton
     ) -> some View where LeftButton : View, RightButton : View {
         modifier(
             CommonNavigationBarModifier(
                 title: title,
+                showsRightButton: showsRightButton,
                 leftButton: leftButton,
                 rightButton: rightButton
             )
+        )
+    }
+
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to: nil,
+            from: nil,
+            for: nil
         )
     }
 }

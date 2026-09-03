@@ -1,0 +1,66 @@
+---
+description: Swift and SwiftUI coding conventions for Expense Tracker
+globs: "**/*.swift"
+alwaysApply: false
+---
+
+# Swift Conventions
+
+## Naming
+
+| Type | Pattern | Example |
+|------|---------|---------|
+| Screen | `*Screen` | `AddExpenseScreen` |
+| ViewModel | `*ViewModel` | `AddExpenseViewModel` |
+| Use case | `*UseCase` | `FirebaseRealtimeDBUseCase` |
+| UI model | `*UIModel` | `AlertUIModel`, `BarChartUIModel` |
+
+## ViewModels
+
+- `final class` conforming to `ObservableObject`
+- Inject dependencies via `init`; default to shared singletons where the codebase already does (e.g. `FirebaseRealtimeDBUseCase.shared`)
+- Expose read-only state with `@Published private(set) var`
+- User-editable fields use `@Published var`
+- Use `[weak self]` in async/completion closures
+
+```swift
+final class AddExpenseViewModel: ObservableObject {
+    private let firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase
+    @Published private(set) var state: State
+    @Published var selectedCurrency: String
+
+    init(firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = .shared) {
+        self.firebaseRealtimeDBUseCase = firebaseRealtimeDBUseCase
+    }
+}
+```
+
+## Screens
+
+- SwiftUI `struct` conforming to `View`
+- Accept ViewModel via `init` or `@ObservedObject`
+- Use `@EnvironmentObject` for `AppCoordinatorViewModel` navigation
+- Extract subviews as `private var` computed properties when the body grows
+- Reference colors and strings from `Constants.AppColors` / `Constants.AppText`
+
+## Use cases
+
+- `final class` in `Domain/UseCase/`
+- Singleton pattern via `static let shared` where appropriate
+- Firebase access stays in use cases, not in ViewModels or Screens
+
+## Navigation
+
+- Add new destinations to the `Screen` enum in `Navigation/Screen.swift`
+- Wire routes in `AppCoordinator` and navigation methods in `AppCoordinatorViewModel`
+
+## Constants & extensions
+
+- App-wide values: nested enums under `enum Constants` in `Helper/Constants.swift`
+- Type extensions: `Extension/` (e.g. `Color+Extension`, `Date+Extension`)
+
+## General
+
+- Match existing file header style and folder placement
+- Keep changes scoped; follow existing patterns before introducing new abstractions
+- Do not commit `GoogleService-Info.plist` secrets or modify `.gitignore` without reason

@@ -48,8 +48,9 @@ struct ExpenseAnalysisDetailsScreen: View {
         .padding()
         .commonNavigationBar(
             title: "Expense Details",
+            showsRightButton: false,
             leftButton: { backButton },
-            rightButton: { Color.clear }
+            rightButton: { EmptyView() }
         )
     }
     
