@@ -57,6 +57,9 @@
 		04BC6F632E7BE8B900AC5FF2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BC6F622E7BE8B900AC5FF2 /* FirebaseAuth */; };
 		04BC6F652E7BE8B900AC5FF2 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 04BC6F642E7BE8B900AC5FF2 /* FirebaseCore */; };
 		04BC6F682E7BE90A00AC5FF2 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 04BC6F672E7BE90A00AC5FF2 /* FirebaseDatabase */; };
+		04AF10102E9A000100AILOGI /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = 04AF10112E9A000100AILOGI /* FirebaseAI */; };
+		04AF10122E9A000100APPCHK /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 04AF10132E9A000100APPCHK /* FirebaseAppCheck */; };
+		04AF10212E9A000100GEMINI /* GeminiExpenseParseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AF10202E9A000100GEMINI /* GeminiExpenseParseUseCase.swift */; };
 		04C410E42B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */; };
 		04C410E62B3C87B30084BF81 /* ExpenseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E52B3C87B30084BF81 /* ExpenseList.swift */; };
 		04C410E82B3C8A0D0084BF81 /* DateFormatter+Extenson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */; };
@@ -141,6 +144,7 @@
 		04B1BFEF2B4F127700ABA765 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		04B1BFF12B4F154800ABA765 /* ExpenseEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEditView.swift; sourceTree = "<group>"; };
 		04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRealtimeDBUseCase.swift; sourceTree = "<group>"; };
+		04AF10202E9A000100GEMINI /* GeminiExpenseParseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiExpenseParseUseCase.swift; sourceTree = "<group>"; };
 		04C410E52B3C87B30084BF81 /* ExpenseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseList.swift; sourceTree = "<group>"; };
 		04C410E72B3C8A0D0084BF81 /* DateFormatter+Extenson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extenson.swift"; sourceTree = "<group>"; };
 		04C410E92B3C8A690084BF81 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 				041152902B179ACE00D93FFC /* GoogleSignInSwift in Frameworks */,
 				0418DCE02B159F8000AF975A /* FlowStacks in Frameworks */,
 				04BC6F632E7BE8B900AC5FF2 /* FirebaseAuth in Frameworks */,
+				04AF10102E9A000100AILOGI /* FirebaseAI in Frameworks */,
+				04AF10122E9A000100APPCHK /* FirebaseAppCheck in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +210,7 @@
 			children = (
 				041152932B179F1100D93FFC /* LoginGmailUseCase.swift */,
 				04C410E32B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift */,
+				04AF10202E9A000100GEMINI /* GeminiExpenseParseUseCase.swift */,
 				04MBGT022D10000100BUDGET /* MonthlyBudgetUseCase.swift */,
 			);
 			path = UseCase;
@@ -531,6 +538,8 @@
 				04BC6F622E7BE8B900AC5FF2 /* FirebaseAuth */,
 				04BC6F642E7BE8B900AC5FF2 /* FirebaseCore */,
 				04BC6F672E7BE90A00AC5FF2 /* FirebaseDatabase */,
+				04AF10112E9A000100AILOGI /* FirebaseAI */,
+				04AF10132E9A000100APPCHK /* FirebaseAppCheck */,
 			);
 			productName = ExpenseTracker;
 			productReference = 04742F182B02557500850F24 /* ExpenseTracker.app */;
@@ -677,6 +686,7 @@
 				04073E512B17092800BDE21B /* AppDelegate.swift in Sources */,
 				04CBF14A2B15230700DF5B06 /* Color+Extension.swift in Sources */,
 				04C410E42B3C63270084BF81 /* FirebaseRealtimeDBUseCase.swift in Sources */,
+				04AF10212E9A000100GEMINI /* GeminiExpenseParseUseCase.swift in Sources */,
 				04MBGT012D10000100BUDGET /* MonthlyBudget.swift in Sources */,
 				04MBGT032D10000100BUDGET /* MonthlyBudgetUseCase.swift in Sources */,
 				04BGPR012D20000100BUDGET /* BudgetProgressUIModel.swift in Sources */,
@@ -1022,6 +1032,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04BC6F612E7BE8B900AC5FF2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		04AF10112E9A000100AILOGI /* FirebaseAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04BC6F612E7BE8B900AC5FF2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAI;
+		};
+		04AF10132E9A000100APPCHK /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04BC6F612E7BE8B900AC5FF2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
