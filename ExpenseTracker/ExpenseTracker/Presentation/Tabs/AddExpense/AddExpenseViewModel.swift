@@ -11,9 +11,14 @@ import Foundation
 final class AddExpenseViewModel: ObservableObject {
 
     private let firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase
+    private let geminiExpenseParseUseCase: GeminiExpenseParseUseCase
+    private var notesContextCache: [ExpenseParseContextItem]?
+
     @Published private(set) var addedLocalExpenseList: [Expense]
     @Published private(set) var currentTotal: Double
     @Published private(set) var state: State
+    @Published private(set) var isParsingNotes = false
+    @Published private(set) var addEntry: AddEntry = .options
     @Published var selectedCurrency: String
     @Published var selectedDate = Date.now
 
@@ -24,22 +29,16 @@ final class AddExpenseViewModel: ObservableObject {
     @Published var editCountry: String = ""
     @Published var editCity: String = ""
     @Published var isShowingAlert: Bool = false
-    @Published private(set) var isDataAddSuccess = false
+    @Published var alertData = AlertUIModel(title: "", description: "", isError: true)
+    @Published var notesInputText = ""
+    @Published var isShowingNotesInput = false
 
-    var alertData: AlertUIModel {
-        let title = isDataAddSuccess ? "Success!" : "Error!"
-        let description = isDataAddSuccess ?
-        "Expense list added successfully." :
-        "Failed to add expense list"
-        return .init(
-            title: title,
-            description: description,
-            isError: !isDataAddSuccess
-        )
-    }
-
-    init(firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase.shared) {
+    init(
+        firebaseRealtimeDBUseCase: FirebaseRealtimeDBUseCase = FirebaseRealtimeDBUseCase.shared,
+        geminiExpenseParseUseCase: GeminiExpenseParseUseCase = .shared
+    ) {
         self.firebaseRealtimeDBUseCase = firebaseRealtimeDBUseCase
+        self.geminiExpenseParseUseCase = geminiExpenseParseUseCase
         addedLocalExpenseList = []
         currentTotal = 0.0
         state = .add
@@ -53,18 +52,26 @@ final class AddExpenseViewModel: ObservableObject {
                 expenseList: expenseList
             ) { [weak self] isSuccess in
                 NSLog("XYZ POST RESULT: \(isSuccess)")
-                self?.isDataAddSuccess = isSuccess
+                self?.notesContextCache = nil
                 if isSuccess {
                     self?.addedLocalExpenseList.removeAll()
+                    self?.currentTotal = 0.0
+                    self?.addEntry = .options
                 }
-                self?.isShowingAlert = true
+                self?.showAlert(
+                    title: isSuccess ? "Success!" : "Error!",
+                    description: isSuccess
+                        ? Constants.AppText.expenseListAddSuccess
+                        : Constants.AppText.expenseListAddFailed,
+                    isError: !isSuccess
+                )
             }
         }
     }
 
     func onAddLocalExpense(expense: Expense) {
         addedLocalExpenseList.append(expense)
-        currentTotal = addedLocalExpenseList.map(\.price).reduce(0.0, +)
+        updateCurrentTotal()
     }
 
     func onTapEditButton(expense: Expense) {
@@ -86,8 +93,93 @@ final class AddExpenseViewModel: ObservableObject {
             addedLocalExpenseList[editIndex].city = editCity
             addedLocalExpenseList[editIndex].country = editCountry
         }
-        currentTotal = addedLocalExpenseList.map(\.price).reduce(0.0, +)
+        updateCurrentTotal()
         state = .add
+    }
+
+    func onTapAddFromNotes() {
+        isShowingNotesInput = true
+    }
+
+    func onTapAddManually() {
+        addEntry = .manual
+    }
+
+    func onTapAddMore() {
+        addEntry = .options
+    }
+
+    func onCancelManualInput() {
+        addEntry = addedLocalExpenseList.isEmpty ? .options : .compact
+    }
+
+    func createListFromNotes() {
+        let note = notesInputText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !note.isEmpty else {
+            showAlert(
+                title: "Error!",
+                description: Constants.AppText.notesEmpty,
+                isError: true
+            )
+            return
+        }
+        guard !isParsingNotes else {
+            return
+        }
+        isParsingNotes = true
+        Task { [weak self] in
+            await self?.parseNotes(note)
+        }
+    }
+
+    private func parseNotes(_ note: String) async {
+        do {
+            let context = await loadNotesContext()
+            let expenses = try await geminiExpenseParseUseCase.parse(
+                note: note,
+                context: context
+            )
+            await MainActor.run { [weak self] in
+                guard let self else { return }
+                self.isParsingNotes = false
+                guard !expenses.isEmpty else {
+                    self.showAlert(
+                        title: "Error!",
+                        description: Constants.AppText.notesNoItems,
+                        isError: true
+                    )
+                    return
+                }
+                self.addedLocalExpenseList.append(contentsOf: expenses)
+                self.updateCurrentTotal()
+                self.notesInputText = ""
+                self.isShowingNotesInput = false
+                self.addEntry = .compact
+            }
+        } catch {
+            await MainActor.run { [weak self] in
+                self?.isParsingNotes = false
+                self?.showAlert(
+                    title: "Error!",
+                    description: GeminiExpenseParseUseCase.isServiceBusy(error)
+                        ? Constants.AppText.notesServiceBusy
+                        : Constants.AppText.notesParseFailed,
+                    isError: true
+                )
+            }
+        }
+    }
+
+    private func loadNotesContext() async -> [ExpenseParseContextItem] {
+        if let notesContextCache {
+            return notesContextCache
+        }
+        let lists = await firebaseRealtimeDBUseCase.getExpenseListsFromPreviousMonthStart()
+        let context = GeminiExpenseParseUseCase.compactContext(from: lists)
+        await MainActor.run { [weak self] in
+            self?.notesContextCache = context
+        }
+        return context
     }
 
     private func createExpenseList() -> ExpenseList {
@@ -101,6 +193,19 @@ final class AddExpenseViewModel: ObservableObject {
             expenses: addedLocalExpenseList
         )
     }
+
+    private func updateCurrentTotal() {
+        currentTotal = addedLocalExpenseList.map(\.price).reduce(0.0, +)
+    }
+
+    private func showAlert(title: String, description: String, isError: Bool) {
+        alertData = .init(
+            title: title,
+            description: description,
+            isError: isError
+        )
+        isShowingAlert = true
+    }
 }
 
 extension AddExpenseViewModel {
@@ -108,5 +213,11 @@ extension AddExpenseViewModel {
     enum State {
         case add
         case edit(Expense)
+    }
+
+    enum AddEntry: Equatable {
+        case compact
+        case options
+        case manual
     }
 }

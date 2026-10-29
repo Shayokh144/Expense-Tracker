@@ -28,4 +28,14 @@ extension Date {
         formatter.calendar = Calendar(identifier: .gregorian)
         return formatter.string(from: self)
     }
+
+    /// Start of the previous calendar month at 00:00:00.
+    /// Example: 15 May → 1 April.
+    static func startOfPreviousCalendarMonth(from date: Date = Date()) -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        let thisMonthStart = calendar.date(
+            from: calendar.dateComponents([.year, .month], from: date)
+        ) ?? date
+        return calendar.date(byAdding: .month, value: -1, to: thisMonthStart) ?? thisMonthStart
+    }
 }

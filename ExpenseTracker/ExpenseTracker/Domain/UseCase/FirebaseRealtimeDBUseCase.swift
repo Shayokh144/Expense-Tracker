@@ -227,6 +227,29 @@ final class FirebaseRealtimeDBUseCase {
             }
     }
 
+    /// Fetches expense lists from the 1st of last month through today.
+    /// Uses a local pagination cursor so History paging is not affected.
+    func getExpenseListsFromPreviousMonthStart(
+        completion: @escaping ([ExpenseList]) -> Void
+    ) {
+        let startDate = Date.startOfPreviousCalendarMonth()
+        fetchExpenseListsPage(
+            endingAtKey: nil,
+            startDate: startDate,
+            accumulated: [],
+            pageCount: 0,
+            completion: completion
+        )
+    }
+
+    func getExpenseListsFromPreviousMonthStart() async -> [ExpenseList] {
+        await withCheckedContinuation { continuation in
+            getExpenseListsFromPreviousMonthStart { lists in
+                continuation.resume(returning: lists)
+            }
+        }
+    }
+
     // MARK: - Model conversion
 
     private func getExpenseModel(snapshot: DataSnapshot) ->  ExpenseList? {
@@ -284,6 +307,84 @@ final class FirebaseRealtimeDBUseCase {
             return databasePath
                 .queryOrdered(byChild: "id")
                 .queryLimited(toLast: queryLimit)
+        }
+    }
+
+    private func fetchExpenseListsPage(
+        endingAtKey: String?,
+        startDate: Date,
+        accumulated: [ExpenseList],
+        pageCount: Int,
+        completion: @escaping ([ExpenseList]) -> Void
+    ) {
+        guard let databasePath = databaseReference else {
+            NSLog("Database path not found")
+            completion([])
+            return
+        }
+        let pageSize: UInt = 40
+        let maxPages = 10
+        let query: DatabaseQuery
+        if let endingAtKey {
+            query = databasePath
+                .queryOrderedByKey()
+                .queryEnding(atValue: endingAtKey)
+                .queryLimited(toLast: pageSize)
+        } else {
+            query = databasePath
+                .queryOrderedByKey()
+                .queryLimited(toLast: pageSize)
+        }
+
+        query.observeSingleEvent(of: .value) { [weak self] snapshot in
+            guard let self else {
+                completion(accumulated)
+                return
+            }
+            var page: [ExpenseList] = []
+            var firstKey: String?
+            for child in snapshot.children {
+                guard let childSnapshot = child as? DataSnapshot else {
+                    continue
+                }
+                if firstKey == nil {
+                    firstKey = childSnapshot.key
+                }
+                if let dataModel = self.getExpenseModel(snapshot: childSnapshot) {
+                    page.append(dataModel)
+                }
+            }
+            if let endingAtKey {
+                page.removeAll { $0.id == endingAtKey }
+            }
+
+            let inWindow = page.filter { expenseList in
+                guard let date = DateFormatter.fullDateTimeFormat.date(from: expenseList.dateTime)
+                else {
+                    return false
+                }
+                return date >= startDate
+            }
+            let combined = accumulated + inWindow
+            let oldestDate = page
+                .compactMap { DateFormatter.fullDateTimeFormat.date(from: $0.dateTime) }
+                .min()
+            let expectedFullPageCount = endingAtKey == nil ? Int(pageSize) : Int(pageSize) - 1
+            let reachedStart = page.isEmpty
+                || (oldestDate != nil && oldestDate! < startDate)
+                || page.count < expectedFullPageCount
+            let nextPageCount = pageCount + 1
+            if reachedStart || firstKey == nil || nextPageCount >= maxPages {
+                completion(combined)
+                return
+            }
+            self.fetchExpenseListsPage(
+                endingAtKey: firstKey,
+                startDate: startDate,
+                accumulated: combined,
+                pageCount: nextPageCount,
+                completion: completion
+            )
         }
     }
 

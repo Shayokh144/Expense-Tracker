@@ -31,6 +31,78 @@ struct AddExpenseScreen: View {
         .padding(.bottom, 32.0)
     }
 
+    private var addFromNotesButton: some View {
+        Button {
+            viewModel.onTapAddFromNotes()
+        } label: {
+            Text(Constants.AppText.addFromNotes)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(
+            TextButtonStyle(
+                backgroundColor: Color(hexString: Constants.AppColors.tabSelectionColor),
+                textColor: .black
+            )
+        )
+    }
+
+    private var addManuallyButton: some View {
+        Button {
+            viewModel.onTapAddManually()
+        } label: {
+            Text(Constants.AppText.addManually)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(
+            TextButtonStyle(
+                backgroundColor: Color.green,
+                textColor: .black
+            )
+        )
+    }
+
+    private var addMethodButtons: some View {
+        VStack(spacing: 12.0) {
+            addFromNotesButton
+            addManuallyButton
+        }
+        .padding(.vertical)
+    }
+
+    private var addMoreButton: some View {
+        Button {
+            viewModel.onTapAddMore()
+        } label: {
+            Text(Constants.AppText.addMore)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(
+            TextButtonStyle(
+                backgroundColor: Color.orange,
+                textColor: .black
+            )
+        )
+        .padding(.vertical)
+    }
+
+    private var manualInputHeader: some View {
+        HStack {
+            Text(Constants.AppText.addNewItem)
+            Spacer()
+            Button(Constants.AppText.cancel) {
+                viewModel.onCancelManualInput()
+            }
+            .buttonStyle(
+                TextButtonStyle(
+                    backgroundColor: Color.orange,
+                    textColor: .black,
+                    textPadding: EdgeInsets(top: 4.0, leading: 8.0, bottom: 4.0, trailing: 8.0)
+                )
+            )
+        }
+        .padding(.vertical)
+    }
+
     private var currencyPickerView: some View {
         HStack {
             Text("Select currency")
@@ -129,15 +201,23 @@ struct AddExpenseScreen: View {
                     datePickerView
                     currencyPickerView
                 }
-                Text("Add new item")
-                    .padding(.vertical)
-                expenseInputView
+                switch viewModel.addEntry {
+                case .options:
+                    addMethodButtons
+                case .manual:
+                    if !isKeyboardPresented {
+                        manualInputHeader
+                    }
+                    expenseInputView
+                case .compact:
+                    if !isKeyboardPresented {
+                        addMoreButton
+                    }
+                }
                 if !isKeyboardPresented && !viewModel.addedLocalExpenseList.isEmpty {
                     ScrollView {
                         addedExpenseView
                     }
-                }
-                if !isKeyboardPresented && !viewModel.addedLocalExpenseList.isEmpty {
                     summarySection
                 }
                 Spacer()
@@ -146,6 +226,9 @@ struct AddExpenseScreen: View {
             }
         }
         .padding(.horizontal)
+        .sheet(isPresented: $viewModel.isShowingNotesInput) {
+            addFromNotesSheet
+        }
         .alertView(
             isPresenting: $viewModel.isShowingAlert,
             title: viewModel.alertData.title,
@@ -156,6 +239,7 @@ struct AddExpenseScreen: View {
             }
         )
         .animation(.linear(duration: 0.2), value: viewModel.isShowingAlert)
+        .animation(.linear(duration: 0.2), value: viewModel.addEntry)
         .onReceive(
             NotificationCenter
                 .default
@@ -178,6 +262,75 @@ struct AddExpenseScreen: View {
 
     init(viewModel: AddExpenseViewModel) {
         self.viewModel = viewModel
+    }
+
+    private var addFromNotesSheet: some View {
+        NavigationView {
+            VStack(alignment: .leading, spacing: 16.0) {
+                TextEditor(text: $viewModel.notesInputText)
+                    .frame(minHeight: 180.0)
+                    .padding(8.0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8.0)
+                            .stroke(Color.gray.opacity(0.4), lineWidth: 1.0)
+                    )
+                    .overlay(alignment: .topLeading) {
+                        if viewModel.notesInputText.isEmpty {
+                            Text(Constants.AppText.notesPlaceholder)
+                                .foregroundColor(.gray)
+                                .padding(.horizontal, 12.0)
+                                .padding(.vertical, 16.0)
+                                .allowsHitTesting(false)
+                        }
+                    }
+                    .disabled(viewModel.isParsingNotes)
+                Button {
+                    viewModel.createListFromNotes()
+                } label: {
+                    HStack(spacing: 8.0) {
+                        if viewModel.isParsingNotes {
+                            ProgressView()
+                                .tint(.white)
+                        }
+                        Text(
+                            viewModel.isParsingNotes
+                                ? Constants.AppText.creatingList
+                                : Constants.AppText.createList
+                        )
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(
+                    TextButtonStyle(
+                        backgroundColor: Color(hexString: Constants.AppColors.blueButtonColor),
+                        textColor: .white
+                    )
+                )
+                .disabled(viewModel.isParsingNotes)
+                Spacer()
+            }
+            .padding()
+            .navigationTitle(Constants.AppText.addFromNotes)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(Constants.AppText.cancel) {
+                        viewModel.isShowingNotesInput = false
+                    }
+                    .disabled(viewModel.isParsingNotes)
+                }
+            }
+            .interactiveDismissDisabled(viewModel.isParsingNotes)
+            .alertView(
+                isPresenting: $viewModel.isShowingAlert,
+                title: viewModel.alertData.title,
+                description: viewModel.alertData.description,
+                isError: viewModel.alertData.isError,
+                didTap: {
+                    viewModel.isShowingAlert = false
+                }
+            )
+        }
     }
 
     private func editExpenseView(expense: Expense) -> some View {

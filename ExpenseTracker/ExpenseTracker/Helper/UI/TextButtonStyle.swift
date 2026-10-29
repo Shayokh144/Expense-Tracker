@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TextButtonStyle: ButtonStyle {
 
+    @Environment(\.isEnabled) private var isEnabled
     private let backgroundColor: Color
     private let textColor: Color
     private let cornerRadius: CGFloat
@@ -34,8 +35,8 @@ struct TextButtonStyle: ButtonStyle {
             .font(font)
             .foregroundStyle(textColor)
             .padding(textPadding)
-            .background(backgroundColor)
+            .background(backgroundColor.opacity(isEnabled ? 1.0 : 0.45))
             .cornerRadius(cornerRadius)
-            .opacity(configuration.isPressed ? 0.6 : 1.0)
+            .opacity(configuration.isPressed && isEnabled ? 0.6 : 1.0)
     }
 }
