@@ -87,7 +87,13 @@ extension Constants {
 
     enum Gemini {
 
-        static let modelName = "gemini-3.6-flash"
+        /// Default first, then fallbacks: 3.7 → 3.6 → 3.5 on quota, overload, or timeout.
+        static let modelNames: [String] = [
+            "gemini-3.8-flash",
+            "gemini-3.7-flash",
+            "gemini-3.6-flash",
+            "gemini-3.5-flash-lite"
+        ]
         static let maxContextItems = 40
         static let maxRetries = 2
     }
